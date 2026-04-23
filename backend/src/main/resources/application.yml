@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: vitalsync-backend
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 1
+        spring.json.add.type.headers: false
+
+# Kafka topic configuration
+vitalsync:
+  kafka:
+    topic:
+      name: ${KAFKA_TOPIC_NAME:vitalsync-data-ingestion}
+      partitions: 3
+      replication-factor: 1
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.vitalsync: DEBUG
+    org.apache.kafka: WARN
