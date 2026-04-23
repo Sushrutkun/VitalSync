@@ -1,6 +1,9 @@
 package com.vitalsync.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ import java.util.List;
  *   "cursor": "hc_token"
  * }
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DataIngestionRequest {
 
     @JsonProperty("user_id")
@@ -22,22 +28,4 @@ public class DataIngestionRequest {
     private List<Object> records;
 
     private String cursor;
-
-    public DataIngestionRequest() {
-    }
-
-    public DataIngestionRequest(String userId, List<Object> records, String cursor) {
-        this.userId = userId;
-        this.records = records;
-        this.cursor = cursor;
-    }
-
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
-
-    public List<Object> getRecords() { return records; }
-    public void setRecords(List<Object> records) { this.records = records; }
-
-    public String getCursor() { return cursor; }
-    public void setCursor(String cursor) { this.cursor = cursor; }
 }

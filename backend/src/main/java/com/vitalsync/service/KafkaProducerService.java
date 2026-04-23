@@ -2,8 +2,8 @@ package com.vitalsync.service;
 
 import com.vitalsync.dto.ApiResponse;
 import com.vitalsync.dto.DataIngestionRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -14,18 +14,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class KafkaProducerService {
-
-    private static final Logger log = LoggerFactory.getLogger(KafkaProducerService.class);
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Value("${vitalsync.kafka.topic.name}")
     private String topicName;
-
-    public KafkaProducerService(KafkaTemplate<String, Object> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
 
     /**
      * Publishes records from a DataIngestionRequest to the configured Kafka topic.

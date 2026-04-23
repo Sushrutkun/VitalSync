@@ -5,8 +5,8 @@ import com.vitalsync.dto.DataIngestionRequest;
 import com.vitalsync.service.KafkaProducerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,31 +16,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/data")
 @Tag(name = "Data Ingestion", description = "Endpoints for ingesting health data into the system")
+@Slf4j
+@RequiredArgsConstructor
 public class DataIngestionController {
 
-    private static final Logger log = LoggerFactory.getLogger(DataIngestionController.class);
-
     private final KafkaProducerService kafkaProducerService;
-
-    public DataIngestionController(KafkaProducerService kafkaProducerService) {
-        this.kafkaProducerService = kafkaProducerService;
-    }
 
     /**
      * POST /api/v1/data/ingest
      *
      * Accepts a structured payload with user_id, records, and cursor.
      * Each record is published to a Kafka topic for post-processing.
-     *
-     * Example request body:
-     * {
-     *   "user_id": "u1",
-     *   "records": [
-     *     { "sensorId": "hr-001", "value": 72, "unit": "bpm" },
-     *     { "sensorId": "bp-002", "systolic": 120, "diastolic": 80 }
-     *   ],
-     *   "cursor": "hc_token"
-     * }
      *
      * @param request the data ingestion request payload
      * @return ApiResponse with publish statistics
