@@ -47,6 +47,10 @@ Accepts a structured JSON payload and publishes each record to the `vitalsync-da
 ### `GET /api/v1/data/health`
 Health check for the ingestion service.
 
+## Documentation (Swagger UI)
+When the application is running, you can access the interactive API documentation at:
+[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
 ## Prerequisites
 
 - Java 17+

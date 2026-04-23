@@ -3,6 +3,8 @@ package com.vitalsync.controller;
 import com.vitalsync.dto.ApiResponse;
 import com.vitalsync.dto.DataIngestionRequest;
 import com.vitalsync.service.KafkaProducerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/data")
+@Tag(name = "Data Ingestion", description = "Endpoints for ingesting health data into the system")
 public class DataIngestionController {
 
     private static final Logger log = LoggerFactory.getLogger(DataIngestionController.class);
@@ -43,6 +46,7 @@ public class DataIngestionController {
      * @return ApiResponse with publish statistics
      */
     @PostMapping("/ingest")
+    @Operation(summary = "Ingest data", description = "Accepts user records and pushes them to Kafka for processing")
     public ResponseEntity<ApiResponse> ingestData(@RequestBody DataIngestionRequest request) {
         log.info("Received data ingestion request from user [{}] with {} records, cursor [{}]",
                 request.getUserId(),
@@ -80,6 +84,7 @@ public class DataIngestionController {
      * Simple health check for the ingestion endpoint.
      */
     @GetMapping("/health")
+    @Operation(summary = "Health check", description = "Checks if the ingestion service is running")
     public ResponseEntity<String> health() {
         return ResponseEntity.ok("VitalSync Data Ingestion API is running");
     }
