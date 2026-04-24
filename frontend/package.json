@@ -2,17 +2,23 @@
   "name": "vitalsync",
   "version": "0.0.1",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "android": "react-native run-android",
-    "start": "react-native start",
+    "android": "expo run:android",
+    "start": "expo start --dev-client",
+    "prebuild": "expo prebuild --platform android --clean",
     "lint": "eslint .",
-    "ts": "tsc --noEmit"
+    "ts": "tsc --noEmit",
+    "ios": "expo run:ios"
   },
   "dependencies": {
-    "react": "18.3.1",
-    "react-native": "0.76.5",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "axios": "^1.7.9",
+    "expo": "~52.0.0",
+    "expo-build-properties": "^55.0.13",
+    "expo-dev-client": "~5.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.5",
     "react-native-background-fetch": "^4.2.7",
     "react-native-get-random-values": "^1.11.0",
     "react-native-health-connect": "^3.1.0",
