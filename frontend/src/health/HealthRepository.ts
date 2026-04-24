@@ -8,11 +8,11 @@ import {
 import { HealthSnapshot, ExerciseSession } from '../types/health';
 
 const PERMISSIONS = [
-  { accessType: 'read', recordType: 'HeartRate' as RecordType },
-  { accessType: 'read', recordType: 'Steps' as RecordType },
-  { accessType: 'read', recordType: 'OxygenSaturation' as RecordType },
-  { accessType: 'read', recordType: 'ActiveCaloriesBurned' as RecordType },
-  { accessType: 'read', recordType: 'ExerciseSession' as RecordType },
+  { accessType: 'read' as const, recordType: 'HeartRate' as RecordType },
+  { accessType: 'read' as const, recordType: 'Steps' as RecordType },
+  { accessType: 'read' as const, recordType: 'OxygenSaturation' as RecordType },
+  { accessType: 'read' as const, recordType: 'ActiveCaloriesBurned' as RecordType },
+  { accessType: 'read' as const, recordType: 'ExerciseSession' as RecordType },
 ];
 
 export const HealthRepository = {
