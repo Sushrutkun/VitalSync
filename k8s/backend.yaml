@@ -41,7 +41,7 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata:q
+metadata:
   name: vitalsync-backend
   namespace: vitalsync
 spec:
