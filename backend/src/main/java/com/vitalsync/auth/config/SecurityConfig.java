@@ -14,39 +14,39 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter;
+  private final JwtAuthFilter jwtAuthFilter;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
-        this.jwtAuthFilter = jwtAuthFilter;
-    }
+  public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+    this.jwtAuthFilter = jwtAuthFilter;
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        // §6: bcrypt cost factor >= 12
-        return new BCryptPasswordEncoder(12);
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    // §6: bcrypt cost factor >= 12
+    return new BCryptPasswordEncoder(12);
+  }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .formLogin(f -> f.disable())
-                .httpBasic(b -> b.disable())
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/v1/auth/signup",
-                                "/api/v1/auth/login",
-                                "/api/v1/auth/refresh",
-                                "/actuator/**",
-                                "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.csrf(csrf -> csrf.disable())
+        .formLogin(f -> f.disable())
+        .httpBasic(b -> b.disable())
+        .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers(
+                        "/api/v1/auth/signup",
+                        "/api/v1/auth/login",
+                        "/api/v1/auth/refresh",
+                        "/actuator/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+    return http.build();
+  }
 }

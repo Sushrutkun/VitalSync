@@ -14,33 +14,34 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private final AuthService auth;
+  private final AuthService auth;
 
-    public AuthController(AuthService auth) {
-        this.auth = auth;
-    }
+  public AuthController(AuthService auth) {
+    this.auth = auth;
+  }
 
-    @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> signup(@Valid @RequestBody SignupRequest req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(auth.signup(req));
-    }
+  @PostMapping("/signup")
+  public ResponseEntity<AuthResponse> signup(@Valid @RequestBody SignupRequest req) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(auth.signup(req));
+  }
 
-    @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest req) {
-        return auth.login(req);
-    }
+  @PostMapping("/login")
+  public AuthResponse login(@Valid @RequestBody LoginRequest req) {
+    return auth.login(req);
+  }
 
-    @PostMapping("/refresh")
-    public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
-        return auth.refresh(req.refreshToken());
-    }
+  @PostMapping("/refresh")
+  public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
+    return auth.refresh(req.refreshToken());
+  }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(@Valid @RequestBody LogoutRequest req, Authentication authentication) {
-        if (authentication == null || authentication.getName() == null) {
-            throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Authentication required");
-        }
-        auth.logout(req.refreshToken(), authentication.getName());
-        return ResponseEntity.noContent().build();
+  @PostMapping("/logout")
+  public ResponseEntity<Void> logout(
+      @Valid @RequestBody LogoutRequest req, Authentication authentication) {
+    if (authentication == null || authentication.getName() == null) {
+      throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Authentication required");
     }
+    auth.logout(req.refreshToken(), authentication.getName());
+    return ResponseEntity.noContent().build();
+  }
 }
