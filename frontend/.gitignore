@@ -4,6 +4,9 @@
 ### Node & Dependencies ###
 node_modules/
 
+# Graphify
+graphify-out/
+
 # Expo
 package-lock.json
 yarn.lock

@@ -11,6 +11,9 @@ target/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 
+### Graphify ###
+graphify-out/
+
 ### STS ###
 .apt_generated
 .classpath
