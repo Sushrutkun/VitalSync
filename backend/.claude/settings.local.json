@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker-compose up *)",
+      "Bash(docker pull postgres:15-alpine *)",
+      "Bash(docker-compose ps *)",
+      "Bash(docker-compose exec *)",
+      "Bash(mvn spring-boot:run)"
+    ]
+  }
+}

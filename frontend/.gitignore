@@ -1,5 +1,10 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
 ### Node & Dependencies ###
 node_modules/
+
+# Expo
 package-lock.json
 yarn.lock
 
@@ -14,6 +19,21 @@ build/
 
 ### Logs ###
 *.log
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
@@ -27,6 +47,12 @@ ios/
 .env
 .env.local
 .env.*.local
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
 
 ### IDE ###
 .idea/
@@ -47,3 +73,11 @@ ios/
 *.iml
 .gradle/
 *.keystore
+# typescript
+*.tsbuildinfo
+
+app-example
+
+# generated native folders
+/ios
+/android
