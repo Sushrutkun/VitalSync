@@ -1,3 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vitalsync-jwt
+  namespace: vitalsync
+type: Opaque
+stringData:
+  # Replace with output of: openssl rand -hex 32
+  JWT_SECRET: "change-me-in-prod-min-256-bits-of-entropy-please-do-not-commit"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,6 +36,23 @@ spec:
               value: "kafka.vitalsync.svc.cluster.local:9092"
             - name: KAFKA_TOPIC_NAME
               value: "vitalsync-data-ingestion"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres.vitalsync.svc.cluster.local:5432/vitalsync"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: vitalsync-jwt
+                  key: JWT_SECRET
           readinessProbe:
             httpGet:
               path: /actuator/health

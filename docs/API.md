@@ -13,6 +13,7 @@
 2. [Authentication](#2-authentication)
 3. [Error Format](#3-error-format)
 4. [Endpoints](#4-endpoints)
+   - [Auth — Signup](#40-post-apiv1authsignup)
    - [Auth — Login](#41-post-apiv1authlogin)
    - [Auth — Refresh](#42-post-apiv1authrefresh)
    - [Auth — Logout](#43-post-apiv1authlogout)
@@ -65,8 +66,8 @@ VitalSync uses **Access Token + Refresh Token (ATRT)** auth.
 
 | Token | Type | Lifetime | Storage (backend) |
 |---|---|---|---|
-| `accessToken` | JWT (signed HS256 or RS256) | 15 minutes | Stateless — not stored |
-| `refreshToken` | Opaque random string (32+ bytes) | 30 days | Hashed (bcrypt) in DB |
+| `accessToken` | JWT (signed HS256 or RS256) | 24 hours | Stateless — not stored |
+| `refreshToken` | Opaque random string (32+ bytes), wire format `{id}.{secret}` | 180 days (~6 months) | Hashed (bcrypt) in DB — only the secret half is hashed |
 
 ### JWT Payload
 ```json
@@ -132,6 +133,50 @@ All errors follow a consistent envelope:
 
 ---
 
+### 4.0 `POST /api/v1/auth/signup`
+
+Creates a new user account and immediately issues an access + refresh token pair (auto-login).
+
+**Auth required:** No
+
+#### Request Body
+```json
+{
+  "email": "user@example.com",
+  "password": "s3cur3P@ssword",
+  "name": "Keshav"
+}
+```
+
+| Field | Type | Required | Validation |
+|---|---|---|---|
+| `email` | string | Yes | Valid email format, max 254 chars |
+| `password` | string | Yes | Min 8 chars, max 128 |
+| `name` | string | Yes | Non-blank, max 128 chars |
+
+#### Response `201 Created`
+Same shape as `POST /auth/login`:
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
+  "refreshToken": "rt_abc.d4f8a2c1b9e3...",
+  "expiresIn": 86400,
+  "user": {
+    "id": "user_abc123",
+    "email": "user@example.com",
+    "name": "Keshav"
+  }
+}
+```
+
+#### Error Responses
+| HTTP | Code | Condition |
+|---|---|---|
+| 400 | `VALIDATION_ERROR` | Missing or malformed fields |
+| 409 | `CONFLICT` | Email already registered |
+
+---
+
 ### 4.1 `POST /api/v1/auth/login`
 
 Authenticates a user and issues an access + refresh token pair.
@@ -156,7 +201,7 @@ Authenticates a user and issues an access + refresh token pair.
 {
   "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
   "refreshToken": "d4f8a2c1b9e3...",
-  "expiresIn": 900,
+  "expiresIn": 86400,
   "user": {
     "id": "user_abc123",
     "email": "user@example.com",
@@ -169,7 +214,7 @@ Authenticates a user and issues an access + refresh token pair.
 |---|---|---|
 | `accessToken` | string | JWT — attach to all subsequent requests |
 | `refreshToken` | string | Opaque — store securely, use only to refresh |
-| `expiresIn` | number | Seconds until `accessToken` expires (always `900`) |
+| `expiresIn` | number | Seconds until `accessToken` expires (always `86400`) |
 | `user` | object | Basic profile of the authenticated user |
 
 #### Error Responses
@@ -198,7 +243,7 @@ Issues a new access token + refresh token pair. The submitted refresh token is *
 {
   "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
   "refreshToken": "e7g1h3i2j4k5...",
-  "expiresIn": 900
+  "expiresIn": 86400
 }
 ```
 
@@ -507,7 +552,7 @@ token_hash    VARCHAR NOT NULL            -- bcrypt hash — NEVER store raw tok
 device_id     VARCHAR                    -- optional, for per-device revocation
 created_at    TIMESTAMPTZ DEFAULT now()
 last_used_at  TIMESTAMPTZ
-expires_at    TIMESTAMPTZ NOT NULL       -- created_at + 30 days
+expires_at    TIMESTAMPTZ NOT NULL       -- created_at + 180 days (~6 months)
 ```
 
 ### `health_snapshots`
