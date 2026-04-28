@@ -5,6 +5,19 @@ spring:
   application:
     name: vitalsync-backend
 
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/vitalsync}
+    username: ${DB_USER:vitalsync}
+    password: ${DB_PASSWORD:vitalsync}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
@@ -24,6 +37,11 @@ vitalsync:
       name: ${KAFKA_TOPIC_NAME:vitalsync-data-ingestion}
       partitions: 3
       replication-factor: 1
+  auth:
+    jwt:
+      secret: ${JWT_SECRET:change-me-in-prod-min-256-bits-of-entropy-please}
+      access-token-ttl-seconds: 86400      # 24h
+      refresh-token-ttl-seconds: 15552000  # 180d (~6mo)
 
 # Actuator
 management:

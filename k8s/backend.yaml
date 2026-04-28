@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vitalsync-jwt
+  namespace: vitalsync
+type: Opaque
+stringData:
+  # Replace with output of: openssl rand -hex 32
+  JWT_SECRET: "change-me-in-prod-min-256-bits-of-entropy-please-do-not-commit"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vitalsync-backend
+  namespace: vitalsync
+  labels:
+    app: vitalsync-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vitalsync-backend
+  template:
+    metadata:
+      labels:
+        app: vitalsync-backend
+    spec:
+      containers:
+        - name: backend
+          image: vitalsync-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka.vitalsync.svc.cluster.local:9092"
+            - name: KAFKA_TOPIC_NAME
+              value: "vitalsync-data-ingestion"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres.vitalsync.svc.cluster.local:5432/vitalsync"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: vitalsync-jwt
+                  key: JWT_SECRET
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vitalsync-backend
+  namespace: vitalsync
+spec:
+  type: NodePort
+  selector:
+    app: vitalsync-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080

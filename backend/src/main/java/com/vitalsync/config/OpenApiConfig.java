@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
-    @Bean
-    public OpenAPI vitalSyncOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("VitalSync Ingestion API")
-                        .description("API for ingesting health data records into VitalSync via Kafka")
-                        .version("v1.0.0"));
-    }
+  @Bean
+  public OpenAPI vitalSyncOpenAPI() {
+    return new OpenAPI()
+        .info(
+            new Info()
+                .title("VitalSync Ingestion API")
+                .description("API for ingesting health data records into VitalSync via Kafka")
+                .version("v1.0.0"));
+  }
 }

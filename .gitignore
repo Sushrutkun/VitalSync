@@ -1,0 +1,31 @@
+### Graphify ###
+graphify-out/
+
+### IDE ###
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+### Environment & Logs ###
+.env
+.env.local
+.env.*.local
+*.log
+*.log.*
+
+### Node & Web ###
+node_modules/
+.expo/
+dist/
+web-build/
+
+### Operating System ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

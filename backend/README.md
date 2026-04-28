@@ -66,12 +66,34 @@ docker run -d --name kafka -p 9092:9092 apache/kafka:latest
 ./mvnw spring-boot:run
 ```
 
+## Authentication
+
+ATRT (Access Token + Refresh Token). See `docs/API.md` §2 + §4.0–§4.3 for spec.
+
+| Token | Lifetime | Storage |
+|---|---|---|
+| `accessToken` | 24h | JWT HS256, stateless |
+| `refreshToken` | 180 days (~6 months) | bcrypt-hashed in `refresh_tokens` table; rotated on every `/auth/refresh` |
+
+Endpoints:
+
+- `POST /api/v1/auth/signup` — create account, returns `{accessToken, refreshToken, user}`
+- `POST /api/v1/auth/login` — same response shape
+- `POST /api/v1/auth/refresh` — submit current refresh token, get new pair (old one is invalidated)
+- `POST /api/v1/auth/logout` — requires `Authorization: Bearer <accessToken>`, deletes the submitted refresh token row
+
+All non-auth endpoints (e.g. `/api/v1/health/sync`) require `Authorization: Bearer <accessToken>`. The controller also enforces `userId` in the request body matches the JWT `sub` (returns `403 FORBIDDEN` otherwise).
+
 ## Configuration
 
 | Env Variable             | Default                     | Description            |
 |--------------------------|-----------------------------|------------------------|
 | `KAFKA_BOOTSTRAP_SERVERS`| `localhost:9092`            | Kafka broker addresses |
 | `KAFKA_TOPIC_NAME`       | `vitalsync-data-ingestion`  | Target Kafka topic     |
+| `DB_URL`                 | `jdbc:postgresql://localhost:5432/vitalsync` | Postgres JDBC URL |
+| `DB_USER`                | `vitalsync`                 | Postgres user          |
+| `DB_PASSWORD`            | `vitalsync`                 | Postgres password      |
+| `JWT_SECRET`             | _none — required in prod_   | HS256 signing key, ≥32 bytes (`openssl rand -hex 32`) |
 
 ## Project Structure
 
