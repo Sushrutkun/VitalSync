@@ -5,7 +5,9 @@
       "Bash(docker pull postgres:15-alpine *)",
       "Bash(docker-compose ps *)",
       "Bash(docker-compose exec *)",
-      "Bash(mvn spring-boot:run)"
+      "Bash(mvn spring-boot:run)",
+      "Bash(curl -s http://localhost:8080/health)",
+      "Bash(curl *)"
     ]
   }
 }
