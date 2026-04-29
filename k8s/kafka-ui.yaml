@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: kafka-ui
-          image: docker.redpanda.com/redpandadata/console:latest
+          image: provectuslabs/kafka-ui:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

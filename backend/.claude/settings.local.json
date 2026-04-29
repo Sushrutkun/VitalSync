@@ -7,7 +7,15 @@
       "Bash(docker-compose exec *)",
       "Bash(mvn spring-boot:run)",
       "Bash(curl -s http://localhost:8080/health)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(kubectl get *)",
+      "Bash(docker pull *)",
+      "Bash(kubectl delete *)",
+      "Bash(kubectl apply *)",
+      "Bash(docker build *)",
+      "Bash(kubectl cluster-info *)",
+      "Bash(docker save *)",
+      "Bash(docker run *)"
     ]
   }
 }
