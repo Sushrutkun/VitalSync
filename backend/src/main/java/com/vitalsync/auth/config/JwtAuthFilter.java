@@ -49,12 +49,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   protected void doFilterInternal(
       HttpServletRequest req, HttpServletResponse resp, FilterChain chain)
       throws ServletException, IOException {
-    String header = req.getHeader("Authorization");
-    if (header == null || !header.startsWith(BEARER)) {
+    String authHeader = req.getHeader("Authorization");
+    if (authHeader == null || !authHeader.startsWith(BEARER)) {
       writeError(resp, AuthErrorCode.TOKEN_INVALID, "Missing or malformed Authorization header");
       return;
     }
-    String token = header.substring(BEARER.length()).trim();
+    String token = authHeader.substring(BEARER.length()).trim();
     try {
       Claims claims = jwt.parse(token);
       UsernamePasswordAuthenticationToken auth =
@@ -71,13 +71,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       throws IOException {
     resp.setStatus(code.status().value());
     resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
-    Map<String, Object> body =
+    Map<String, Object> errorBody =
         Map.of(
             "error",
             Map.of(
                 "code", code.name(),
                 "message", msg,
                 "details", Map.of()));
-    json.writeValue(resp.getOutputStream(), body);
+    json.writeValue(resp.getOutputStream(), errorBody);
   }
 }

@@ -44,30 +44,30 @@ public class AuthService {
     if (users.existsByEmail(req.email())) {
       throw new AuthException(AuthErrorCode.CONFLICT, "Email already registered");
     }
-    User u =
+    User user =
         User.builder()
             .id("user_" + shortId())
             .email(req.email())
             .passwordHash(passwordEncoder.encode(req.password()))
             .name(req.name())
             .build();
-    users.save(u);
-    return issueTokens(u);
+    users.save(user);
+    return issueTokens(user);
   }
 
   @Transactional
   public AuthResponse login(LoginRequest req) {
-    User u =
+    User user =
         users
             .findByEmail(req.email())
             .orElseThrow(
                 () ->
                     new AuthException(
                         AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect"));
-    if (!passwordEncoder.matches(req.password(), u.getPasswordHash())) {
+    if (!passwordEncoder.matches(req.password(), user.getPasswordHash())) {
       throw new AuthException(AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect");
     }
-    return issueTokens(u);
+    return issueTokens(user);
   }
 
   /**
@@ -76,71 +76,71 @@ public class AuthService {
    */
   @Transactional
   public AuthResponse refresh(String rawToken) {
-    ParsedToken p = parse(rawToken);
-    RefreshToken match =
+    ParsedToken parsedToken = parse(rawToken);
+    RefreshToken refreshToken =
         refreshTokens
-            .findById(p.id)
+            .findById(parsedToken.id)
             .orElseThrow(
                 () ->
                     new AuthException(
                         AuthErrorCode.REFRESH_TOKEN_INVALID, "Refresh token not found"));
 
-    if (!passwordEncoder.matches(p.secret, match.getTokenHash())) {
+    if (!passwordEncoder.matches(parsedToken.secret, refreshToken.getTokenHash())) {
       throw new AuthException(AuthErrorCode.REFRESH_TOKEN_INVALID, "Refresh token does not match");
     }
-    if (match.getExpiresAt().isBefore(Instant.now())) {
-      refreshTokens.deleteById(match.getId());
+    if (refreshToken.getExpiresAt().isBefore(Instant.now())) {
+      refreshTokens.deleteById(refreshToken.getId());
       throw new AuthException(AuthErrorCode.REFRESH_TOKEN_EXPIRED, "Refresh token has expired");
     }
-    refreshTokens.deleteById(match.getId());
+    refreshTokens.deleteById(refreshToken.getId());
 
-    User u =
+    User user =
         users
-            .findById(match.getUserId())
+            .findById(refreshToken.getUserId())
             .orElseThrow(
                 () ->
                     new AuthException(
                         AuthErrorCode.REFRESH_TOKEN_INVALID, "User no longer exists"));
-    return issueTokens(u);
+    return issueTokens(user);
   }
 
   @Transactional
   public void logout(String rawToken, String authUserId) {
-    ParsedToken p;
+    ParsedToken parsedToken;
     try {
-      p = parse(rawToken);
+      parsedToken = parse(rawToken);
     } catch (AuthException ignored) {
       return; // logout is best-effort
     }
     refreshTokens
-        .findById(p.id)
+        .findById(parsedToken.id)
         .ifPresent(
-            rt -> {
-              if (rt.getUserId().equals(authUserId)
-                  && passwordEncoder.matches(p.secret, rt.getTokenHash())) {
-                refreshTokens.deleteById(rt.getId());
+            refreshToken -> {
+              if (refreshToken.getUserId().equals(authUserId)
+                  && passwordEncoder.matches(parsedToken.secret, refreshToken.getTokenHash())) {
+                refreshTokens.deleteById(refreshToken.getId());
               }
             });
   }
 
-  private AuthResponse issueTokens(User u) {
-    String accessToken = jwt.issue(u.getId(), u.getEmail());
-    String rtId = "rt_" + shortId();
+  private AuthResponse issueTokens(User user) {
+    String accessToken = jwt.issue(user.getId(), user.getEmail());
+    String refreshTokenId = "rt_" + shortId();
     String secret = randomHex(32);
-    String wire = rtId + "." + secret;
-    RefreshToken rt =
+    String wire = refreshTokenId + "." + secret;
+    RefreshToken refreshToken =
         RefreshToken.builder()
-            .id(rtId)
-            .userId(u.getId())
+            .id(refreshTokenId)
+            .userId(user.getId())
             .tokenHash(passwordEncoder.encode(secret))
             .expiresAt(Instant.now().plusSeconds(refreshTtlSeconds))
             .build();
-    refreshTokens.save(rt);
+    refreshTokens.save(refreshToken);
     return new AuthResponse(
         accessToken,
         wire,
         jwt.accessTtlSeconds(),
-        new UserDto(u.getId(), u.getEmail(), u.getName()));
+        new UserDto(user.getId(), user.getEmail(), user.getName()));
   }
 
   private ParsedToken parse(String raw) {
@@ -155,9 +155,9 @@ public class AuthService {
   }
 
   private String randomHex(int bytes) {
-    byte[] b = new byte[bytes];
-    random.nextBytes(b);
-    return HexFormat.of().formatHex(b);
+    byte[] randomBytes = new byte[bytes];
+    random.nextBytes(randomBytes);
+    return HexFormat.of().formatHex(randomBytes);
   }
 
   private String shortId() {
