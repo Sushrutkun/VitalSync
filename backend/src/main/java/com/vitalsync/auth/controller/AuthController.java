@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-  private final AuthService auth;
+  private final AuthService authService;
 
-  public AuthController(AuthService auth) {
-    this.auth = auth;
+  public AuthController(AuthService authService) {
+    this.authService = authService;
   }
 
   @PostMapping("/signup")
   public ResponseEntity<AuthResponse> signup(@Valid @RequestBody SignupRequest req) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(auth.signup(req));
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(req));
   }
 
   @PostMapping("/login")
   public AuthResponse login(@Valid @RequestBody LoginRequest req) {
-    return auth.login(req);
+    return authService.login(req);
   }
 
   @PostMapping("/refresh")
   public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
-    return auth.refresh(req.refreshToken());
+    return authService.refresh(req.refreshToken());
   }
 
   @PostMapping("/logout")
@@ -41,7 +41,7 @@ public class AuthController {
     if (authentication == null || authentication.getName() == null) {
       throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Authentication required");
     }
-    auth.logout(req.refreshToken(), authentication.getName());
+    authService.logout(req.refreshToken(), authentication.getName());
     return ResponseEntity.noContent().build();
   }
 }
