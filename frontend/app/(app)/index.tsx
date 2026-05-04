@@ -54,9 +54,7 @@ export default function TodayScreen() {
     const result = await syncLastMinute();
     setSyncMessage(
       result.ok
-        ? result.result.duplicate
-          ? "Already synced (duplicate)."
-          : "Synced last minute."
+        ? "Synced last minute."
         : `Sync failed: ${result.reason}`,
     );
     void summary.refetch();
