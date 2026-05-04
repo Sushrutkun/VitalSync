@@ -44,7 +44,7 @@ async function refreshAccessToken(): Promise<string | null> {
     try {
       const refreshToken = await tokenStorage.getRefreshToken();
       if (!refreshToken) return null;
-      const url = `${env.apiBaseUrl}/auth/refresh`;
+      const url = `${env.apiBaseUrl}/api/v1/auth/refresh`;
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
