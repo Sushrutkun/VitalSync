@@ -36,7 +36,7 @@ export default function SignupScreen() {
     try {
       await signup(values.email, values.password, values.name);
     } catch (error) {
-      if (error instanceof ApiError && error.code === "EMAIL_ALREADY_EXISTS") {
+      if (error instanceof ApiError && error.code === "CONFLICT") {
         setSubmitError("An account with this email already exists.");
       } else if (error instanceof ApiError) {
         setSubmitError(error.message);

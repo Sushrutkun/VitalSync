@@ -14,6 +14,7 @@ graphify-out/
 .env.*.local
 *.log
 *.log.*
+.claude/settings.local.json
 
 ### Node & Web ###
 node_modules/
