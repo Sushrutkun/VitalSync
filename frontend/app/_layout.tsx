@@ -9,6 +9,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Theme, useTheme, YStack } from "tamagui";
 
 import { AuthProvider, useAuth } from "@/src/auth/AuthContext";
+import { DebugOverlay } from "@/src/components/DebugOverlay";
 import { queryClient } from "@/src/lib/queryClient";
 import { ThemeProvider, useThemePref } from "@/src/theme/ThemeProvider";
 
@@ -53,6 +54,7 @@ function ThemedShell() {
       <YStack flex={1} backgroundColor="$background">
         <StatusBar style={resolved === "dark" ? "light" : "dark"} />
         <RootStack />
+        {__DEV__ ? <DebugOverlay /> : null}
       </YStack>
     </Theme>
   );

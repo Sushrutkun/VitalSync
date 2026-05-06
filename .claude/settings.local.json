@@ -31,7 +31,11 @@
       "Bash(./mvnw -q compile)",
       "Bash(mvn -q compile)",
       "Bash(mvn compile *)",
-      "Bash(mvn clean *)"
+      "Bash(mvn clean *)",
+      "Bash(kill 12984 12752)",
+      "Bash(mvn spring-boot:run -q)",
+      "Bash(echo \"Started PID $!\")",
+      "Bash(adb devices *2)"
     ]
   }
 }
