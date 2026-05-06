@@ -37,6 +37,7 @@ export type RefreshResponse = {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
+  user: AuthUser;
 };
 
 export type ExerciseSession = {
@@ -70,8 +71,11 @@ export type HealthSyncRequest = {
 };
 
 export type HealthSyncResponse = {
-  received: boolean;
-  duplicate: boolean;
+  success: boolean;
+  message: string;
+  idempotencyKey: string;
+  timestamp: string;
+  errors: string[];
 };
 
 export type DailySummary = {

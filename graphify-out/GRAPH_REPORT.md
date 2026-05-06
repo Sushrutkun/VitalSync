@@ -1,134 +1,261 @@
-# Graph Report - /Users/sushrutda/Desktop/personal/VitalSync  (2026-04-28)
+# Graph Report - .  (2026-05-06)
 
 ## Corpus Check
-- Corpus is ~14,288 words - fits in a single context window. You may not need a graph.
+- 0 files · ~99,999 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 84 nodes · 98 edges · 12 communities detected
-- Extraction: 82% EXTRACTED · 18% INFERRED · 0% AMBIGUOUS · INFERRED: 18 edges (avg confidence: 0.8)
+- 262 nodes · 244 edges · 33 communities detected
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 20 edges (avg confidence: 0.84)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_API Spec & DB Schema|API Spec & DB Schema]]
-- [[_COMMUNITY_Health Sync Controller Flow|Health Sync Controller Flow]]
-- [[_COMMUNITY_k8s Deployments & Services|k8s Deployments & Services]]
-- [[_COMMUNITY_Spring Boot Beans & Config|Spring Boot Beans & Config]]
-- [[_COMMUNITY_Global Exception Handling|Global Exception Handling]]
-- [[_COMMUNITY_Health Snapshot Pipeline (DTO)|Health Snapshot Pipeline (DTO)]]
-- [[_COMMUNITY_Architecture Docs & Endpoints|Architecture Docs & Endpoints]]
+- [[_COMMUNITY_Auth API Surface|Auth API Surface]]
+- [[_COMMUNITY_Health Sync Backend|Health Sync Backend]]
+- [[_COMMUNITY_LoginSignup Forms|Login/Signup Forms]]
+- [[_COMMUNITY_Frontend Sync & Permissions|Frontend Sync & Permissions]]
+- [[_COMMUNITY_Backend Error Handling|Backend Error Handling]]
+- [[_COMMUNITY_Android Assets & Health Connect|Android Assets & Health Connect]]
+- [[_COMMUNITY_Frontend API Client|Frontend API Client]]
+- [[_COMMUNITY_Health Snapshot Builder|Health Snapshot Builder]]
+- [[_COMMUNITY_Expo Framework Wiring|Expo Framework Wiring]]
+- [[_COMMUNITY_JWT Auth Filter|JWT Auth Filter]]
+- [[_COMMUNITY_Auth Controller|Auth Controller]]
+- [[_COMMUNITY_JWT Service|JWT Service]]
+- [[_COMMUNITY_K8s Infrastructure|K8s Infrastructure]]
+- [[_COMMUNITY_Android MainActivity|Android MainActivity]]
+- [[_COMMUNITY_Health Score Math|Health Score Math]]
+- [[_COMMUNITY_Theme System|Theme System]]
+- [[_COMMUNITY_Spring Security Config|Spring Security Config]]
+- [[_COMMUNITY_Health API Endpoints|Health API Endpoints]]
 - [[_COMMUNITY_Kafka Producer Config|Kafka Producer Config]]
-- [[_COMMUNITY_Application Entry Point|Application Entry Point]]
+- [[_COMMUNITY_User Repository|User Repository]]
+- [[_COMMUNITY_Profile Form|Profile Form]]
+- [[_COMMUNITY_Android MainApplication|Android MainApplication]]
+- [[_COMMUNITY_User Entity|User Entity]]
+- [[_COMMUNITY_Spring Boot Bootstrap|Spring Boot Bootstrap]]
 - [[_COMMUNITY_Kafka Topic Config|Kafka Topic Config]]
-- [[_COMMUNITY_Jackson Config|Jackson Config]]
-- [[_COMMUNITY_OpenAPISwagger Config|OpenAPI/Swagger Config]]
+- [[_COMMUNITY_Jackson JSON Config|Jackson JSON Config]]
+- [[_COMMUNITY_OpenAPI Config|OpenAPI Config]]
+- [[_COMMUNITY_Swagger UI|Swagger UI]]
+- [[_COMMUNITY_UserProfile DTO|UserProfile DTO]]
+- [[_COMMUNITY_Logout Endpoint|Logout Endpoint]]
+- [[_COMMUNITY_Get Me Endpoint|Get Me Endpoint]]
+- [[_COMMUNITY_Patch Me Endpoint|Patch Me Endpoint]]
+- [[_COMMUNITY_Android Monochrome Icon|Android Monochrome Icon]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `docs/API.md - API Specification v1` - 12 edges
-2. `k8s Namespace: vitalsync` - 6 edges
-3. `k8s Deployment: vitalsync-backend` - 6 edges
-4. `failure()` - 5 edges
-5. `GlobalExceptionHandler` - 5 edges
-6. `VitalSyncApplication (Spring Boot entry point)` - 5 edges
-7. `HealthSnapshotPublisher (Kafka producer service)` - 5 edges
-8. `REST endpoint: POST /api/v1/health/sync` - 5 edges
-9. `Kafka topic: vitalsync-data-ingestion` - 5 edges
-10. `HealthSyncController (POST /api/v1/health/sync)` - 4 edges
+1. `AuthService` - 10 edges
+2. `GlobalExceptionHandler` - 7 edges
+3. `buildSnapshotForWindow()` - 7 edges
+4. `JwtAuthFilter` - 6 edges
+5. `AuthController` - 6 edges
+6. `JwtService` - 5 edges
+7. `MainActivity` - 5 edges
+8. `SecurityConfig` - 5 edges
+9. `AuthException` - 4 edges
+10. `Expo Frontend Application` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `HealthSnapshot DTO` --semantically_similar_to--> `DB table spec: health_snapshots`  [INFERRED] [semantically similar]
-  backend/src/main/java/com/vitalsync/dto/HealthSnapshot.java → docs/API.md
-- `NewTopic vitalSyncDataTopic bean` --references--> `Kafka topic: vitalsync-data-ingestion`  [INFERRED]
-  backend/src/main/java/com/vitalsync/config/KafkaTopicConfig.java → k8s/backend.yaml
-- `k8s Deployment: vitalsync-backend` --references--> `VitalSyncApplication (Spring Boot entry point)`  [INFERRED]
-  k8s/backend.yaml → backend/src/main/java/com/vitalsync/VitalSyncApplication.java
-- `HealthSnapshotPublisher (Kafka producer service)` --references--> `Kafka topic: vitalsync-data-ingestion`  [INFERRED]
-  backend/src/main/java/com/vitalsync/service/HealthSnapshotPublisher.java → k8s/backend.yaml
-- `DB table spec: exercise_sessions` --shares_data_with--> `ExerciseSession DTO`  [INFERRED]
-  docs/API.md → backend/src/main/java/com/vitalsync/dto/ExerciseSession.java
-
-## Hyperedges (group relationships)
-- **Health sync request -> controller -> publisher -> Kafka topic** — vitalsync_health_sync_controller, vitalsync_health_snapshot_publisher, vitalsync_kafka_template_bean, vitalsync_kafka_topic_data_ingestion, vitalsync_health_sync_request_dto [EXTRACTED 1.00]
-- **Spring bean wiring: ProducerFactory -> KafkaTemplate -> publisher** — vitalsync_kafka_producer_config, vitalsync_producer_factory_bean, vitalsync_kafka_template_bean, vitalsync_health_snapshot_publisher [EXTRACTED 1.00]
-- **All k8s workloads collocated in vitalsync namespace** — vitalsync_namespace, vitalsync_backend_deployment, vitalsync_backend_service, vitalsync_kafka_deployment, vitalsync_kafka_service, vitalsync_kafka_ui_deployment, vitalsync_kafka_ui_service [EXTRACTED 1.00]
-- **Kafka runtime: backend producer + Redpanda console UI -> kafka broker svc** — vitalsync_backend_deployment, vitalsync_kafka_ui_deployment, vitalsync_kafka_service, vitalsync_kafka_deployment [EXTRACTED 1.00]
-- **HealthSnapshot data model spans DTOs, API spec, DB tables** — vitalsync_health_snapshot_dto, vitalsync_exercise_session_dto, vitalsync_db_table_health_snapshots, vitalsync_db_table_exercise_sessions, vitalsync_api_md [INFERRED 0.85]
+- `VitalSync Project` --has_component--> `Expo Frontend Application`  [INFERRED]
+  /Users/sushrutda/Desktop/personal/VitalSync/README.md → /Users/sushrutda/Desktop/personal/VitalSync/frontend/README.md
+- `onSyncNow()` --calls--> `getHealthConnectStatus()`  [INFERRED]
+  frontend/app/(app)/index.tsx → frontend/src/health/permissions.ts
+- `onSyncNow()` --calls--> `ensureHealthPermissions()`  [INFERRED]
+  frontend/app/(app)/index.tsx → frontend/src/health/permissions.ts
+- `onSyncNow()` --calls--> `syncLastMinute()`  [INFERRED]
+  frontend/app/(app)/index.tsx → frontend/src/health/sync.ts
+- `buildSnapshotForWindow()` --calls--> `syncLastMinute()`  [INFERRED]
+  frontend/src/health/snapshot.web.ts → frontend/src/health/sync.ts
 
 ## Communities
 
-### Community 0 - "API Spec & DB Schema"
-Cohesion: 0.18
-Nodes (15): docs/API.md - API Specification v1, Concept: Access Token + Refresh Token (ATRT) auth, Concept: Refresh token rotation, DB table spec: exercise_sessions, DB table spec: health_snapshots, DB table spec: refresh_tokens, DB table spec: users, Spec endpoint: GET /api/v1/health/history (+7 more)
+### Community 0 - "Auth API Surface"
+Cohesion: 0.13
+Nodes (24): ApiResponse DTO, ATRT Authentication, POST /api/v1/auth/login, POST /api/v1/auth/refresh, POST /api/v1/auth/signup, bcrypt, DataIngestionController, Docker (+16 more)
 
-### Community 1 - "Health Sync Controller Flow"
-Cohesion: 0.18
-Nodes (5): HealthSnapshotPublisher, KafkaPublishException, HealthSyncController, accepted(), RuntimeException
+### Community 1 - "Health Sync Backend"
+Cohesion: 0.12
+Nodes (6): HealthSyncController, accepted(), AuthException, RuntimeException, HealthSnapshotPublisher, KafkaPublishException
 
-### Community 2 - "k8s Deployments & Services"
-Cohesion: 0.31
-Nodes (10): k8s Deployment: vitalsync-backend, Container image: vitalsync-backend:latest, k8s Service: vitalsync-backend (NodePort 30080), k8s Deployment: kafka (KRaft single-node), Container image: confluentinc/cp-kafka:7.6.1, k8s Service: kafka (ClusterIP 9092), k8s Deployment: kafka-ui (Redpanda Console), Container image: redpanda console:latest (+2 more)
+### Community 2 - "Login/Signup Forms"
+Cohesion: 0.21
+Nodes (3): onSubmit(), onSubmit(), AuthService
 
-### Community 3 - "Spring Boot Beans & Config"
+### Community 3 - "Frontend Sync & Permissions"
+Cohesion: 0.23
+Nodes (7): onSyncNow(), ensureHealthPermissions(), ensureInitialized(), getHealthConnectStatus(), hasHealthPermissions(), buildSnapshotForWindow(), syncLastMinute()
+
+### Community 4 - "Backend Error Handling"
 Cohesion: 0.29
-Nodes (8): VitalSyncApplication (Spring Boot entry point), JacksonConfig (scalar-to-string coercion), KafkaProducerConfig (ProducerFactory + KafkaTemplate), KafkaTemplate<String,Object> bean, KafkaTopicConfig (auto-create topic bean), NewTopic vitalSyncDataTopic bean, OpenApiConfig (Swagger metadata), ProducerFactory<String,Object> bean
+Nodes (2): status(), GlobalExceptionHandler
 
-### Community 4 - "Global Exception Handling"
-Cohesion: 0.43
-Nodes (2): GlobalExceptionHandler, failure()
+### Community 5 - "Android Assets & Health Connect"
+Cohesion: 0.2
+Nodes (8): Android Icon (Background), Android Icon (Foreground), Favicon, Android Health Connect, React, React Logo, VitalSync, VitalSync Frontend
 
-### Community 5 - "Health Snapshot Pipeline (DTO)"
+### Community 6 - "Frontend API Client"
+Cohesion: 0.29
+Nodes (6): ApiError, buildUrl(), doFetch(), parseError(), refreshAccessToken(), request()
+
+### Community 7 - "Health Snapshot Builder"
+Cohesion: 0.39
+Nodes (7): buildSnapshotForWindow(), readActiveCalories(), readExerciseSessions(), readHeartRateAvg(), readLatestSpO2(), readStepsSum(), startOfUtcDay()
+
+### Community 8 - "Expo Framework Wiring"
+Cohesion: 0.29
+Nodes (7): Android App Launcher Icon, Android Native Module, Expo File-Based Routing, Expo Framework, Expo Frontend Application, VitalSync Project, App Splash Screen Logo - Concentric Circles Design
+
+### Community 9 - "JWT Auth Filter"
 Cohesion: 0.38
-Nodes (7): GlobalExceptionHandler (RestControllerAdvice), HealthSnapshot DTO, HealthSnapshotPublisher (Kafka producer service), HealthSyncController (POST /api/v1/health/sync), HealthSyncRequest DTO, HealthSyncResponse DTO, KafkaPublishException
+Nodes (2): JwtAuthFilter, OncePerRequestFilter
 
-### Community 6 - "Architecture Docs & Endpoints"
+### Community 10 - "Auth Controller"
+Cohesion: 0.29
+Nodes (1): AuthController
+
+### Community 11 - "JWT Service"
 Cohesion: 0.33
-Nodes (7): Backend README (architecture overview), Concept: Health Connect 60s sync window, Concept: idempotency-key dedup, Backend README endpoint: POST /api/v1/data/ingest (stale), REST endpoint: POST /api/v1/health/sync, Kafka topic: vitalsync-data-ingestion, Top-level README.md
+Nodes (1): JwtService
 
-### Community 7 - "Kafka Producer Config"
+### Community 12 - "K8s Infrastructure"
+Cohesion: 0.33
+Nodes (6): vitalsync-backend Deployment, kafka Deployment, kafka-ui Service, vitalsync namespace, postgres Deployment, Kubernetes
+
+### Community 13 - "Android MainActivity"
+Cohesion: 0.33
+Nodes (1): MainActivity
+
+### Community 14 - "Health Score Math"
+Cohesion: 0.53
+Nodes (4): clamp(), recoveryScore(), sleepScore(), strainScore()
+
+### Community 15 - "Theme System"
+Cohesion: 0.33
+Nodes (2): useThemePref(), ThemeToggle()
+
+### Community 16 - "Spring Security Config"
+Cohesion: 0.4
+Nodes (1): SecurityConfig
+
+### Community 17 - "Health API Endpoints"
+Cohesion: 0.4
+Nodes (5): ExerciseSession, GET /api/v1/health/history, HealthSnapshot, GET /api/v1/health/summary, POST /api/v1/health/sync
+
+### Community 18 - "Kafka Producer Config"
 Cohesion: 0.67
 Nodes (1): KafkaProducerConfig
 
-### Community 8 - "Application Entry Point"
+### Community 19 - "User Repository"
+Cohesion: 0.5
+Nodes (1): UserRepository
+
+### Community 20 - "Profile Form"
+Cohesion: 0.67
+Nodes (2): onSubmit(), parseOptionalNumber()
+
+### Community 21 - "Android MainApplication"
+Cohesion: 0.5
+Nodes (1): MainApplication
+
+### Community 23 - "User Entity"
+Cohesion: 0.5
+Nodes (1): User
+
+### Community 25 - "Spring Boot Bootstrap"
 Cohesion: 0.67
 Nodes (1): VitalSyncApplication
 
-### Community 9 - "Kafka Topic Config"
+### Community 26 - "Kafka Topic Config"
 Cohesion: 0.67
 Nodes (1): KafkaTopicConfig
 
-### Community 10 - "Jackson Config"
+### Community 27 - "Jackson JSON Config"
 Cohesion: 0.67
 Nodes (1): JacksonConfig
 
-### Community 11 - "OpenAPI/Swagger Config"
+### Community 28 - "OpenAPI Config"
 Cohesion: 0.67
 Nodes (1): OpenApiConfig
 
+### Community 50 - "Swagger UI"
+Cohesion: 1.0
+Nodes (1): Swagger UI
+
+### Community 51 - "UserProfile DTO"
+Cohesion: 1.0
+Nodes (1): UserProfile
+
+### Community 52 - "Logout Endpoint"
+Cohesion: 1.0
+Nodes (1): POST /api/v1/auth/logout
+
+### Community 53 - "Get Me Endpoint"
+Cohesion: 1.0
+Nodes (1): GET /api/v1/users/me
+
+### Community 54 - "Patch Me Endpoint"
+Cohesion: 1.0
+Nodes (1): PATCH /api/v1/users/me
+
+### Community 55 - "Android Monochrome Icon"
+Cohesion: 1.0
+Nodes (1): Android Icon (Monochrome)
+
 ## Knowledge Gaps
-- **11 isolated node(s):** `OpenApiConfig (Swagger metadata)`, `Top-level README.md`, `Concept: idempotency-key dedup`, `Concept: Health Connect 60s sync window`, `Spec endpoint: GET /api/v1/health/summary` (+6 more)
+- **5 isolated node(s):** `VitalSync Project`, `Expo Framework`, `Android App Launcher Icon`, `App Splash Screen Logo - Concentric Circles Design`, `Expo File-Based Routing`
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Global Exception Handling`** (7 nodes): `GlobalExceptionHandler.java`, `GlobalExceptionHandler`, `.handleGeneric()`, `.handleKafka()`, `.handleUnreadable()`, `.handleValidation()`, `failure()`
+- **Thin community `Backend Error Handling`** (11 nodes): `AuthErrorCode.java`, `GlobalExceptionHandler.java`, `AuthErrorCode()`, `status()`, `GlobalExceptionHandler`, `.error()`, `.handleAuth()`, `.handleGeneric()`, `.handleKafka()`, `.handleUnreadable()`, `.handleValidation()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `JWT Auth Filter`** (7 nodes): `JwtAuthFilter.java`, `JwtAuthFilter`, `.doFilterInternal()`, `.JwtAuthFilter()`, `.shouldNotFilter()`, `.writeError()`, `OncePerRequestFilter`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Auth Controller`** (7 nodes): `AuthController.java`, `AuthController`, `.AuthController()`, `.login()`, `.logout()`, `.refresh()`, `.signup()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `JWT Service`** (6 nodes): `JwtService.java`, `JwtService`, `.accessTtlSeconds()`, `.issue()`, `.JwtService()`, `.parse()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Android MainActivity`** (6 nodes): `MainActivity`, `.createReactActivityDelegate()`, `.getMainComponentName()`, `.invokeDefaultOnBackPressed()`, `.onCreate()`, `MainActivity.kt`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Theme System`** (6 nodes): `ThemeToggle.tsx`, `ThemeProvider.tsx`, `isPreference()`, `ThemeProvider()`, `useThemePref()`, `ThemeToggle()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Spring Security Config`** (6 nodes): `SecurityConfig.java`, `SecurityConfig`, `.corsConfigurationSource()`, `.passwordEncoder()`, `.SecurityConfig()`, `.securityFilterChain()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Kafka Producer Config`** (4 nodes): `KafkaProducerConfig.java`, `KafkaProducerConfig`, `.kafkaTemplate()`, `.producerFactory()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Application Entry Point`** (3 nodes): `VitalSyncApplication.java`, `VitalSyncApplication`, `.main()`
+- **Thin community `User Repository`** (4 nodes): `UserRepository.java`, `UserRepository`, `.existsByEmail()`, `.findByEmail()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Profile Form`** (4 nodes): `numberInRange()`, `onSubmit()`, `parseOptionalNumber()`, `profile.tsx`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Android MainApplication`** (4 nodes): `MainApplication`, `.onConfigurationChanged()`, `.onCreate()`, `MainApplication.kt`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `User Entity`** (4 nodes): `User.java`, `User`, `.onInsert()`, `.onUpdate()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Spring Boot Bootstrap`** (3 nodes): `VitalSyncApplication.java`, `VitalSyncApplication`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Kafka Topic Config`** (3 nodes): `KafkaTopicConfig.java`, `KafkaTopicConfig`, `.vitalSyncDataTopic()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Jackson Config`** (3 nodes): `JacksonConfig.java`, `JacksonConfig`, `.scalarToStringCoercion()`
+- **Thin community `Jackson JSON Config`** (3 nodes): `JacksonConfig.java`, `JacksonConfig`, `.scalarToStringCoercion()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `OpenAPI/Swagger Config`** (3 nodes): `OpenApiConfig.java`, `OpenApiConfig`, `.vitalSyncOpenAPI()`
+- **Thin community `OpenAPI Config`** (3 nodes): `OpenApiConfig.java`, `OpenApiConfig`, `.vitalSyncOpenAPI()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Swagger UI`** (1 nodes): `Swagger UI`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `UserProfile DTO`** (1 nodes): `UserProfile`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Logout Endpoint`** (1 nodes): `POST /api/v1/auth/logout`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Get Me Endpoint`** (1 nodes): `GET /api/v1/users/me`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Patch Me Endpoint`** (1 nodes): `PATCH /api/v1/users/me`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Android Monochrome Icon`** (1 nodes): `Android Icon (Monochrome)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `docs/API.md - API Specification v1` connect `API Spec & DB Schema` to `Architecture Docs & Endpoints`?**
-  _High betweenness centrality (0.133) - this node is a cross-community bridge._
-- **Why does `REST endpoint: POST /api/v1/health/sync` connect `Architecture Docs & Endpoints` to `API Spec & DB Schema`, `Health Snapshot Pipeline (DTO)`?**
-  _High betweenness centrality (0.115) - this node is a cross-community bridge._
-- **Why does `k8s Deployment: vitalsync-backend` connect `k8s Deployments & Services` to `Spring Boot Beans & Config`, `Architecture Docs & Endpoints`?**
-  _High betweenness centrality (0.109) - this node is a cross-community bridge._
-- **Are the 4 inferred relationships involving `failure()` (e.g. with `.handleValidation()` and `.handleUnreadable()`) actually correct?**
-  _`failure()` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `OpenApiConfig (Swagger metadata)`, `Top-level README.md`, `Concept: idempotency-key dedup` to the rest of the system?**
-  _11 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `VitalSync Project`, `Expo Framework`, `Android App Launcher Icon` to the rest of the system?**
+  _5 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Auth API Surface` be split into smaller, more focused modules?**
+  _Cohesion score 0.13 - nodes in this community are weakly interconnected._
+- **Should `Health Sync Backend` be split into smaller, more focused modules?**
+  _Cohesion score 0.12 - nodes in this community are weakly interconnected._

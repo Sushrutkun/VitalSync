@@ -9,7 +9,7 @@ const KEYS = {
 
 const isWeb = Platform.OS === "web";
 
-const store = {
+export const store = {
   async get(key: string): Promise<string | null> {
     if (isWeb) return localStorage.getItem(key);
     return SecureStore.getItemAsync(key);

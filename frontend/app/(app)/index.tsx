@@ -1,21 +1,18 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useState } from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme, XStack, YStack } from "tamagui";
 
 import { healthApi } from "@/src/api/health";
+import { Body, Button, Card, Heading, MetricCard, Ring, RowItem, ThemeToggle } from "@/src/components/ui";
+import { formatSleep, recoveryScore, sleepScore, strainScore } from "@/src/dashboard/scores";
 import { ensureHealthPermissions, getHealthConnectStatus } from "@/src/health/permissions";
 import { syncLastMinute } from "@/src/health/sync";
 import { ApiError } from "@/src/lib/api";
+import { brand } from "@/src/theme/tokens";
 
 function todayUtc(): string {
   return format(new Date(), "yyyy-MM-dd");
@@ -23,6 +20,7 @@ function todayUtc(): string {
 
 export default function TodayScreen() {
   const date = todayUtc();
+  const theme = useTheme();
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
 
@@ -52,139 +50,169 @@ export default function TodayScreen() {
       return;
     }
     const result = await syncLastMinute();
-    setSyncMessage(
-      result.ok
-        ? "Synced last minute."
-        : `Sync failed: ${result.reason}`,
-    );
+    setSyncMessage(result.ok ? "Synced last minute." : `Sync failed: ${result.reason}`);
     void summary.refetch();
     setSyncing(false);
   };
 
   const isNotFound = summary.error instanceof ApiError && summary.error.status === 404;
+  const data = summary.data;
+
+  const recovery = data ? recoveryScore(data) : null;
+  const strain = data ? strainScore(data) : null;
+  const sleep = data ? sleepScore(data) : null;
 
   return (
-    <SafeAreaView style={styles.safe} edges={["bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
       <ScrollView
-        contentContainerStyle={styles.content}
+        contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 20 }}
         refreshControl={
-          <RefreshControl refreshing={summary.isFetching} onRefresh={() => summary.refetch()} />
+          <RefreshControl
+            refreshing={summary.isFetching}
+            onRefresh={() => summary.refetch()}
+            tintColor={theme.accent?.val}
+          />
         }
       >
-        <Text style={styles.heading}>Today</Text>
-        <Text style={styles.subheading}>{format(new Date(), "EEEE, d MMM yyyy")}</Text>
+        <XStack alignItems="center" justifyContent="space-between">
+          <YStack>
+            <Body tone="muted" size="sm" weight="semibold">
+              {format(new Date(), "EEEE, d MMM").toUpperCase()}
+            </Body>
+            <Heading level={1}>Today</Heading>
+          </YStack>
+          <ThemeToggle />
+        </XStack>
 
         {summary.isLoading ? (
-          <View style={styles.center}>
-            <ActivityIndicator />
-          </View>
+          <Card padding={24} alignItems="center">
+            <Body tone="muted">Loading…</Body>
+          </Card>
         ) : isNotFound ? (
-          <View style={styles.empty}>
-            <Text style={styles.emptyText}>No data yet for today.</Text>
-            <Text style={styles.emptyHint}>Tap &quot;Sync now&quot; to upload your latest readings.</Text>
-          </View>
+          <Card elevated padding={24} alignItems="center" gap={6}>
+            <Body weight="semibold" size="lg">
+              No data yet for today.
+            </Body>
+            <Body tone="muted" textAlign="center">
+              Tap &quot;Sync now&quot; to upload your latest readings.
+            </Body>
+          </Card>
         ) : summary.error ? (
-          <Text style={styles.error}>
-            {summary.error instanceof ApiError ? summary.error.message : "Could not load summary."}
-          </Text>
-        ) : summary.data ? (
-          <View style={styles.cards}>
-            <Stat label="Steps" value={summary.data.steps?.toLocaleString() ?? "—"} />
-            <Stat
-              label="Active calories"
-              value={
-                summary.data.activeCaloriesKcal != null
-                  ? `${Math.round(summary.data.activeCaloriesKcal)} kcal`
-                  : "—"
-              }
-            />
-            <Stat
-              label="Avg heart rate"
-              value={
-                summary.data.avgHeartRateBpm != null ? `${summary.data.avgHeartRateBpm} bpm` : "—"
-              }
-            />
-            <Stat
-              label="Resting heart rate"
-              value={
-                summary.data.restingHeartRateBpm != null
-                  ? `${summary.data.restingHeartRateBpm} bpm`
-                  : "—"
-              }
-            />
-            <Stat
-              label="Blood oxygen"
-              value={
-                summary.data.bloodOxygenPct != null ? `${summary.data.bloodOxygenPct}%` : "—"
-              }
-            />
-            <Stat
-              label="Sleep"
-              value={
-                summary.data.sleepDurationMinutes != null
-                  ? `${Math.floor(summary.data.sleepDurationMinutes / 60)}h ${summary.data.sleepDurationMinutes % 60}m`
-                  : "—"
-              }
-            />
-          </View>
+          <Card padding={20}>
+            <Body tone="danger">
+              {summary.error instanceof ApiError ? summary.error.message : "Could not load summary."}
+            </Body>
+          </Card>
+        ) : data && recovery && strain && sleep ? (
+          <>
+            <Card elevated padding={20} gap={16}>
+              <Body tone="muted" size="sm" weight="semibold">
+                DAILY SCORES
+              </Body>
+              <XStack justifyContent="space-around" alignItems="center" flexWrap="wrap" gap={12}>
+                <Ring
+                  progress={recovery.ratio}
+                  color={brand.recovery}
+                  label={recovery.label}
+                  value={`${recovery.value}`}
+                  unit="%"
+                />
+                <Ring
+                  progress={strain.ratio}
+                  color={brand.strain}
+                  label={strain.label}
+                  value={`${strain.value}`}
+                  unit="%"
+                />
+                <Ring
+                  progress={sleep.ratio}
+                  color={brand.sleep}
+                  label={sleep.label}
+                  value={`${sleep.value}`}
+                  unit="%"
+                />
+              </XStack>
+            </Card>
+
+            <YStack gap={10}>
+              <Body tone="muted" size="sm" weight="semibold">
+                VITALS
+              </Body>
+              <XStack gap={10} flexWrap="wrap">
+                <MetricCard
+                  label="Steps"
+                  value={data.steps?.toLocaleString() ?? "—"}
+                  icon={<Ionicons name="walk-outline" size={18} color={brand.accent} />}
+                />
+                <MetricCard
+                  label="Active kcal"
+                  value={data.activeCaloriesKcal != null ? Math.round(data.activeCaloriesKcal).toString() : "—"}
+                  unit="kcal"
+                  accent="$strain"
+                  icon={<Ionicons name="flame-outline" size={18} color={brand.strain} />}
+                />
+                <MetricCard
+                  label="Avg HR"
+                  value={data.avgHeartRateBpm != null ? `${data.avgHeartRateBpm}` : "—"}
+                  unit="bpm"
+                  icon={<Ionicons name="heart-outline" size={18} color={brand.danger} />}
+                />
+                <MetricCard
+                  label="Resting HR"
+                  value={data.restingHeartRateBpm != null ? `${data.restingHeartRateBpm}` : "—"}
+                  unit="bpm"
+                  accent="$recovery"
+                  icon={<Ionicons name="pulse-outline" size={18} color={brand.recovery} />}
+                />
+                <MetricCard
+                  label="SpO₂"
+                  value={data.bloodOxygenPct != null ? `${data.bloodOxygenPct}` : "—"}
+                  unit="%"
+                  icon={<Ionicons name="water-outline" size={18} color={brand.sleep} />}
+                />
+                <MetricCard
+                  label="Sleep"
+                  value={formatSleep(data.sleepDurationMinutes)}
+                  accent="$sleep"
+                  icon={<Ionicons name="moon-outline" size={18} color={brand.sleep} />}
+                />
+              </XStack>
+            </YStack>
+
+            {data.exerciseSessions && data.exerciseSessions.length > 0 ? (
+              <YStack gap={10}>
+                <Body tone="muted" size="sm" weight="semibold">
+                  RECENT ACTIVITY
+                </Body>
+                <YStack gap={8}>
+                  {data.exerciseSessions.map((s, i) => (
+                    <RowItem
+                      key={`${s.startTime}-${i}`}
+                      title={s.type}
+                      subtitle={`${Math.round(s.durationMinutes)} min · ${format(new Date(s.startTime), "HH:mm")}`}
+                      leading={<Ionicons name="fitness-outline" size={20} color={brand.strain} />}
+                      trailing={
+                        s.calories != null ? (
+                          <Body weight="semibold">{Math.round(s.calories)} kcal</Body>
+                        ) : null
+                      }
+                    />
+                  ))}
+                </YStack>
+              </YStack>
+            ) : null}
+          </>
         ) : null}
 
-        <Pressable
-          style={[styles.button, syncing && styles.buttonDisabled]}
-          disabled={syncing}
-          onPress={onSyncNow}
-        >
-          {syncing ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Sync now</Text>}
-        </Pressable>
-        {syncMessage && <Text style={styles.syncMessage}>{syncMessage}</Text>}
+        <Button onPress={onSyncNow} loading={syncing} marginTop="$2">
+          Sync now
+        </Button>
+        {syncMessage ? (
+          <Body tone="muted" textAlign="center" size="sm">
+            {syncMessage}
+          </Body>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <View style={styles.card}>
-      <Text style={styles.cardLabel}>{label}</Text>
-      <Text style={styles.cardValue}>{value}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#f7f7f8" },
-  content: { padding: 20, paddingBottom: 40 },
-  heading: { fontSize: 28, fontWeight: "700" },
-  subheading: { fontSize: 14, color: "#666", marginTop: 2, marginBottom: 20 },
-  center: { padding: 40, alignItems: "center" },
-  empty: { padding: 24, alignItems: "center" },
-  emptyText: { fontSize: 16, fontWeight: "600", color: "#333" },
-  emptyHint: { fontSize: 14, color: "#666", marginTop: 4, textAlign: "center" },
-  error: { color: "#d33", padding: 12 },
-  cards: { gap: 10 },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 1,
-  },
-  cardLabel: { fontSize: 14, color: "#666" },
-  cardValue: { fontSize: 18, fontWeight: "600", color: "#111" },
-  button: {
-    marginTop: 24,
-    backgroundColor: "#0a7",
-    borderRadius: 10,
-    paddingVertical: 14,
-    alignItems: "center",
-  },
-  buttonDisabled: { opacity: 0.6 },
-  buttonText: { color: "#fff", fontSize: 16, fontWeight: "600" },
-  syncMessage: { textAlign: "center", color: "#444", marginTop: 12, fontSize: 13 },
-});

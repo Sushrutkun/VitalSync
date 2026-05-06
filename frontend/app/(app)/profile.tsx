@@ -1,25 +1,19 @@
+import { Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme, XStack, YStack } from "tamagui";
 import { z } from "zod";
 
 import { usersApi } from "@/src/api/users";
 import { useAuth } from "@/src/auth/AuthContext";
+import { Body, Button, Card, Field, Heading, ThemeToggle } from "@/src/components/ui";
 import { ApiError } from "@/src/lib/api";
+import { brand } from "@/src/theme/tokens";
 import type { UpdateProfileRequest, UserProfile } from "@/src/types/api";
 
 const numberInRange = (min: number, max: number) =>
@@ -47,6 +41,7 @@ function parseOptionalNumber(v: string): number | undefined {
 
 export default function ProfileScreen() {
   const { logout } = useAuth();
+  const theme = useTheme();
   const queryClient = useQueryClient();
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
 
@@ -63,7 +58,12 @@ export default function ProfileScreen() {
     },
   });
 
-  const { control, handleSubmit, reset, formState: { errors, isDirty } } = useForm<FormValues>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", heightCm: "", weightKg: "", dateOfBirth: "" },
   });
@@ -92,182 +92,197 @@ export default function ProfileScreen() {
 
   if (profile.isLoading) {
     return (
-      <SafeAreaView style={styles.safe} edges={["bottom"]}>
-        <View style={styles.center}>
-          <ActivityIndicator />
-        </View>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+        <YStack flex={1} alignItems="center" justifyContent="center">
+          <ActivityIndicator color={theme.accent?.val} />
+        </YStack>
       </SafeAreaView>
     );
   }
 
   if (profile.error) {
     return (
-      <SafeAreaView style={styles.safe} edges={["bottom"]}>
-        <View style={styles.center}>
-          <Text style={styles.error}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+        <YStack flex={1} alignItems="center" justifyContent="center" padding={20}>
+          <Body tone="danger">
             {profile.error instanceof ApiError ? profile.error.message : "Could not load profile."}
-          </Text>
-        </View>
+          </Body>
+        </YStack>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.safe} edges={["bottom"]}>
-      <KeyboardAvoidingView
-        style={styles.flex}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-      >
-        <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
-          <Text style={styles.heading}>Profile</Text>
-          {profile.data && <ReadOnly profile={profile.data} />}
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 16 }} keyboardShouldPersistTaps="handled">
+          <Heading level={1}>Profile</Heading>
 
-          <Field control={control} name="name" label="Name" error={errors.name?.message} />
-          <Field
-            control={control}
-            name="dateOfBirth"
-            label="Date of birth (YYYY-MM-DD)"
-            placeholder="1995-06-15"
-            error={errors.dateOfBirth?.message}
-          />
-          <Field
-            control={control}
-            name="heightCm"
-            label="Height (cm)"
-            keyboardType="numeric"
-            error={errors.heightCm?.message}
-          />
-          <Field
-            control={control}
-            name="weightKg"
-            label="Weight (kg)"
-            keyboardType="numeric"
-            error={errors.weightKg?.message}
-          />
+          {profile.data ? <ProfileHero profile={profile.data} /> : null}
+          {profile.data ? <AccountInfo profile={profile.data} /> : null}
 
-          {update.error && (
-            <Text style={styles.submitError}>
+          <Card gap={10} padding={16}>
+            <Body tone="muted" size="sm" weight="semibold">
+              APPEARANCE
+            </Body>
+            <ThemeToggle />
+          </Card>
+
+          <YStack gap={12}>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Field
+                  label="Name"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  error={errors.name?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="dateOfBirth"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Field
+                  label="Date of birth (YYYY-MM-DD)"
+                  placeholder="1995-06-15"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  autoCapitalize="none"
+                  error={errors.dateOfBirth?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="heightCm"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Field
+                  label="Height (cm)"
+                  keyboardType="numeric"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  error={errors.heightCm?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="weightKg"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Field
+                  label="Weight (kg)"
+                  keyboardType="numeric"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  error={errors.weightKg?.message}
+                />
+              )}
+            />
+          </YStack>
+
+          {update.error ? (
+            <Body tone="danger" textAlign="center">
               {update.error instanceof ApiError ? update.error.message : "Could not save."}
-            </Text>
-          )}
-          {savedMessage && <Text style={styles.savedMessage}>{savedMessage}</Text>}
+            </Body>
+          ) : null}
+          {savedMessage ? (
+            <Body tone="accent" textAlign="center">
+              {savedMessage}
+            </Body>
+          ) : null}
 
-          <Pressable
-            style={[styles.button, (!isDirty || update.isPending) && styles.buttonDisabled]}
-            disabled={!isDirty || update.isPending}
+          <Button
             onPress={handleSubmit(onSubmit)}
+            disabled={!isDirty || update.isPending}
+            loading={update.isPending}
           >
-            {update.isPending ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>Save changes</Text>
-            )}
-          </Pressable>
+            Save changes
+          </Button>
 
-          <Pressable style={styles.logout} onPress={() => void logout()}>
-            <Text style={styles.logoutText}>Sign out</Text>
-          </Pressable>
+          <Card gap={10} padding={16} marginTop="$3">
+            <Body tone="muted" size="sm" weight="semibold">
+              ACCOUNT
+            </Body>
+            <Button intent="danger" onPress={() => void logout()}>
+              <XStack alignItems="center" gap={8}>
+                <Ionicons name="log-out-outline" size={18} color="#FFFFFF" />
+                <Body weight="semibold" color="#FFFFFF">
+                  Sign out
+                </Body>
+              </XStack>
+            </Button>
+          </Card>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
-function ReadOnly({ profile }: { profile: UserProfile }) {
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function ProfileHero({ profile }: { profile: UserProfile }) {
   return (
-    <View style={styles.readOnly}>
+    <Card elevated gap={12} padding={20} alignItems="center">
+      <YStack
+        width={84}
+        height={84}
+        borderRadius={42}
+        alignItems="center"
+        justifyContent="center"
+        backgroundColor={brand.accent as any}
+      >
+        <Body fontSize={32} weight="bold" color="#0B0B0F">
+          {initials(profile.name)}
+        </Body>
+      </YStack>
+      <YStack alignItems="center" gap={2}>
+        <Body size="lg" weight="bold" fontSize={20}>
+          {profile.name}
+        </Body>
+        <XStack alignItems="center" gap={6}>
+          <Ionicons name="mail-outline" size={14} color={brand.dark.muted} />
+          <Body tone="muted" size="sm">
+            {profile.email}
+          </Body>
+        </XStack>
+      </YStack>
+    </Card>
+  );
+}
+
+function AccountInfo({ profile }: { profile: UserProfile }) {
+  return (
+    <Card gap={6} padding={16}>
+      <Body tone="muted" size="sm" weight="semibold">
+        DETAILS
+      </Body>
+      <Row label="Username" value={profile.email.split("@")[0]} />
       <Row label="Email" value={profile.email} />
+      <Row label="User ID" value={profile.id.slice(0, 8)} />
       <Row label="Member since" value={format(new Date(profile.createdAt), "d MMM yyyy")} />
-    </View>
+    </Card>
   );
 }
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <View style={styles.row}>
-      <Text style={styles.rowLabel}>{label}</Text>
-      <Text style={styles.rowValue}>{value}</Text>
-    </View>
+    <XStack justifyContent="space-between" paddingVertical={4} gap={12}>
+      <Body tone="muted">{label}</Body>
+      <Body weight="semibold" numberOfLines={1} flexShrink={1} textAlign="right">
+        {value}
+      </Body>
+    </XStack>
   );
 }
-
-type FieldProps = {
-  control: ReturnType<typeof useForm<FormValues>>["control"];
-  name: keyof FormValues;
-  label: string;
-  placeholder?: string;
-  keyboardType?: "default" | "numeric" | "email-address";
-  error?: string;
-};
-
-function Field({ control, name, label, placeholder, keyboardType, error }: FieldProps) {
-  return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field: { onChange, onBlur, value } }) => (
-        <View style={styles.field}>
-          <Text style={styles.fieldLabel}>{label}</Text>
-          <TextInput
-            style={[styles.input, error && styles.inputError]}
-            placeholder={placeholder}
-            keyboardType={keyboardType}
-            autoCapitalize="none"
-            value={value === undefined || value === null ? "" : String(value)}
-            onChangeText={onChange}
-            onBlur={onBlur}
-          />
-          {error && <Text style={styles.errorText}>{error}</Text>}
-        </View>
-      )}
-    />
-  );
-}
-
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#f7f7f8" },
-  flex: { flex: 1 },
-  content: { padding: 20, paddingBottom: 40 },
-  center: { flex: 1, alignItems: "center", justifyContent: "center" },
-  heading: { fontSize: 28, fontWeight: "700", marginBottom: 16 },
-  readOnly: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 20,
-  },
-  row: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 6 },
-  rowLabel: { color: "#666", fontSize: 14 },
-  rowValue: { fontSize: 14, fontWeight: "600", color: "#111" },
-  field: { marginBottom: 14 },
-  fieldLabel: { fontSize: 14, fontWeight: "600", color: "#333", marginBottom: 6 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    fontSize: 16,
-    backgroundColor: "#fff",
-  },
-  inputError: { borderColor: "#d33" },
-  errorText: { color: "#d33", fontSize: 13, marginTop: 4 },
-  submitError: { color: "#d33", textAlign: "center", marginVertical: 8 },
-  savedMessage: { color: "#0a7", textAlign: "center", marginVertical: 8 },
-  button: {
-    marginTop: 8,
-    backgroundColor: "#0a7",
-    borderRadius: 10,
-    paddingVertical: 14,
-    alignItems: "center",
-  },
-  buttonDisabled: { opacity: 0.5 },
-  buttonText: { color: "#fff", fontSize: 16, fontWeight: "600" },
-  logout: {
-    marginTop: 24,
-    paddingVertical: 14,
-    alignItems: "center",
-  },
-  logoutText: { color: "#d33", fontWeight: "600", fontSize: 15 },
-  error: { color: "#d33" },
-});

@@ -44,6 +44,15 @@ export async function getHealthConnectStatus(): Promise<HealthConnectStatus> {
   }
 }
 
+export async function hasHealthPermissions(): Promise<boolean> {
+  const ok = await ensureInitialized();
+  if (!ok) return false;
+  const granted = await getGrantedPermissions();
+  return REQUIRED_PERMISSIONS.every((req) =>
+    granted.some((g) => g.recordType === req.recordType && g.accessType === req.accessType),
+  );
+}
+
 export async function ensureHealthPermissions(): Promise<{
   granted: boolean;
   missing: Permission[];
@@ -57,7 +66,7 @@ export async function ensureHealthPermissions(): Promise<{
   );
   if (missing.length === 0) return { granted: true, missing: [] };
 
-  const after = await requestPermission(missing);
+  const after = await requestPermission(missing).catch(() => []);
   const stillMissing = missing.filter(
     (req) => !after.some((g) => g.recordType === req.recordType && g.accessType === req.accessType),
   );
