@@ -1,6 +1,6 @@
 package com.vitalsync.service;
 
-import com.vitalsync.dto.HealthSyncRequest;
+import com.vitalsync.dto.health.HealthSyncRequest;
 import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -9,19 +9,19 @@ import type {
 
 export const healthApi = {
   sync(payload: HealthSyncRequest): Promise<HealthSyncResponse> {
-    return request<HealthSyncResponse>("/health/sync", {
+    return request<HealthSyncResponse>("/api/v1/health/sync", {
       method: "POST",
       body: payload,
     });
   },
   summary(date?: string): Promise<DailySummary> {
-    return request<DailySummary>("/health/summary", {
+    return request<DailySummary>("/api/v1/health/summary", {
       method: "GET",
       query: { date },
     });
   },
   history(q: HistoryQuery): Promise<HistoryResponse> {
-    return request<HistoryResponse>("/health/history", {
+    return request<HistoryResponse>("/api/v1/health/history", {
       method: "GET",
       query: {
         from: q.from,

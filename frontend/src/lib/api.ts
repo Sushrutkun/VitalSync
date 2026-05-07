@@ -1,4 +1,5 @@
 import { env } from "../config/env";
+import { debugLog } from "./debugLog";
 import { tokenStorage } from "./storage";
 import type { ApiErrorEnvelope, RefreshResponse } from "../types/api";
 
@@ -44,7 +45,7 @@ async function refreshAccessToken(): Promise<string | null> {
     try {
       const refreshToken = await tokenStorage.getRefreshToken();
       if (!refreshToken) return null;
-      const url = `${env.apiBaseUrl}/auth/refresh`;
+      const url = `${env.apiBaseUrl}/api/v1/auth/refresh`;
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -100,12 +101,36 @@ async function doFetch(path: string, opts: RequestOptions, accessToken: string |
   };
   if (opts.body !== undefined) headers["Content-Type"] = "application/json";
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
-  return fetch(buildUrl(path, opts.query), {
-    method: opts.method ?? "GET",
-    headers,
-    body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
-    signal: opts.signal,
-  });
+  const url = buildUrl(path, opts.query);
+  const method = opts.method ?? "GET";
+  const start = Date.now();
+  try {
+    const res = await fetch(url, {
+      method,
+      headers,
+      body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
+      signal: opts.signal,
+    });
+    const duration = Date.now() - start;
+    debugLog.add(
+      res.ok ? "api" : "error",
+      `${method} ${path}`,
+      res.ok ? undefined : `HTTP ${res.status}`,
+      res.status,
+      duration,
+    );
+    return res;
+  } catch (err) {
+    const duration = Date.now() - start;
+    debugLog.add(
+      "error",
+      `${method} ${path}`,
+      err instanceof Error ? err.message : String(err),
+      undefined,
+      duration,
+    );
+    throw err;
+  }
 }
 
 export async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {

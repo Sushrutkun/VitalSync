@@ -3,14 +3,26 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Theme, useTheme, YStack } from "tamagui";
 
 import { AuthProvider, useAuth } from "@/src/auth/AuthContext";
+import { DebugOverlay } from "@/src/components/DebugOverlay";
 import { queryClient } from "@/src/lib/queryClient";
+import { ThemeProvider, useThemePref } from "@/src/theme/ThemeProvider";
 
 void SplashScreen.preventAutoHideAsync();
+
+function LoadingScreen() {
+  const theme = useTheme();
+  return (
+    <YStack flex={1} alignItems="center" justifyContent="center" backgroundColor="$background">
+      <ActivityIndicator color={theme.accent?.val} />
+    </YStack>
+  );
+}
 
 function RootStack() {
   const { isReady, userId } = useAuth();
@@ -19,18 +31,12 @@ function RootStack() {
     if (isReady) void SplashScreen.hideAsync();
   }, [isReady]);
 
-  if (!isReady) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
-  }
+  if (!isReady) return <LoadingScreen />;
 
   const isAuthenticated = userId !== null;
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "transparent" } }}>
       <Stack.Protected guard={isAuthenticated}>
         <Stack.Screen name="(app)" />
       </Stack.Protected>
@@ -41,16 +47,30 @@ function RootStack() {
   );
 }
 
+function ThemedShell() {
+  const { resolved } = useThemePref();
+  return (
+    <Theme name={resolved}>
+      <YStack flex={1} backgroundColor="$background">
+        <StatusBar style={resolved === "dark" ? "light" : "dark"} />
+        <RootStack />
+        {__DEV__ ? <DebugOverlay /> : null}
+      </YStack>
+    </Theme>
+  );
+}
+
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <StatusBar style="auto" />
-            <RootStack />
-          </AuthProvider>
-        </QueryClientProvider>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <ThemedShell />
+            </AuthProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
