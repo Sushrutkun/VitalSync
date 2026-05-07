@@ -1,4 +1,4 @@
-package com.vitalsync.auth.exception;
+package com.vitalsync.exception;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,4 +1,4 @@
-package com.vitalsync.dto;
+package com.vitalsync.dto.health;
 
 import java.time.LocalDate;
 import java.util.List;

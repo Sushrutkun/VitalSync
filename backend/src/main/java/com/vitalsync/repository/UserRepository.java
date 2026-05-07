@@ -1,6 +1,6 @@
-package com.vitalsync.auth.repository;
+package com.vitalsync.repository;
 
-import com.vitalsync.auth.entity.User;
+import com.vitalsync.entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

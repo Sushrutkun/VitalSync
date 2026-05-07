@@ -1,12 +1,15 @@
-package com.vitalsync.auth.service;
+package com.vitalsync.service;
 
-import com.vitalsync.auth.dto.*;
-import com.vitalsync.auth.entity.RefreshToken;
-import com.vitalsync.auth.entity.User;
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
-import com.vitalsync.auth.repository.RefreshTokenRepository;
-import com.vitalsync.auth.repository.UserRepository;
+import com.vitalsync.dto.auth.AuthResponse;
+import com.vitalsync.dto.auth.AuthUserDto;
+import com.vitalsync.dto.auth.LoginRequest;
+import com.vitalsync.dto.auth.SignupRequest;
+import com.vitalsync.entity.RefreshToken;
+import com.vitalsync.entity.User;
+import com.vitalsync.exception.AuthErrorCode;
+import com.vitalsync.exception.AuthException;
+import com.vitalsync.repository.RefreshTokenRepository;
+import com.vitalsync.repository.UserRepository;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.HexFormat;
@@ -140,7 +143,7 @@ public class AuthService {
         accessToken,
         wire,
         jwt.accessTtlSeconds(),
-        new UserDto(user.getId(), user.getEmail(), user.getName()));
+        new AuthUserDto(user.getId(), user.getEmail(), user.getName()));
   }
 
   private ParsedToken parse(String raw) {

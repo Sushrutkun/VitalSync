@@ -1,4 +1,4 @@
-package com.vitalsync.dto;
+package com.vitalsync.dto.user;
 
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;

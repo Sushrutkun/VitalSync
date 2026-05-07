@@ -1,9 +1,9 @@
 package com.vitalsync.controller;
 
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
-import com.vitalsync.dto.UpdateProfileRequest;
-import com.vitalsync.dto.UserProfileDto;
+import com.vitalsync.dto.user.UpdateProfileRequest;
+import com.vitalsync.dto.user.UserProfileDto;
+import com.vitalsync.exception.AuthErrorCode;
+import com.vitalsync.exception.AuthException;
 import com.vitalsync.service.UserProfileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

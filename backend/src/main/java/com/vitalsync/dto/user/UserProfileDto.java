@@ -1,4 +1,4 @@
-package com.vitalsync.dto;
+package com.vitalsync.dto.user;
 
 import java.math.BigDecimal;
 import java.time.Instant;

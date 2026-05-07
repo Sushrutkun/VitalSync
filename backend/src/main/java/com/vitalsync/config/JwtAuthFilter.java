@@ -1,9 +1,9 @@
-package com.vitalsync.auth.config;
+package com.vitalsync.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
-import com.vitalsync.auth.service.JwtService;
+import com.vitalsync.exception.AuthErrorCode;
+import com.vitalsync.exception.AuthException;
+import com.vitalsync.service.JwtService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

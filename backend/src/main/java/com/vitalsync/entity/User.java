@@ -1,4 +1,4 @@
-package com.vitalsync.auth.entity;
+package com.vitalsync.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;

@@ -20,7 +20,11 @@
       "Bash(chmod +x *)",
       "Bash(cp ~/.git-templates/hooks/post-commit .git/hooks/post-commit)",
       "Bash(cp ~/.git-templates/hooks/post-checkout .git/hooks/post-checkout)",
-      "Bash(bash /Users/sushrutda/Desktop/personal/VitalSync/scripts/setup.sh)"
+      "Bash(bash /Users/sushrutda/Desktop/personal/VitalSync/scripts/setup.sh)",
+      "Bash(./mvnw -q clean compile)",
+      "Bash(mvn -q clean compile)",
+      "Bash(mvn clean *)",
+      "Bash(graphify update *)"
     ]
   }
 }

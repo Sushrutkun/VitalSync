@@ -1,7 +1,5 @@
 package com.vitalsync.exception;
 
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
 import com.vitalsync.service.HealthSnapshotPublisher.KafkaPublishException;
 import java.util.HashMap;
 import java.util.Map;

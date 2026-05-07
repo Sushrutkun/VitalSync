@@ -1,7 +1,7 @@
 package com.vitalsync.controller;
 
-import com.vitalsync.dto.DailySummaryDto;
-import com.vitalsync.dto.HistoryResponseDto;
+import com.vitalsync.dto.health.DailySummaryDto;
+import com.vitalsync.dto.health.HistoryResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.LocalDate;

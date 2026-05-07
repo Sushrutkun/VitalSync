@@ -1,4 +1,4 @@
-package com.vitalsync.auth.config;
+package com.vitalsync.config;
 
 import java.util.List;
 import org.springframework.context.annotation.Bean;

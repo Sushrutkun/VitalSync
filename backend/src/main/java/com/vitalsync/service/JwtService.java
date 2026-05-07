@@ -1,7 +1,7 @@
-package com.vitalsync.auth.service;
+package com.vitalsync.service;
 
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
+import com.vitalsync.exception.AuthErrorCode;
+import com.vitalsync.exception.AuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;

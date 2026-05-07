@@ -1,4 +1,4 @@
-package com.vitalsync.dto;
+package com.vitalsync.dto.health;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

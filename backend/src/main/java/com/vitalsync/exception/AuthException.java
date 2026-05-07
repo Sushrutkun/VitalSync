@@ -1,4 +1,4 @@
-package com.vitalsync.auth.exception;
+package com.vitalsync.exception;
 
 public class AuthException extends RuntimeException {
   private final AuthErrorCode code;

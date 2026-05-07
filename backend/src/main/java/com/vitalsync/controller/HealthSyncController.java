@@ -1,9 +1,9 @@
 package com.vitalsync.controller;
 
-import com.vitalsync.auth.exception.AuthErrorCode;
-import com.vitalsync.auth.exception.AuthException;
-import com.vitalsync.dto.HealthSyncRequest;
-import com.vitalsync.dto.HealthSyncResponse;
+import com.vitalsync.dto.health.HealthSyncRequest;
+import com.vitalsync.dto.health.HealthSyncResponse;
+import com.vitalsync.exception.AuthErrorCode;
+import com.vitalsync.exception.AuthException;
 import com.vitalsync.service.HealthSnapshotPublisher;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

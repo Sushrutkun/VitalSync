@@ -1,9 +1,9 @@
 package com.vitalsync.service;
 
-import com.vitalsync.auth.entity.User;
-import com.vitalsync.auth.repository.UserRepository;
-import com.vitalsync.dto.UpdateProfileRequest;
-import com.vitalsync.dto.UserProfileDto;
+import com.vitalsync.dto.user.UpdateProfileRequest;
+import com.vitalsync.dto.user.UserProfileDto;
+import com.vitalsync.entity.User;
+import com.vitalsync.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

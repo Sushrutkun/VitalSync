@@ -1,7 +1,7 @@
 # Graph Report - VitalSync  (2026-05-08)
 
 ## Corpus Check
-- 81 files · ~54,183 words
+- 81 files · ~54,199 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -72,16 +72,16 @@ Cohesion: 0.09
 Nodes (31): Android Icon (Background), Android Icon (Foreground), ApiResponse DTO, ATRT Authentication, POST /api/v1/auth/login, POST /api/v1/auth/refresh, POST /api/v1/auth/signup, bcrypt (+23 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.11
-Nodes (5): AuthService, JwtService, onSubmit(), onSubmit(), UserRepository
+Cohesion: 0.08
+Nodes (7): useForegroundSync(), AppLayout(), onSubmit(), onSubmit(), parseOptionalNumber(), React, onSubmit()
 
 ### Community 2 - "Community 2"
-Cohesion: 0.09
-Nodes (5): useForegroundSync(), AppLayout(), onSubmit(), parseOptionalNumber(), React
-
-### Community 3 - "Community 3"
 Cohesion: 0.11
 Nodes (10): HealthSnapshotPublisher, HealthSyncController, accepted(), onSyncNow(), ensureHealthPermissions(), ensureInitialized(), getHealthConnectStatus(), hasHealthPermissions() (+2 more)
+
+### Community 3 - "Community 3"
+Cohesion: 0.14
+Nodes (3): AuthService, JwtService, UserRepository
 
 ### Community 4 - "Community 4"
 Cohesion: 0.15
@@ -230,13 +230,17 @@ Nodes (1): Android Icon (Monochrome)
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `onSubmit()` connect `Community 1` to `Community 3`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
+- **Why does `onSubmit()` connect `Community 1` to `Community 3`?**
+  _High betweenness centrality (0.052) - this node is a cross-community bridge._
 - **What connects `VitalSync Project`, `Expo Framework`, `Android App Launcher Icon` to the rest of the system?**
   _5 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.11 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.09 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.11 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.14 - nodes in this community are weakly interconnected._

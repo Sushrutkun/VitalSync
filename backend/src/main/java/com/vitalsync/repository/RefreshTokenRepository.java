@@ -1,6 +1,6 @@
-package com.vitalsync.auth.repository;
+package com.vitalsync.repository;
 
-import com.vitalsync.auth.entity.RefreshToken;
+import com.vitalsync.entity.RefreshToken;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
