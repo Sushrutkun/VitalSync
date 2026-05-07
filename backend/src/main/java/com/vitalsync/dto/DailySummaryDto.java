@@ -10,7 +10,9 @@ import java.util.List;
 public record DailySummaryDto(
     LocalDate date,
     long steps,
+    double distanceMeters,
     double activeCaloriesKcal,
+    long heartRateZoneMinutes,
     double avgHeartRateBpm,
     double restingHeartRateBpm,
     double bloodOxygenPct,

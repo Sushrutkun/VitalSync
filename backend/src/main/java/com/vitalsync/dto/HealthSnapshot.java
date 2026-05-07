@@ -18,4 +18,6 @@ public record HealthSnapshot(
     Long stepsDelta,
     Double bloodOxygenPct,
     Double activeCaloriesKcal,
+    Double distanceMeters,
+    Long heartRateZoneMinutes,
     @Valid List<ExerciseSession> exerciseSessions) {}

@@ -3,6 +3,8 @@ import { readRecords } from "react-native-health-connect";
 import type { ExerciseSession, HealthSnapshot } from "../types/api";
 import { exerciseTypeName } from "./exerciseTypes";
 
+const HR_ZONE_MIN_BPM = 120;
+
 function startOfUtcDay(d: Date): Date {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
 }
@@ -29,11 +31,49 @@ async function readHeartRateAvg(periodStart: string, periodEnd: string): Promise
   return n > 0 ? Math.round(sum / n) : null;
 }
 
+async function readHeartRateZoneMinutes(
+  periodStart: string,
+  periodEnd: string,
+): Promise<number | null> {
+  const { records } = await readRecords("HeartRate", {
+    timeRangeFilter: { operator: "between", startTime: periodStart, endTime: periodEnd },
+  });
+  const samples: { t: number; bpm: number }[] = [];
+  const startMs = new Date(periodStart).getTime();
+  const endMs = new Date(periodEnd).getTime();
+  for (const rec of records) {
+    for (const s of rec.samples ?? []) {
+      const t = new Date(s.time).getTime();
+      if (t >= startMs && t <= endMs) samples.push({ t, bpm: s.beatsPerMinute });
+    }
+  }
+  if (samples.length === 0) return null;
+  samples.sort((a, b) => a.t - b.t);
+  let zoneMs = 0;
+  for (let i = 1; i < samples.length; i += 1) {
+    const prev = samples[i - 1];
+    const cur = samples[i];
+    const gap = cur.t - prev.t;
+    if (gap <= 0 || gap > 5 * 60_000) continue;
+    if (prev.bpm >= HR_ZONE_MIN_BPM && cur.bpm >= HR_ZONE_MIN_BPM) zoneMs += gap;
+  }
+  return Math.round(zoneMs / 60_000);
+}
+
 async function readStepsSum(startTime: string, endTime: string): Promise<number> {
   const { records } = await readRecords("Steps", {
     timeRangeFilter: { operator: "between", startTime, endTime },
   });
   return records.reduce((acc, r) => acc + (r.count ?? 0), 0);
+}
+
+async function readDistanceMeters(startTime: string, endTime: string): Promise<number | null> {
+  const { records } = await readRecords("Distance", {
+    timeRangeFilter: { operator: "between", startTime, endTime },
+  });
+  if (records.length === 0) return null;
+  const total = records.reduce((acc, r) => acc + (r.distance?.inMeters ?? 0), 0);
+  return Math.round(total);
 }
 
 async function readLatestSpO2(periodStart: string, periodEnd: string): Promise<number | null> {
@@ -80,15 +120,25 @@ export async function buildSnapshotForWindow(
   const endIso = periodEnd.toISOString();
   const dayStartIso = startOfUtcDay(periodEnd).toISOString();
 
-  const [heartRateBpm, stepsDelta, stepsTotal, bloodOxygenPct, activeCaloriesKcal, exerciseSessions] =
-    await Promise.all([
-      readHeartRateAvg(startIso, endIso),
-      readStepsSum(startIso, endIso),
-      readStepsSum(dayStartIso, endIso),
-      readLatestSpO2(startIso, endIso),
-      readActiveCalories(startIso, endIso),
-      readExerciseSessions(startIso, endIso),
-    ]);
+  const [
+    heartRateBpm,
+    stepsDelta,
+    stepsTotal,
+    bloodOxygenPct,
+    activeCaloriesKcal,
+    distanceMeters,
+    heartRateZoneMinutes,
+    exerciseSessions,
+  ] = await Promise.all([
+    readHeartRateAvg(startIso, endIso),
+    readStepsSum(startIso, endIso),
+    readStepsSum(dayStartIso, endIso),
+    readLatestSpO2(startIso, endIso),
+    readActiveCalories(startIso, endIso),
+    readDistanceMeters(dayStartIso, endIso),
+    readHeartRateZoneMinutes(dayStartIso, endIso),
+    readExerciseSessions(startIso, endIso),
+  ]);
 
   return {
     timestamp: endIso,
@@ -99,6 +149,8 @@ export async function buildSnapshotForWindow(
     stepsDelta: stepsDelta > 0 ? stepsDelta : null,
     bloodOxygenPct,
     activeCaloriesKcal,
+    distanceMeters,
+    heartRateZoneMinutes,
     exerciseSessions,
   };
 }

@@ -12,6 +12,7 @@ const REQUIRED_PERMISSIONS: Permission[] = [
   { accessType: "read", recordType: "Steps" },
   { accessType: "read", recordType: "OxygenSaturation" },
   { accessType: "read", recordType: "ActiveCaloriesBurned" },
+  { accessType: "read", recordType: "Distance" },
   { accessType: "read", recordType: "ExerciseSession" },
   { accessType: "read", recordType: "RestingHeartRate" },
   { accessType: "read", recordType: "SleepSession" },

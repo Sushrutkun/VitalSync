@@ -5,7 +5,22 @@
       "Bash(npm install:*)",
       "Bash(npx expo:*)",
       "Bash(git rm:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(docker-compose up *)",
+      "Read(//Users/sushrutda/.docker/**)",
+      "Read(//Applications/Docker.app/Contents/Resources/bin/**)",
+      "Bash(export PATH=\"/Applications/Docker.app/Contents/Resources/bin:$PATH\")",
+      "Bash(docker-compose ps *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,'->',v\\) for k,v in d.get\\('scripts',{}\\).items\\(\\)]\")",
+      "Bash(adb devices *)",
+      "Bash(adb reverse *)",
+      "Bash(graphify --help)",
+      "Bash(graphify hook *)",
+      "Bash(pip3 show *)",
+      "Bash(chmod +x *)",
+      "Bash(cp ~/.git-templates/hooks/post-commit .git/hooks/post-commit)",
+      "Bash(cp ~/.git-templates/hooks/post-checkout .git/hooks/post-checkout)",
+      "Bash(bash /Users/sushrutda/Desktop/personal/VitalSync/scripts/setup.sh)"
     ]
   }
 }

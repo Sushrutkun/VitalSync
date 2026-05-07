@@ -59,6 +59,8 @@ export type HealthSnapshot = {
   stepsDelta: number | null;
   bloodOxygenPct: number | null;
   activeCaloriesKcal: number | null;
+  distanceMeters: number | null;
+  heartRateZoneMinutes: number | null;
   exerciseSessions: ExerciseSession[];
 };
 
@@ -81,7 +83,9 @@ export type HealthSyncResponse = {
 export type DailySummary = {
   date: string;
   steps: number;
+  distanceMeters: number;
   activeCaloriesKcal: number;
+  heartRateZoneMinutes: number;
   avgHeartRateBpm: number;
   restingHeartRateBpm: number;
   bloodOxygenPct: number;

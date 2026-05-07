@@ -10,6 +10,8 @@ export async function buildSnapshotForWindow(start: Date, end: Date): Promise<He
     stepsDelta: null,
     bloodOxygenPct: null,
     activeCaloriesKcal: null,
+    distanceMeters: null,
+    heartRateZoneMinutes: null,
     exerciseSessions: [],
   };
 }

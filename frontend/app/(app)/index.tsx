@@ -105,6 +105,55 @@ export default function TodayScreen() {
           </Card>
         ) : data && recovery && strain && sleep ? (
           <>
+            <YStack gap={10}>
+              <Body tone="muted" size="sm" weight="semibold">
+                TODAY
+              </Body>
+              <XStack gap={10} flexWrap="wrap">
+                <MetricCard
+                  large
+                  label="Steps"
+                  value={data.steps?.toLocaleString() ?? "—"}
+                  icon={<Ionicons name="walk-outline" size={20} color={brand.accent} />}
+                />
+                <MetricCard
+                  large
+                  label="Distance"
+                  value={
+                    data.distanceMeters != null
+                      ? (data.distanceMeters / 1000).toFixed(2)
+                      : "—"
+                  }
+                  unit="km"
+                  icon={<Ionicons name="map-outline" size={20} color={brand.accent} />}
+                />
+                <MetricCard
+                  large
+                  label="Calories"
+                  value={
+                    data.activeCaloriesKcal != null
+                      ? Math.round(data.activeCaloriesKcal).toString()
+                      : "—"
+                  }
+                  unit="kcal"
+                  accent="$strain"
+                  icon={<Ionicons name="flame-outline" size={20} color={brand.strain} />}
+                />
+                <MetricCard
+                  large
+                  label="Zone min"
+                  value={
+                    data.heartRateZoneMinutes != null
+                      ? data.heartRateZoneMinutes.toString()
+                      : "—"
+                  }
+                  unit="min"
+                  accent="$strain"
+                  icon={<Ionicons name="stopwatch-outline" size={20} color={brand.strain} />}
+                />
+              </XStack>
+            </YStack>
+
             <Card elevated padding={20} gap={16}>
               <Body tone="muted" size="sm" weight="semibold">
                 DAILY SCORES

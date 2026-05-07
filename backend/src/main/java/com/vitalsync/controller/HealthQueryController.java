@@ -35,7 +35,7 @@ public class HealthQueryController {
           LocalDate date) {
     LocalDate effectiveDate = date != null ? date : LocalDate.now();
     log.warn("STUB /api/v1/health/summary called for date=[{}] — returning zeros", effectiveDate);
-    return new DailySummaryDto(effectiveDate, 0L, 0.0, 0.0, 0.0, 0.0, 0L, List.of());
+    return new DailySummaryDto(effectiveDate, 0L, 0.0, 0.0, 0L, 0.0, 0.0, 0.0, 0L, List.of());
   }
 
   @GetMapping("/history")
