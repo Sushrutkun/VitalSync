@@ -5254,8 +5254,8 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L48",
       "weight": 1.0,
-      "_src": "authexception_authexception_code",
-      "_tgt": "globalexceptionhandler_globalexceptionhandler_handleauth",
+      "_src": "globalexceptionhandler_globalexceptionhandler_handleauth",
+      "_tgt": "authexception_authexception_code",
       "source": "globalexceptionhandler_globalexceptionhandler_handleauth",
       "target": "authexception_authexception_code"
     },
