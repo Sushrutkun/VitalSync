@@ -56,8 +56,8 @@
 ## Surprising Connections (you probably didn't know these)
 - `VitalSync Project` --has_component--> `Expo Frontend Application`  [INFERRED]
   README.md → frontend/README.md
-- `syncLastMinute()` --calls--> `buildSnapshotForWindow()`  [INFERRED]
-  frontend/src/health/sync.ts → frontend/src/health/snapshot.web.ts
+- `buildSnapshotForWindow()` --calls--> `syncLastMinute()`  [INFERRED]
+  frontend/src/health/snapshot.web.ts → frontend/src/health/sync.ts
 - `onSyncNow()` --calls--> `getHealthConnectStatus()`  [INFERRED]
   frontend/app/(app)/index.tsx → frontend/src/health/permissions.ts
 - `onSyncNow()` --calls--> `ensureHealthPermissions()`  [INFERRED]
