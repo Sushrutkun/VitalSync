@@ -9,6 +9,8 @@ Expo + React Native app. Package: `com.vitalsync.app`.
 - JDK 17 (for Gradle)
 - Device with USB debugging on, or running emulator
 
+> All commands below are run from this `frontend/` directory unless stated otherwise.
+
 ## Install
 
 ```bash
@@ -17,16 +19,18 @@ npm install
 
 ## ADB Setup
 
+Reverse Metro (8081) and the backend API (8080, see `backend/docker-compose.yml`):
+
 ```bash
-adb devices                          # confirm device attached
-adb reverse tcp:8081 tcp:8081        # Metro bundler
-adb reverse tcp:8000 tcp:8000        # backend (if local)
+adb devices -l
+adb reverse tcp:8081 tcp:8081   # Metro bundler
+adb reverse tcp:8083 tcp:8083   # backend API
 ```
 
 ## Dev Run (debug, hot reload)
 
 ```bash
-npx expo run:android                 # build debug APK + install + launch Metro
+npx expo run:android
 ```
 
 Metro only (already installed):
@@ -71,10 +75,15 @@ adb logcat | grep -i vitalsync
 ## Clean Rebuild
 
 ```bash
-cd android && ./gradlew clean && cd ..
-rm -rf node_modules && npm install
-npx expo prebuild --clean            # regen android/ from app.json
+rm -rf node_modules android
+npm install
+npx expo prebuild --clean   # regenerates android/
+npx expo run:android
 ```
+
+> Do **not** run `./gradlew clean` after wiping `node_modules` — CMake will fail
+> on stale autolinking refs to deleted codegen dirs. Just delete `android/` and
+> let `expo prebuild --clean` regenerate it.
 
 ## Other Targets
 
