@@ -43,15 +43,16 @@
       ],
       "expo-secure-store",
       "expo-background-task",
+      "react-native-health-connect",
       [
-        "react-native-health-connect",
+        "./plugins/withHealthConnectPermissions",
         {
-          "package": "com.vitalsync.app",
           "permissions": [
             "HeartRate",
             "Steps",
             "OxygenSaturation",
             "ActiveCaloriesBurned",
+            "Distance",
             "ExerciseSession",
             "RestingHeartRate",
             "SleepSession"

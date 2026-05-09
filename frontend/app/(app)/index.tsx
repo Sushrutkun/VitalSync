@@ -9,7 +9,11 @@ import { useTheme, XStack, YStack } from "tamagui";
 import { healthApi } from "@/src/api/health";
 import { Body, Button, Card, Heading, MetricCard, Ring, RowItem, ThemeToggle } from "@/src/components/ui";
 import { formatSleep, recoveryScore, sleepScore, strainScore } from "@/src/dashboard/scores";
-import { ensureHealthPermissions, getHealthConnectStatus } from "@/src/health/permissions";
+import {
+  ensureHealthPermissions,
+  getHealthConnectStatus,
+  openHealthConnectAppSettings,
+} from "@/src/health/permissions";
 import { syncLastMinute } from "@/src/health/sync";
 import { ApiError } from "@/src/lib/api";
 import { brand } from "@/src/theme/tokens";
@@ -23,6 +27,7 @@ export default function TodayScreen() {
   const theme = useTheme();
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
+  const [needsSettings, setNeedsSettings] = useState(false);
 
   const summary = useQuery({
     queryKey: ["summary", date],
@@ -33,6 +38,7 @@ export default function TodayScreen() {
   const onSyncNow = async () => {
     setSyncing(true);
     setSyncMessage(null);
+    setNeedsSettings(false);
     const status = await getHealthConnectStatus();
     if (status !== "available") {
       setSyncMessage(
@@ -45,7 +51,12 @@ export default function TodayScreen() {
     }
     const perm = await ensureHealthPermissions();
     if (!perm.granted) {
-      setSyncMessage("Health Connect permissions were not granted.");
+      const names = perm.missing.map((p) => p.recordType).join(", ");
+      setSyncMessage(
+        `Missing Health Connect permission${perm.missing.length === 1 ? "" : "s"}: ${names}. ` +
+          `Open Health Connect settings to grant access manually.`,
+      );
+      setNeedsSettings(true);
       setSyncing(false);
       return;
     }
@@ -260,6 +271,11 @@ export default function TodayScreen() {
           <Body tone="muted" textAlign="center" size="sm">
             {syncMessage}
           </Body>
+        ) : null}
+        {needsSettings ? (
+          <Button onPress={openHealthConnectAppSettings} intent="secondary">
+            Open Health Connect settings
+          </Button>
         ) : null}
       </ScrollView>
     </SafeAreaView>

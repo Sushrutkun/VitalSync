@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/health")
-@Tag(name = "Health Query (stub)", description = "Returns zeroed/empty payloads until read store lands")
+@Tag(
+    name = "Health Query (stub)",
+    description = "Returns zeroed/empty payloads until read store lands")
 @Slf4j
 public class HealthQueryController {
 

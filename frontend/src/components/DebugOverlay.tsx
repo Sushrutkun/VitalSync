@@ -3,7 +3,7 @@ import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 
 import { useAuth } from "../auth/AuthContext";
 import { env } from "../config/env";
-import { getHealthConnectStatus, hasHealthPermissions } from "../health/permissions";
+import { getHealthConnectStatus, getMissingHealthPermissions } from "../health/permissions";
 import { debugLog, type DebugEntry } from "../lib/debugLog";
 
 const colors = {
@@ -48,6 +48,7 @@ export function DebugOverlay() {
   const [entries, setEntries] = useState<DebugEntry[]>([]);
   const [hcStatus, setHcStatus] = useState<string>("checking…");
   const [hcGranted, setHcGranted] = useState<boolean | null>(null);
+  const [hcMissing, setHcMissing] = useState<string[]>([]);
   const { userId, isReady } = useAuth();
 
   useEffect(() => debugLog.subscribe(setEntries), []);
@@ -63,10 +64,16 @@ export function DebugOverlay() {
         if (alive) setHcStatus("error");
       }
       try {
-        const g = await hasHealthPermissions();
-        if (alive) setHcGranted(g);
+        const missing = await getMissingHealthPermissions();
+        if (alive) {
+          setHcGranted(missing.length === 0);
+          setHcMissing(missing.map((p) => p.recordType));
+        }
       } catch {
-        if (alive) setHcGranted(false);
+        if (alive) {
+          setHcGranted(false);
+          setHcMissing([]);
+        }
       }
     })();
     return () => {
@@ -118,6 +125,9 @@ export function DebugOverlay() {
                 value={hcGranted === null ? "checking…" : hcGranted ? "granted" : "missing"}
                 valueColor={hcGranted ? colors.ok : colors.err}
               />
+              {hcMissing.length > 0 ? (
+                <StatusRow label="HC missing" value={hcMissing.join(", ")} valueColor={colors.err} />
+              ) : null}
             </View>
 
             <View style={styles.sectionRow}>

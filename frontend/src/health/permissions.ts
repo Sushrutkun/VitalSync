@@ -2,6 +2,7 @@ import {
   getGrantedPermissions,
   getSdkStatus,
   initialize,
+  openHealthConnectSettings,
   requestPermission,
   SdkAvailabilityStatus,
   type Permission,
@@ -72,4 +73,17 @@ export async function ensureHealthPermissions(): Promise<{
     (req) => !after.some((g) => g.recordType === req.recordType && g.accessType === req.accessType),
   );
   return { granted: stillMissing.length === 0, missing: stillMissing };
+}
+
+export async function getMissingHealthPermissions(): Promise<Permission[]> {
+  const ok = await ensureInitialized();
+  if (!ok) return REQUIRED_PERMISSIONS;
+  const granted = await getGrantedPermissions();
+  return REQUIRED_PERMISSIONS.filter(
+    (req) => !granted.some((g) => g.recordType === req.recordType && g.accessType === req.accessType),
+  );
+}
+
+export function openHealthConnectAppSettings(): void {
+  openHealthConnectSettings();
 }
