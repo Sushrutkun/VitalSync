@@ -1,9 +1,6 @@
 package com.vitalsync
 
-import org.apache.spark.sql.SparkSession
-
-object SparkJob extends SparkSessionWrapper {
-
+object Analytics extends SparkSessionWrapper {
   def main(args: Array[String]): Unit = {
 
     import spark.implicits._

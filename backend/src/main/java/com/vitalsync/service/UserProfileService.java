@@ -31,10 +31,10 @@ public class UserProfileService {
             .findById(userId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-    if (patch.name() != null) user.setName(patch.name());
-    if (patch.dateOfBirth() != null) user.setDateOfBirth(patch.dateOfBirth());
-    if (patch.heightCm() != null) user.setHeightCm(patch.heightCm());
-    if (patch.weightKg() != null) user.setWeightKg(patch.weightKg());
+    if (patch.getName() != null) user.setName(patch.getName());
+    if (patch.getDateOfBirth() != null) user.setDateOfBirth(patch.getDateOfBirth());
+    if (patch.getHeightCm() != null) user.setHeightCm(patch.getHeightCm());
+    if (patch.getWeightKg() != null) user.setWeightKg(patch.getWeightKg());
 
     User saved = userRepository.save(user);
     return toDto(saved);

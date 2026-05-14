@@ -3,8 +3,20 @@ package com.vitalsync.dto.auth;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record SignupRequest(
-    @Email @NotBlank @Size(max = 254) String email,
-    @NotBlank @Size(min = 8, max = 128) String password,
-    @NotBlank @Size(max = 128) String name) {}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SignupRequest {
+    @Email @NotBlank @Size(max = 254)
+    String email;
+
+    @NotBlank @Size(min = 8, max = 128)
+    String password;
+
+    @NotBlank @Size(max = 128)
+    String name;
+}

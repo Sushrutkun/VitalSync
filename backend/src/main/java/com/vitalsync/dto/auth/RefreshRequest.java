@@ -1,5 +1,14 @@
 package com.vitalsync.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record RefreshRequest(@NotBlank String refreshToken) {}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RefreshRequest {
+    @NotBlank
+    String refreshToken;
+}

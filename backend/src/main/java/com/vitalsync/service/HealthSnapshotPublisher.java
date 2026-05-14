@@ -37,26 +37,26 @@ public class HealthSnapshotPublisher {
    */
   public void publish(HealthSyncRequest request) {
     ProducerRecord<String, Object> record =
-        new ProducerRecord<>(topicName, null, request.userId(), request);
+        new ProducerRecord<>(topicName, null, request.getUserId(), request);
     record
         .headers()
         .add(
             new RecordHeader(
-                IDEMPOTENCY_KEY_HEADER, request.idempotencyKey().getBytes(StandardCharsets.UTF_8)));
+                IDEMPOTENCY_KEY_HEADER, request.getIdempotencyKey().getBytes(StandardCharsets.UTF_8)));
 
     try {
       SendResult<String, Object> result = kafkaTemplate.send(record).get();
       log.info(
           "Published snapshot user=[{}] idempotencyKey=[{}] partition=[{}] offset=[{}]",
-          request.userId(),
-          request.idempotencyKey(),
+          request.getUserId(),
+          request.getIdempotencyKey(),
           result.getRecordMetadata().partition(),
           result.getRecordMetadata().offset());
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
       throw new KafkaPublishException("Interrupted while publishing snapshot", e);
     } catch (Exception e) {
-      throw new KafkaPublishException("Failed to publish snapshot for user " + request.userId(), e);
+      throw new KafkaPublishException("Failed to publish snapshot for user " + request.getUserId(), e);
     }
   }
 

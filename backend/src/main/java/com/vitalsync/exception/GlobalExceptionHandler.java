@@ -3,6 +3,9 @@ package com.vitalsync.exception;
 import com.vitalsync.service.HealthSnapshotPublisher.KafkaPublishException;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
 
-  public record ApiErrorResponse(ErrorBody error) {}
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class ApiErrorResponse {
+    ErrorBody error;
+  }
 
-  public record ErrorBody(String code, String message, Map<String, Object> details) {}
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class ErrorBody {
+    String code;
+    String message;
+    Map<String, Object> details;
+  }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<ApiErrorResponse> handleValidation(MethodArgumentNotValidException ex) {

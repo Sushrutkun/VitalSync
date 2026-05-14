@@ -1,6 +1,8 @@
 package com.vitalsync.service;
 
 import com.vitalsync.dto.auth.AuthResponse;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import com.vitalsync.dto.auth.AuthUserDto;
 import com.vitalsync.dto.auth.LoginRequest;
 import com.vitalsync.dto.auth.SignupRequest;
@@ -44,15 +46,15 @@ public class AuthService {
 
   @Transactional
   public AuthResponse signup(SignupRequest req) {
-    if (users.existsByEmail(req.email())) {
+    if (users.existsByEmail(req.getEmail())) {
       throw new AuthException(AuthErrorCode.CONFLICT, "Email already registered");
     }
     User user =
         User.builder()
             .id("user_" + shortId())
-            .email(req.email())
-            .passwordHash(passwordEncoder.encode(req.password()))
-            .name(req.name())
+            .email(req.getEmail())
+            .passwordHash(passwordEncoder.encode(req.getPassword()))
+            .name(req.getName())
             .build();
     users.save(user);
     return issueTokens(user);
@@ -62,12 +64,12 @@ public class AuthService {
   public AuthResponse login(LoginRequest req) {
     User user =
         users
-            .findByEmail(req.email())
+            .findByEmail(req.getEmail())
             .orElseThrow(
                 () ->
                     new AuthException(
                         AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect"));
-    if (!passwordEncoder.matches(req.password(), user.getPasswordHash())) {
+    if (!passwordEncoder.matches(req.getPassword(), user.getPasswordHash())) {
       throw new AuthException(AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect");
     }
     return issueTokens(user);
@@ -80,15 +82,16 @@ public class AuthService {
   @Transactional
   public AuthResponse refresh(String rawToken) {
     ParsedToken parsedToken = parse(rawToken);
+    // parsedToken fields accessed via getters below
     RefreshToken refreshToken =
         refreshTokens
-            .findById(parsedToken.id)
+            .findById(parsedToken.getId())
             .orElseThrow(
                 () ->
                     new AuthException(
                         AuthErrorCode.REFRESH_TOKEN_INVALID, "Refresh token not found"));
 
-    if (!passwordEncoder.matches(parsedToken.secret, refreshToken.getTokenHash())) {
+    if (!passwordEncoder.matches(parsedToken.getSecret(), refreshToken.getTokenHash())) {
       throw new AuthException(AuthErrorCode.REFRESH_TOKEN_INVALID, "Refresh token does not match");
     }
     if (refreshToken.getExpiresAt().isBefore(Instant.now())) {
@@ -116,11 +119,11 @@ public class AuthService {
       return; // logout is best-effort
     }
     refreshTokens
-        .findById(parsedToken.id)
+        .findById(parsedToken.getId())
         .ifPresent(
             refreshToken -> {
               if (refreshToken.getUserId().equals(authUserId)
-                  && passwordEncoder.matches(parsedToken.secret, refreshToken.getTokenHash())) {
+                  && passwordEncoder.matches(parsedToken.getSecret(), refreshToken.getTokenHash())) {
                 refreshTokens.deleteById(refreshToken.getId());
               }
             });
@@ -167,5 +170,10 @@ public class AuthService {
     return UUID.randomUUID().toString().replace("-", "").substring(0, 24);
   }
 
-  private record ParsedToken(String id, String secret) {}
+  @Data
+  @AllArgsConstructor
+  private static class ParsedToken {
+    String id;
+    String secret;
+  }
 }

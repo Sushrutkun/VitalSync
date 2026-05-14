@@ -39,20 +39,20 @@ public class HealthSyncController {
           Authentication authentication,
       @Valid @RequestBody HealthSyncRequest request) {
     String authUserId = authentication != null ? authentication.getName() : null;
-    if (authUserId == null || !authUserId.equals(request.userId())) {
+    if (authUserId == null || !authUserId.equals(request.getUserId())) {
       throw new AuthException(
           AuthErrorCode.FORBIDDEN, "userId in body does not match authenticated user");
     }
 
     log.info(
         "Health sync received user=[{}] idempotencyKey=[{}] window=[{} -> {}]",
-        request.userId(),
-        request.idempotencyKey(),
-        request.periodStart(),
-        request.periodEnd());
+        request.getUserId(),
+        request.getIdempotencyKey(),
+        request.getPeriodStart(),
+        request.getPeriodEnd());
 
     publisher.publish(request);
 
-    return ResponseEntity.accepted().body(HealthSyncResponse.accepted(request.idempotencyKey()));
+    return ResponseEntity.accepted().body(HealthSyncResponse.accepted(request.getIdempotencyKey()));
   }
 }
