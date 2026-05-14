@@ -9,7 +9,7 @@
       "source_file": "frontend/expo-env.d.ts",
       "source_location": "L1",
       "id": "frontend_expo_env_d_ts",
-      "community": 31,
+      "community": 34,
       "norm_label": "expo-env.d.ts"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "frontend/metro.config.js",
       "source_location": "L1",
       "id": "frontend_metro_config_js",
-      "community": 32,
+      "community": 35,
       "norm_label": "metro.config.js"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "frontend/babel.config.js",
       "source_location": "L1",
       "id": "frontend_babel_config_js",
-      "community": 33,
+      "community": 36,
       "norm_label": "babel.config.js"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "frontend/eslint.config.js",
       "source_location": "L1",
       "id": "frontend_eslint_config_js",
-      "community": 34,
+      "community": 37,
       "norm_label": "eslint.config.js"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "frontend/tamagui.config.ts",
       "source_location": "L1",
       "id": "frontend_tamagui_config_ts",
-      "community": 35,
+      "community": 38,
       "norm_label": "tamagui.config.ts"
     },
     {
@@ -72,25 +72,25 @@
       "source_file": "frontend/app/(app)/index.tsx",
       "source_location": "L1",
       "id": "frontend_app_app_index_tsx",
-      "community": 2,
+      "community": 8,
       "norm_label": "index.tsx"
     },
     {
       "label": "todayUtc()",
       "file_type": "code",
       "source_file": "frontend/app/(app)/index.tsx",
-      "source_location": "L17",
+      "source_location": "L21",
       "id": "index_todayutc",
-      "community": 2,
+      "community": 8,
       "norm_label": "todayutc()"
     },
     {
       "label": "onSyncNow()",
       "file_type": "code",
       "source_file": "frontend/app/(app)/index.tsx",
-      "source_location": "L33",
+      "source_location": "L38",
       "id": "index_onsyncnow",
-      "community": 2,
+      "community": 8,
       "norm_label": "onsyncnow()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "frontend/app/(app)/history.tsx",
       "source_location": "L1",
       "id": "frontend_app_app_history_tsx",
-      "community": 36,
+      "community": 39,
       "norm_label": "history.tsx"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "frontend/app/(auth)/login.tsx",
       "source_location": "L1",
       "id": "frontend_app_auth_login_tsx",
-      "community": 1,
+      "community": 9,
       "norm_label": "login.tsx"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "frontend/app/(auth)/login.tsx",
       "source_location": "L33",
       "id": "login_onsubmit",
-      "community": 1,
+      "community": 9,
       "norm_label": "onsubmit()"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "frontend/app/(auth)/signup.tsx",
       "source_location": "L1",
       "id": "frontend_app_auth_signup_tsx",
-      "community": 1,
+      "community": 9,
       "norm_label": "signup.tsx"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "frontend/app/(auth)/signup.tsx",
       "source_location": "L34",
       "id": "signup_onsubmit",
-      "community": 1,
+      "community": 9,
       "norm_label": "onsubmit()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "frontend/app/(auth)/_layout.tsx",
       "source_location": "L1",
       "id": "frontend_app_auth_layout_tsx",
-      "community": 27,
+      "community": 28,
       "norm_label": "_layout.tsx"
     },
     {
@@ -207,8 +207,26 @@
       "source_file": "frontend/app/(auth)/_layout.tsx",
       "source_location": "L3",
       "id": "layout_authlayout",
-      "community": 27,
+      "community": 28,
       "norm_label": "authlayout()"
+    },
+    {
+      "label": "withHealthConnectPermissions.js",
+      "file_type": "code",
+      "source_file": "frontend/plugins/withHealthConnectPermissions.js",
+      "source_location": "L1",
+      "id": "frontend_plugins_withhealthconnectpermissions_js",
+      "community": 29,
+      "norm_label": "withhealthconnectpermissions.js"
+    },
+    {
+      "label": "injectMainActivity()",
+      "file_type": "code",
+      "source_file": "frontend/plugins/withHealthConnectPermissions.js",
+      "source_location": "L34",
+      "id": "withhealthconnectpermissions_injectmainactivity",
+      "community": 29,
+      "norm_label": "injectmainactivity()"
     },
     {
       "label": "MainActivity.kt",
@@ -216,7 +234,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L1",
       "id": "frontend_android_app_src_main_java_com_vitalsync_app_mainactivity_kt",
-      "community": 10,
+      "community": 15,
       "norm_label": "mainactivity.kt"
     },
     {
@@ -225,7 +243,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L15",
       "id": "mainactivity_mainactivity",
-      "community": 10,
+      "community": 15,
       "norm_label": "mainactivity"
     },
     {
@@ -234,7 +252,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L16",
       "id": "mainactivity_mainactivity_oncreate",
-      "community": 10,
+      "community": 15,
       "norm_label": ".oncreate()"
     },
     {
@@ -243,7 +261,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L26",
       "id": "mainactivity_mainactivity_getmaincomponentname",
-      "community": 10,
+      "community": 15,
       "norm_label": ".getmaincomponentname()"
     },
     {
@@ -252,7 +270,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L32",
       "id": "mainactivity_mainactivity_createreactactivitydelegate",
-      "community": 10,
+      "community": 15,
       "norm_label": ".createreactactivitydelegate()"
     },
     {
@@ -261,7 +279,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainActivity.kt",
       "source_location": "L48",
       "id": "mainactivity_mainactivity_invokedefaultonbackpressed",
-      "community": 10,
+      "community": 15,
       "norm_label": ".invokedefaultonbackpressed()"
     },
     {
@@ -270,7 +288,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainApplication.kt",
       "source_location": "L1",
       "id": "frontend_android_app_src_main_java_com_vitalsync_app_mainapplication_kt",
-      "community": 16,
+      "community": 18,
       "norm_label": "mainapplication.kt"
     },
     {
@@ -279,7 +297,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainApplication.kt",
       "source_location": "L17",
       "id": "mainapplication_mainapplication",
-      "community": 16,
+      "community": 18,
       "norm_label": "mainapplication"
     },
     {
@@ -288,7 +306,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainApplication.kt",
       "source_location": "L30",
       "id": "mainapplication_mainapplication_oncreate",
-      "community": 16,
+      "community": 18,
       "norm_label": ".oncreate()"
     },
     {
@@ -297,7 +315,7 @@
       "source_file": "frontend/android/app/src/main/java/com/vitalsync/app/MainApplication.kt",
       "source_location": "L41",
       "id": "mainapplication_mainapplication_onconfigurationchanged",
-      "community": 16,
+      "community": 18,
       "norm_label": ".onconfigurationchanged()"
     },
     {
@@ -306,7 +324,7 @@
       "source_file": "frontend/src/types/api.ts",
       "source_location": "L1",
       "id": "frontend_src_types_api_ts",
-      "community": 37,
+      "community": 40,
       "norm_label": "api.ts"
     },
     {
@@ -315,7 +333,7 @@
       "source_file": "frontend/src/config/env.ts",
       "source_location": "L1",
       "id": "frontend_src_config_env_ts",
-      "community": 28,
+      "community": 30,
       "norm_label": "env.ts"
     },
     {
@@ -324,7 +342,7 @@
       "source_file": "frontend/src/config/env.ts",
       "source_location": "L5",
       "id": "env_fromextra",
-      "community": 28,
+      "community": 30,
       "norm_label": "fromextra()"
     },
     {
@@ -351,7 +369,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L1",
       "id": "frontend_src_health_snapshot_ts",
-      "community": 6,
+      "community": 10,
       "norm_label": "snapshot.ts"
     },
     {
@@ -360,7 +378,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L8",
       "id": "snapshot_startofutcday",
-      "community": 6,
+      "community": 10,
       "norm_label": "startofutcday()"
     },
     {
@@ -369,7 +387,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L12",
       "id": "snapshot_diffminutes",
-      "community": 6,
+      "community": 10,
       "norm_label": "diffminutes()"
     },
     {
@@ -378,7 +396,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L16",
       "id": "snapshot_readheartrateavg",
-      "community": 6,
+      "community": 10,
       "norm_label": "readheartrateavg()"
     },
     {
@@ -387,7 +405,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L34",
       "id": "snapshot_readheartratezoneminutes",
-      "community": 6,
+      "community": 10,
       "norm_label": "readheartratezoneminutes()"
     },
     {
@@ -396,7 +414,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L63",
       "id": "snapshot_readstepssum",
-      "community": 6,
+      "community": 10,
       "norm_label": "readstepssum()"
     },
     {
@@ -405,7 +423,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L70",
       "id": "snapshot_readdistancemeters",
-      "community": 6,
+      "community": 10,
       "norm_label": "readdistancemeters()"
     },
     {
@@ -414,7 +432,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L79",
       "id": "snapshot_readlatestspo2",
-      "community": 6,
+      "community": 10,
       "norm_label": "readlatestspo2()"
     },
     {
@@ -423,7 +441,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L91",
       "id": "snapshot_readactivecalories",
-      "community": 6,
+      "community": 10,
       "norm_label": "readactivecalories()"
     },
     {
@@ -432,7 +450,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L100",
       "id": "snapshot_readexercisesessions",
-      "community": 6,
+      "community": 10,
       "norm_label": "readexercisesessions()"
     },
     {
@@ -441,7 +459,7 @@
       "source_file": "frontend/src/health/snapshot.ts",
       "source_location": "L115",
       "id": "snapshot_buildsnapshotforwindow",
-      "community": 6,
+      "community": 10,
       "norm_label": "buildsnapshotforwindow()"
     },
     {
@@ -450,7 +468,7 @@
       "source_file": "frontend/src/health/snapshot.web.ts",
       "source_location": "L1",
       "id": "frontend_src_health_snapshot_web_ts",
-      "community": 2,
+      "community": 8,
       "norm_label": "snapshot.web.ts"
     },
     {
@@ -459,7 +477,7 @@
       "source_file": "frontend/src/health/snapshot.web.ts",
       "source_location": "L3",
       "id": "snapshot_web_buildsnapshotforwindow",
-      "community": 2,
+      "community": 8,
       "norm_label": "buildsnapshotforwindow()"
     },
     {
@@ -486,7 +504,7 @@
       "source_file": "frontend/src/health/permissions.web.ts",
       "source_location": "L1",
       "id": "frontend_src_health_permissions_web_ts",
-      "community": 17,
+      "community": 19,
       "norm_label": "permissions.web.ts"
     },
     {
@@ -495,7 +513,7 @@
       "source_file": "frontend/src/health/permissions.web.ts",
       "source_location": "L7",
       "id": "permissions_web_gethealthconnectstatus",
-      "community": 17,
+      "community": 19,
       "norm_label": "gethealthconnectstatus()"
     },
     {
@@ -504,7 +522,7 @@
       "source_file": "frontend/src/health/permissions.web.ts",
       "source_location": "L11",
       "id": "permissions_web_hashealthpermissions",
-      "community": 17,
+      "community": 19,
       "norm_label": "hashealthpermissions()"
     },
     {
@@ -513,7 +531,7 @@
       "source_file": "frontend/src/health/permissions.web.ts",
       "source_location": "L15",
       "id": "permissions_web_ensurehealthpermissions",
-      "community": 17,
+      "community": 19,
       "norm_label": "ensurehealthpermissions()"
     },
     {
@@ -522,44 +540,62 @@
       "source_file": "frontend/src/health/permissions.ts",
       "source_location": "L1",
       "id": "frontend_src_health_permissions_ts",
-      "community": 2,
+      "community": 8,
       "norm_label": "permissions.ts"
     },
     {
       "label": "ensureInitialized()",
       "file_type": "code",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "id": "permissions_ensureinitialized",
-      "community": 2,
+      "community": 8,
       "norm_label": "ensureinitialized()"
     },
     {
       "label": "getHealthConnectStatus()",
       "file_type": "code",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L35",
+      "source_location": "L36",
       "id": "permissions_gethealthconnectstatus",
-      "community": 2,
+      "community": 8,
       "norm_label": "gethealthconnectstatus()"
     },
     {
       "label": "hasHealthPermissions()",
       "file_type": "code",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "id": "permissions_hashealthpermissions",
-      "community": 2,
+      "community": 8,
       "norm_label": "hashealthpermissions()"
     },
     {
       "label": "ensureHealthPermissions()",
       "file_type": "code",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L57",
+      "source_location": "L58",
       "id": "permissions_ensurehealthpermissions",
-      "community": 2,
+      "community": 8,
       "norm_label": "ensurehealthpermissions()"
+    },
+    {
+      "label": "getMissingHealthPermissions()",
+      "file_type": "code",
+      "source_file": "frontend/src/health/permissions.ts",
+      "source_location": "L78",
+      "id": "permissions_getmissinghealthpermissions",
+      "community": 8,
+      "norm_label": "getmissinghealthpermissions()"
+    },
+    {
+      "label": "openHealthConnectAppSettings()",
+      "file_type": "code",
+      "source_file": "frontend/src/health/permissions.ts",
+      "source_location": "L87",
+      "id": "permissions_openhealthconnectappsettings",
+      "community": 8,
+      "norm_label": "openhealthconnectappsettings()"
     },
     {
       "label": "background.ts",
@@ -567,7 +603,7 @@
       "source_file": "frontend/src/health/background.ts",
       "source_location": "L1",
       "id": "frontend_src_health_background_ts",
-      "community": 21,
+      "community": 23,
       "norm_label": "background.ts"
     },
     {
@@ -576,7 +612,7 @@
       "source_file": "frontend/src/health/background.ts",
       "source_location": "L27",
       "id": "background_registerbackgroundsync",
-      "community": 21,
+      "community": 23,
       "norm_label": "registerbackgroundsync()"
     },
     {
@@ -585,7 +621,7 @@
       "source_file": "frontend/src/health/background.ts",
       "source_location": "L35",
       "id": "background_unregisterbackgroundsync",
-      "community": 21,
+      "community": 23,
       "norm_label": "unregisterbackgroundsync()"
     },
     {
@@ -594,7 +630,7 @@
       "source_file": "frontend/src/health/background.web.ts",
       "source_location": "L1",
       "id": "frontend_src_health_background_web_ts",
-      "community": 22,
+      "community": 24,
       "norm_label": "background.web.ts"
     },
     {
@@ -603,7 +639,7 @@
       "source_file": "frontend/src/health/background.web.ts",
       "source_location": "L3",
       "id": "background_web_registerbackgroundsync",
-      "community": 22,
+      "community": 24,
       "norm_label": "registerbackgroundsync()"
     },
     {
@@ -612,7 +648,7 @@
       "source_file": "frontend/src/health/background.web.ts",
       "source_location": "L5",
       "id": "background_web_unregisterbackgroundsync",
-      "community": 22,
+      "community": 24,
       "norm_label": "unregisterbackgroundsync()"
     },
     {
@@ -621,7 +657,7 @@
       "source_file": "frontend/src/health/sync.ts",
       "source_location": "L1",
       "id": "frontend_src_health_sync_ts",
-      "community": 2,
+      "community": 8,
       "norm_label": "sync.ts"
     },
     {
@@ -630,7 +666,7 @@
       "source_file": "frontend/src/health/sync.ts",
       "source_location": "L13",
       "id": "sync_synclastminute",
-      "community": 2,
+      "community": 8,
       "norm_label": "synclastminute()"
     },
     {
@@ -639,7 +675,7 @@
       "source_file": "frontend/src/health/exerciseTypes.ts",
       "source_location": "L1",
       "id": "frontend_src_health_exercisetypes_ts",
-      "community": 29,
+      "community": 31,
       "norm_label": "exercisetypes.ts"
     },
     {
@@ -648,7 +684,7 @@
       "source_file": "frontend/src/health/exerciseTypes.ts",
       "source_location": "L31",
       "id": "exercisetypes_exercisetypename",
-      "community": 29,
+      "community": 31,
       "norm_label": "exercisetypename()"
     },
     {
@@ -657,7 +693,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L1",
       "id": "frontend_src_dashboard_scores_ts",
-      "community": 11,
+      "community": 16,
       "norm_label": "scores.ts"
     },
     {
@@ -666,7 +702,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L11",
       "id": "scores_clamp",
-      "community": 11,
+      "community": 16,
       "norm_label": "clamp()"
     },
     {
@@ -675,7 +711,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L13",
       "id": "scores_recoveryscore",
-      "community": 11,
+      "community": 16,
       "norm_label": "recoveryscore()"
     },
     {
@@ -684,7 +720,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L24",
       "id": "scores_strainscore",
-      "community": 11,
+      "community": 16,
       "norm_label": "strainscore()"
     },
     {
@@ -693,7 +729,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L35",
       "id": "scores_sleepscore",
-      "community": 11,
+      "community": 16,
       "norm_label": "sleepscore()"
     },
     {
@@ -702,7 +738,7 @@
       "source_file": "frontend/src/dashboard/scores.ts",
       "source_location": "L41",
       "id": "scores_formatsleep",
-      "community": 11,
+      "community": 16,
       "norm_label": "formatsleep()"
     },
     {
@@ -738,7 +774,7 @@
       "source_file": "frontend/src/components/ui/Card.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_ui_card_tsx",
-      "community": 38,
+      "community": 41,
       "norm_label": "card.tsx"
     },
     {
@@ -747,7 +783,7 @@
       "source_file": "frontend/src/components/ui/Field.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_ui_field_tsx",
-      "community": 39,
+      "community": 42,
       "norm_label": "field.tsx"
     },
     {
@@ -756,7 +792,7 @@
       "source_file": "frontend/src/components/ui/Heading.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_ui_heading_tsx",
-      "community": 40,
+      "community": 43,
       "norm_label": "heading.tsx"
     },
     {
@@ -774,7 +810,7 @@
       "source_file": "frontend/src/components/ui/ThemeToggle.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_ui_themetoggle_tsx",
-      "community": 12,
+      "community": 1,
       "norm_label": "themetoggle.tsx"
     },
     {
@@ -783,7 +819,7 @@
       "source_file": "frontend/src/components/ui/ThemeToggle.tsx",
       "source_location": "L30",
       "id": "themetoggle_themetoggle",
-      "community": 12,
+      "community": 1,
       "norm_label": "themetoggle()"
     },
     {
@@ -837,7 +873,7 @@
       "source_file": "frontend/src/components/ui/index.ts",
       "source_location": "L1",
       "id": "frontend_src_components_ui_index_ts",
-      "community": 41,
+      "community": 44,
       "norm_label": "index.ts"
     },
     {
@@ -864,7 +900,7 @@
       "source_file": "frontend/src/theme/ThemeProvider.tsx",
       "source_location": "L1",
       "id": "frontend_src_theme_themeprovider_tsx",
-      "community": 12,
+      "community": 1,
       "norm_label": "themeprovider.tsx"
     },
     {
@@ -873,7 +909,7 @@
       "source_file": "frontend/src/theme/ThemeProvider.tsx",
       "source_location": "L18",
       "id": "themeprovider_ispreference",
-      "community": 12,
+      "community": 1,
       "norm_label": "ispreference()"
     },
     {
@@ -882,7 +918,7 @@
       "source_file": "frontend/src/theme/ThemeProvider.tsx",
       "source_location": "L22",
       "id": "themeprovider_themeprovider",
-      "community": 12,
+      "community": 1,
       "norm_label": "themeprovider()"
     },
     {
@@ -891,7 +927,7 @@
       "source_file": "frontend/src/theme/ThemeProvider.tsx",
       "source_location": "L56",
       "id": "themeprovider_usethemepref",
-      "community": 12,
+      "community": 1,
       "norm_label": "usethemepref()"
     },
     {
@@ -900,7 +936,7 @@
       "source_file": "frontend/src/lib/storage.ts",
       "source_location": "L1",
       "id": "frontend_src_lib_storage_ts",
-      "community": 42,
+      "community": 45,
       "norm_label": "storage.ts"
     },
     {
@@ -909,7 +945,7 @@
       "source_file": "frontend/src/lib/debugLog.ts",
       "source_location": "L1",
       "id": "frontend_src_lib_debuglog_ts",
-      "community": 30,
+      "community": 32,
       "norm_label": "debuglog.ts"
     },
     {
@@ -918,7 +954,7 @@
       "source_file": "frontend/src/lib/debugLog.ts",
       "source_location": "L18",
       "id": "debuglog_notify",
-      "community": 30,
+      "community": 32,
       "norm_label": "notify()"
     },
     {
@@ -927,7 +963,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L1",
       "id": "frontend_src_lib_api_ts",
-      "community": 7,
+      "community": 11,
       "norm_label": "api.ts"
     },
     {
@@ -936,7 +972,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L6",
       "id": "api_apierror",
-      "community": 7,
+      "community": 11,
       "norm_label": "apierror"
     },
     {
@@ -945,7 +981,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L11",
       "id": "api_apierror_constructor",
-      "community": 7,
+      "community": 11,
       "norm_label": ".constructor()"
     },
     {
@@ -954,7 +990,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L23",
       "id": "api_onauthfailure",
-      "community": 7,
+      "community": 11,
       "norm_label": "onauthfailure()"
     },
     {
@@ -963,7 +999,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L28",
       "id": "api_notifyauthfailure",
-      "community": 7,
+      "community": 11,
       "norm_label": "notifyauthfailure()"
     },
     {
@@ -972,7 +1008,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L42",
       "id": "api_refreshaccesstoken",
-      "community": 7,
+      "community": 11,
       "norm_label": "refreshaccesstoken()"
     },
     {
@@ -981,7 +1017,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L71",
       "id": "api_buildurl",
-      "community": 7,
+      "community": 11,
       "norm_label": "buildurl()"
     },
     {
@@ -990,7 +1026,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L81",
       "id": "api_parseerror",
-      "community": 7,
+      "community": 11,
       "norm_label": "parseerror()"
     },
     {
@@ -999,7 +1035,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L98",
       "id": "api_dofetch",
-      "community": 7,
+      "community": 11,
       "norm_label": "dofetch()"
     },
     {
@@ -1008,7 +1044,7 @@
       "source_file": "frontend/src/lib/api.ts",
       "source_location": "L136",
       "id": "api_request",
-      "community": 7,
+      "community": 11,
       "norm_label": "request()"
     },
     {
@@ -1017,7 +1053,7 @@
       "source_file": "frontend/src/lib/queryClient.ts",
       "source_location": "L1",
       "id": "frontend_src_lib_queryclient_ts",
-      "community": 43,
+      "community": 46,
       "norm_label": "queryclient.ts"
     },
     {
@@ -1026,7 +1062,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L1",
       "id": "frontend_src_api_health_ts",
-      "community": 44,
+      "community": 47,
       "norm_label": "health.ts"
     },
     {
@@ -1035,7 +1071,7 @@
       "source_file": "frontend/src/api/users.ts",
       "source_location": "L1",
       "id": "frontend_src_api_users_ts",
-      "community": 45,
+      "community": 48,
       "norm_label": "users.ts"
     },
     {
@@ -1044,7 +1080,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L1",
       "id": "frontend_src_api_auth_ts",
-      "community": 46,
+      "community": 49,
       "norm_label": "auth.ts"
     },
     {
@@ -1053,7 +1089,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/VitalSyncApplication.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_vitalsyncapplication_java",
-      "community": 23,
+      "community": 2,
       "norm_label": "vitalsyncapplication.java"
     },
     {
@@ -1062,7 +1098,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/VitalSyncApplication.java",
       "source_location": "L6",
       "id": "vitalsyncapplication_vitalsyncapplication",
-      "community": 23,
+      "community": 2,
       "norm_label": "vitalsyncapplication"
     },
     {
@@ -1071,7 +1107,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/VitalSyncApplication.java",
       "source_location": "L9",
       "id": "vitalsyncapplication_vitalsyncapplication_main",
-      "community": 23,
+      "community": 2,
       "norm_label": ".main()"
     },
     {
@@ -1080,7 +1116,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/LogoutRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_logoutrequest_java",
-      "community": 47,
+      "community": 50,
       "norm_label": "logoutrequest.java"
     },
     {
@@ -1089,7 +1125,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/RefreshRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_refreshrequest_java",
-      "community": 48,
+      "community": 51,
       "norm_label": "refreshrequest.java"
     },
     {
@@ -1098,7 +1134,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/SignupRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_signuprequest_java",
-      "community": 49,
+      "community": 52,
       "norm_label": "signuprequest.java"
     },
     {
@@ -1107,7 +1143,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/AuthResponse.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_authresponse_java",
-      "community": 50,
+      "community": 53,
       "norm_label": "authresponse.java"
     },
     {
@@ -1116,7 +1152,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/LoginRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_loginrequest_java",
-      "community": 51,
+      "community": 54,
       "norm_label": "loginrequest.java"
     },
     {
@@ -1125,7 +1161,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/auth/AuthUserDto.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_auth_authuserdto_java",
-      "community": 52,
+      "community": 55,
       "norm_label": "authuserdto.java"
     },
     {
@@ -1134,7 +1170,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/HealthSnapshot.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_health_healthsnapshot_java",
-      "community": 53,
+      "community": 56,
       "norm_label": "healthsnapshot.java"
     },
     {
@@ -1143,7 +1179,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/HealthSyncRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_health_healthsyncrequest_java",
-      "community": 54,
+      "community": 57,
       "norm_label": "healthsyncrequest.java"
     },
     {
@@ -1152,7 +1188,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/DailySummaryDto.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_health_dailysummarydto_java",
-      "community": 55,
+      "community": 58,
       "norm_label": "dailysummarydto.java"
     },
     {
@@ -1161,7 +1197,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/HistoryResponseDto.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_health_historyresponsedto_java",
-      "community": 56,
+      "community": 59,
       "norm_label": "historyresponsedto.java"
     },
     {
@@ -1197,7 +1233,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/ExerciseSession.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_health_exercisesession_java",
-      "community": 57,
+      "community": 60,
       "norm_label": "exercisesession.java"
     },
     {
@@ -1206,7 +1242,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/user/UserProfileDto.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_user_userprofiledto_java",
-      "community": 58,
+      "community": 61,
       "norm_label": "userprofiledto.java"
     },
     {
@@ -1215,7 +1251,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/dto/user/UpdateProfileRequest.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_dto_user_updateprofilerequest_java",
-      "community": 59,
+      "community": 62,
       "norm_label": "updateprofilerequest.java"
     },
     {
@@ -1224,7 +1260,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/repository/UserRepository.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_repository_userrepository_java",
-      "community": 3,
+      "community": 4,
       "norm_label": "userrepository.java"
     },
     {
@@ -1233,7 +1269,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/repository/UserRepository.java",
       "source_location": "L7",
       "id": "userrepository_userrepository",
-      "community": 3,
+      "community": 4,
       "norm_label": "userrepository"
     },
     {
@@ -1242,7 +1278,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/repository/UserRepository.java",
       "source_location": "L8",
       "id": "userrepository_userrepository_findbyemail",
-      "community": 3,
+      "community": 4,
       "norm_label": ".findbyemail()"
     },
     {
@@ -1251,7 +1287,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/repository/UserRepository.java",
       "source_location": "L10",
       "id": "userrepository_userrepository_existsbyemail",
-      "community": 3,
+      "community": 4,
       "norm_label": ".existsbyemail()"
     },
     {
@@ -1260,7 +1296,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaTopicConfig.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_kafkatopicconfig_java",
-      "community": 24,
+      "community": 25,
       "norm_label": "kafkatopicconfig.java"
     },
     {
@@ -1269,7 +1305,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaTopicConfig.java",
       "source_location": "L9",
       "id": "kafkatopicconfig_kafkatopicconfig",
-      "community": 24,
+      "community": 25,
       "norm_label": "kafkatopicconfig"
     },
     {
@@ -1278,7 +1314,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaTopicConfig.java",
       "source_location": "L22",
       "id": "kafkatopicconfig_kafkatopicconfig_vitalsyncdatatopic",
-      "community": 24,
+      "community": 25,
       "norm_label": ".vitalsyncdatatopic()"
     },
     {
@@ -1287,7 +1323,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JacksonConfig.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_jacksonconfig_java",
-      "community": 25,
+      "community": 26,
       "norm_label": "jacksonconfig.java"
     },
     {
@@ -1296,7 +1332,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JacksonConfig.java",
       "source_location": "L17",
       "id": "jacksonconfig_jacksonconfig",
-      "community": 25,
+      "community": 26,
       "norm_label": "jacksonconfig"
     },
     {
@@ -1305,7 +1341,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JacksonConfig.java",
       "source_location": "L20",
       "id": "jacksonconfig_jacksonconfig_scalartostringcoercion",
-      "community": 25,
+      "community": 26,
       "norm_label": ".scalartostringcoercion()"
     },
     {
@@ -1314,7 +1350,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_securityconfig_java",
-      "community": 13,
+      "community": 17,
       "norm_label": "securityconfig.java"
     },
     {
@@ -1323,7 +1359,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L17",
       "id": "securityconfig_securityconfig",
-      "community": 13,
+      "community": 17,
       "norm_label": "securityconfig"
     },
     {
@@ -1332,7 +1368,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L23",
       "id": "securityconfig_securityconfig_securityconfig",
-      "community": 13,
+      "community": 17,
       "norm_label": ".securityconfig()"
     },
     {
@@ -1341,7 +1377,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L27",
       "id": "securityconfig_securityconfig_passwordencoder",
-      "community": 13,
+      "community": 17,
       "norm_label": ".passwordencoder()"
     },
     {
@@ -1350,7 +1386,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L33",
       "id": "securityconfig_securityconfig_securityfilterchain",
-      "community": 13,
+      "community": 17,
       "norm_label": ".securityfilterchain()"
     },
     {
@@ -1359,7 +1395,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/SecurityConfig.java",
       "source_location": "L58",
       "id": "securityconfig_securityconfig_corsconfigurationsource",
-      "community": 13,
+      "community": 17,
       "norm_label": ".corsconfigurationsource()"
     },
     {
@@ -1368,7 +1404,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/OpenApiConfig.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_openapiconfig_java",
-      "community": 26,
+      "community": 27,
       "norm_label": "openapiconfig.java"
     },
     {
@@ -1377,7 +1413,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/OpenApiConfig.java",
       "source_location": "L8",
       "id": "openapiconfig_openapiconfig",
-      "community": 26,
+      "community": 27,
       "norm_label": "openapiconfig"
     },
     {
@@ -1386,7 +1422,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/OpenApiConfig.java",
       "source_location": "L11",
       "id": "openapiconfig_openapiconfig_vitalsyncopenapi",
-      "community": 26,
+      "community": 27,
       "norm_label": ".vitalsyncopenapi()"
     },
     {
@@ -1395,7 +1431,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_jwtauthfilter_java",
-      "community": 5,
+      "community": 7,
       "norm_label": "jwtauthfilter.java"
     },
     {
@@ -1404,7 +1440,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L21",
       "id": "jwtauthfilter_jwtauthfilter",
-      "community": 5,
+      "community": 7,
       "norm_label": "jwtauthfilter"
     },
     {
@@ -1413,7 +1449,7 @@
       "source_file": "",
       "source_location": "",
       "id": "onceperrequestfilter",
-      "community": 5,
+      "community": 7,
       "norm_label": "onceperrequestfilter"
     },
     {
@@ -1422,7 +1458,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L37",
       "id": "jwtauthfilter_jwtauthfilter_jwtauthfilter",
-      "community": 5,
+      "community": 7,
       "norm_label": ".jwtauthfilter()"
     },
     {
@@ -1431,7 +1467,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L42",
       "id": "jwtauthfilter_jwtauthfilter_shouldnotfilter",
-      "community": 5,
+      "community": 7,
       "norm_label": ".shouldnotfilter()"
     },
     {
@@ -1440,7 +1476,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L49",
       "id": "jwtauthfilter_jwtauthfilter_dofilterinternal",
-      "community": 5,
+      "community": 7,
       "norm_label": ".dofilterinternal()"
     },
     {
@@ -1449,7 +1485,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L71",
       "id": "jwtauthfilter_jwtauthfilter_writeerror",
-      "community": 5,
+      "community": 7,
       "norm_label": ".writeerror()"
     },
     {
@@ -1458,7 +1494,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaProducerConfig.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_config_kafkaproducerconfig_java",
-      "community": 18,
+      "community": 20,
       "norm_label": "kafkaproducerconfig.java"
     },
     {
@@ -1467,7 +1503,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaProducerConfig.java",
       "source_location": "L15",
       "id": "kafkaproducerconfig_kafkaproducerconfig",
-      "community": 18,
+      "community": 20,
       "norm_label": "kafkaproducerconfig"
     },
     {
@@ -1476,7 +1512,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaProducerConfig.java",
       "source_location": "L21",
       "id": "kafkaproducerconfig_kafkaproducerconfig_producerfactory",
-      "community": 18,
+      "community": 20,
       "norm_label": ".producerfactory()"
     },
     {
@@ -1485,7 +1521,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/config/KafkaProducerConfig.java",
       "source_location": "L37",
       "id": "kafkaproducerconfig_kafkaproducerconfig_kafkatemplate",
-      "community": 18,
+      "community": 20,
       "norm_label": ".kafkatemplate()"
     },
     {
@@ -1494,7 +1530,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/entity/User.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_entity_user_java",
-      "community": 19,
+      "community": 21,
       "norm_label": "user.java"
     },
     {
@@ -1503,7 +1539,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/entity/User.java",
       "source_location": "L9",
       "id": "user_user",
-      "community": 19,
+      "community": 21,
       "norm_label": "user"
     },
     {
@@ -1512,7 +1548,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/entity/User.java",
       "source_location": "L48",
       "id": "user_user_oninsert",
-      "community": 19,
+      "community": 21,
       "norm_label": ".oninsert()"
     },
     {
@@ -1521,7 +1557,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/entity/User.java",
       "source_location": "L55",
       "id": "user_user_onupdate",
-      "community": 19,
+      "community": 21,
       "norm_label": ".onupdate()"
     },
     {
@@ -1530,7 +1566,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_controller_authcontroller_java",
-      "community": 4,
+      "community": 5,
       "norm_label": "authcontroller.java"
     },
     {
@@ -1539,7 +1575,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L20",
       "id": "authcontroller_authcontroller",
-      "community": 4,
+      "community": 5,
       "norm_label": "authcontroller"
     },
     {
@@ -1548,7 +1584,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L26",
       "id": "authcontroller_authcontroller_authcontroller",
-      "community": 4,
+      "community": 5,
       "norm_label": ".authcontroller()"
     },
     {
@@ -1557,7 +1593,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L30",
       "id": "authcontroller_authcontroller_signup",
-      "community": 4,
+      "community": 5,
       "norm_label": ".signup()"
     },
     {
@@ -1566,7 +1602,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L35",
       "id": "authcontroller_authcontroller_login",
-      "community": 4,
+      "community": 5,
       "norm_label": ".login()"
     },
     {
@@ -1575,7 +1611,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L40",
       "id": "authcontroller_authcontroller_refresh",
-      "community": 4,
+      "community": 5,
       "norm_label": ".refresh()"
     },
     {
@@ -1584,7 +1620,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/AuthController.java",
       "source_location": "L45",
       "id": "authcontroller_authcontroller_logout",
-      "community": 4,
+      "community": 5,
       "norm_label": ".logout()"
     },
     {
@@ -1593,7 +1629,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_controller_healthquerycontroller_java",
-      "community": 20,
+      "community": 22,
       "norm_label": "healthquerycontroller.java"
     },
     {
@@ -1602,25 +1638,25 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
       "source_location": "L25",
       "id": "healthquerycontroller_healthquerycontroller",
-      "community": 20,
+      "community": 22,
       "norm_label": "healthquerycontroller"
     },
     {
       "label": ".summary()",
       "file_type": "code",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
-      "source_location": "L31",
+      "source_location": "L33",
       "id": "healthquerycontroller_healthquerycontroller_summary",
-      "community": 20,
+      "community": 22,
       "norm_label": ".summary()"
     },
     {
       "label": ".history()",
       "file_type": "code",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
-      "source_location": "L41",
+      "source_location": "L43",
       "id": "healthquerycontroller_healthquerycontroller_history",
-      "community": 20,
+      "community": 22,
       "norm_label": ".history()"
     },
     {
@@ -1629,7 +1665,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/UsersController.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_controller_userscontroller_java",
-      "community": 8,
+      "community": 12,
       "norm_label": "userscontroller.java"
     },
     {
@@ -1638,7 +1674,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/UsersController.java",
       "source_location": "L17",
       "id": "userscontroller_userscontroller",
-      "community": 8,
+      "community": 12,
       "norm_label": "userscontroller"
     },
     {
@@ -1647,7 +1683,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/UsersController.java",
       "source_location": "L24",
       "id": "userscontroller_userscontroller_me",
-      "community": 8,
+      "community": 12,
       "norm_label": ".me()"
     },
     {
@@ -1656,7 +1692,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/UsersController.java",
       "source_location": "L29",
       "id": "userscontroller_userscontroller_updateme",
-      "community": 8,
+      "community": 12,
       "norm_label": ".updateme()"
     },
     {
@@ -1665,7 +1701,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/controller/UsersController.java",
       "source_location": "L35",
       "id": "userscontroller_userscontroller_requireuserid",
-      "community": 8,
+      "community": 12,
       "norm_label": ".requireuserid()"
     },
     {
@@ -1681,7 +1717,7 @@
       "label": "HealthSyncController",
       "file_type": "code",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthSyncController.java",
-      "source_location": "L20",
+      "source_location": "L18",
       "id": "healthsynccontroller_healthsynccontroller",
       "community": 2,
       "norm_label": "healthsynccontroller"
@@ -1690,10 +1726,82 @@
       "label": ".sync()",
       "file_type": "code",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthSyncController.java",
-      "source_location": "L30",
+      "source_location": "L28",
       "id": "healthsynccontroller_healthsynccontroller_sync",
       "community": 2,
       "norm_label": ".sync()"
+    },
+    {
+      "label": "KafkaDummyDataSeeder.java",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L1",
+      "id": "backend_src_main_java_com_vitalsync_dev_kafkadummydataseeder_java",
+      "community": 2,
+      "norm_label": "kafkadummydataseeder.java"
+    },
+    {
+      "label": "KafkaDummyDataSeeder",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L26",
+      "id": "kafkadummydataseeder_kafkadummydataseeder",
+      "community": 2,
+      "norm_label": "kafkadummydataseeder"
+    },
+    {
+      "label": "CommandLineRunner",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "commandlinerunner",
+      "community": 2,
+      "norm_label": "commandlinerunner"
+    },
+    {
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L39",
+      "id": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "community": 2,
+      "norm_label": ".run()"
+    },
+    {
+      "label": ".buildRandomRequest()",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L81",
+      "id": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "community": 2,
+      "norm_label": ".buildrandomrequest()"
+    },
+    {
+      "label": ".randomSession()",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L114",
+      "id": "kafkadummydataseeder_kafkadummydataseeder_randomsession",
+      "community": 2,
+      "norm_label": ".randomsession()"
+    },
+    {
+      "label": "SeedProperties.java",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/SeedProperties.java",
+      "source_location": "L1",
+      "id": "backend_src_main_java_com_vitalsync_dev_seedproperties_java",
+      "community": 33,
+      "norm_label": "seedproperties.java"
+    },
+    {
+      "label": "SeedProperties",
+      "file_type": "code",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/SeedProperties.java",
+      "source_location": "L9",
+      "id": "seedproperties_seedproperties",
+      "community": 33,
+      "norm_label": "seedproperties"
     },
     {
       "label": "JwtService.java",
@@ -1701,7 +1809,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_service_jwtservice_java",
-      "community": 3,
+      "community": 4,
       "norm_label": "jwtservice.java"
     },
     {
@@ -1710,7 +1818,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L17",
       "id": "jwtservice_jwtservice",
-      "community": 3,
+      "community": 4,
       "norm_label": "jwtservice"
     },
     {
@@ -1719,7 +1827,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L23",
       "id": "jwtservice_jwtservice_jwtservice",
-      "community": 3,
+      "community": 4,
       "norm_label": ".jwtservice()"
     },
     {
@@ -1728,7 +1836,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L35",
       "id": "jwtservice_jwtservice_accessttlseconds",
-      "community": 3,
+      "community": 4,
       "norm_label": ".accessttlseconds()"
     },
     {
@@ -1737,7 +1845,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L39",
       "id": "jwtservice_jwtservice_issue",
-      "community": 3,
+      "community": 4,
       "norm_label": ".issue()"
     },
     {
@@ -1746,7 +1854,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/JwtService.java",
       "source_location": "L51",
       "id": "jwtservice_jwtservice_parse",
-      "community": 3,
+      "community": 4,
       "norm_label": ".parse()"
     },
     {
@@ -1782,7 +1890,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/HealthSnapshotPublisher.java",
       "source_location": "L63",
       "id": "healthsnapshotpublisher_kafkapublishexception",
-      "community": 5,
+      "community": 2,
       "norm_label": "kafkapublishexception"
     },
     {
@@ -1791,7 +1899,7 @@
       "source_file": "",
       "source_location": "",
       "id": "runtimeexception",
-      "community": 5,
+      "community": 2,
       "norm_label": "runtimeexception"
     },
     {
@@ -1800,7 +1908,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/HealthSnapshotPublisher.java",
       "source_location": "L64",
       "id": "healthsnapshotpublisher_kafkapublishexception_kafkapublishexception",
-      "community": 5,
+      "community": 2,
       "norm_label": ".kafkapublishexception()"
     },
     {
@@ -1809,7 +1917,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_service_authservice_java",
-      "community": 3,
+      "community": 4,
       "norm_label": "authservice.java"
     },
     {
@@ -1818,7 +1926,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L22",
       "id": "authservice_authservice",
-      "community": 3,
+      "community": 4,
       "norm_label": "authservice"
     },
     {
@@ -1827,7 +1935,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L32",
       "id": "authservice_authservice_authservice",
-      "community": 3,
+      "community": 4,
       "norm_label": ".authservice()"
     },
     {
@@ -1836,7 +1944,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L45",
       "id": "authservice_authservice_signup",
-      "community": 3,
+      "community": 4,
       "norm_label": ".signup()"
     },
     {
@@ -1845,7 +1953,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L61",
       "id": "authservice_authservice_login",
-      "community": 3,
+      "community": 4,
       "norm_label": ".login()"
     },
     {
@@ -1854,7 +1962,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L80",
       "id": "authservice_authservice_refresh",
-      "community": 3,
+      "community": 4,
       "norm_label": ".refresh()"
     },
     {
@@ -1863,7 +1971,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L110",
       "id": "authservice_authservice_logout",
-      "community": 3,
+      "community": 4,
       "norm_label": ".logout()"
     },
     {
@@ -1872,7 +1980,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L129",
       "id": "authservice_authservice_issuetokens",
-      "community": 3,
+      "community": 4,
       "norm_label": ".issuetokens()"
     },
     {
@@ -1881,7 +1989,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L149",
       "id": "authservice_authservice_parse",
-      "community": 3,
+      "community": 4,
       "norm_label": ".parse()"
     },
     {
@@ -1890,7 +1998,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L160",
       "id": "authservice_authservice_randomhex",
-      "community": 3,
+      "community": 4,
       "norm_label": ".randomhex()"
     },
     {
@@ -1899,7 +2007,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/AuthService.java",
       "source_location": "L166",
       "id": "authservice_authservice_shortid",
-      "community": 3,
+      "community": 4,
       "norm_label": ".shortid()"
     },
     {
@@ -1908,7 +2016,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/UserProfileService.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_service_userprofileservice_java",
-      "community": 8,
+      "community": 12,
       "norm_label": "userprofileservice.java"
     },
     {
@@ -1917,7 +2025,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/UserProfileService.java",
       "source_location": "L13",
       "id": "userprofileservice_userprofileservice",
-      "community": 8,
+      "community": 12,
       "norm_label": "userprofileservice"
     },
     {
@@ -1926,7 +2034,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/UserProfileService.java",
       "source_location": "L19",
       "id": "userprofileservice_userprofileservice_getbyid",
-      "community": 8,
+      "community": 12,
       "norm_label": ".getbyid()"
     },
     {
@@ -1935,7 +2043,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/UserProfileService.java",
       "source_location": "L27",
       "id": "userprofileservice_userprofileservice_update",
-      "community": 8,
+      "community": 12,
       "norm_label": ".update()"
     },
     {
@@ -1944,7 +2052,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/service/UserProfileService.java",
       "source_location": "L43",
       "id": "userprofileservice_userprofileservice_todto",
-      "community": 8,
+      "community": 12,
       "norm_label": ".todto()"
     },
     {
@@ -1953,7 +2061,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthErrorCode.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_exception_autherrorcode_java",
-      "community": 4,
+      "community": 5,
       "norm_label": "autherrorcode.java"
     },
     {
@@ -1962,7 +2070,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthErrorCode.java",
       "source_location": "L17",
       "id": "autherrorcode_autherrorcode",
-      "community": 4,
+      "community": 5,
       "norm_label": "autherrorcode()"
     },
     {
@@ -1971,7 +2079,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthErrorCode.java",
       "source_location": "L21",
       "id": "autherrorcode_status",
-      "community": 4,
+      "community": 5,
       "norm_label": "status()"
     },
     {
@@ -1980,7 +2088,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_exception_globalexceptionhandler_java",
-      "community": 4,
+      "community": 5,
       "norm_label": "globalexceptionhandler.java"
     },
     {
@@ -1989,7 +2097,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L18",
       "id": "globalexceptionhandler_globalexceptionhandler",
-      "community": 4,
+      "community": 5,
       "norm_label": "globalexceptionhandler"
     },
     {
@@ -1998,7 +2106,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L26",
       "id": "globalexceptionhandler_globalexceptionhandler_handlevalidation",
-      "community": 4,
+      "community": 5,
       "norm_label": ".handlevalidation()"
     },
     {
@@ -2007,7 +2115,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L37",
       "id": "globalexceptionhandler_globalexceptionhandler_handleunreadable",
-      "community": 4,
+      "community": 5,
       "norm_label": ".handleunreadable()"
     },
     {
@@ -2016,7 +2124,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L44",
       "id": "globalexceptionhandler_globalexceptionhandler_handleauth",
-      "community": 4,
+      "community": 5,
       "norm_label": ".handleauth()"
     },
     {
@@ -2025,7 +2133,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L55",
       "id": "globalexceptionhandler_globalexceptionhandler_handlekafka",
-      "community": 4,
+      "community": 5,
       "norm_label": ".handlekafka()"
     },
     {
@@ -2034,7 +2142,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L65",
       "id": "globalexceptionhandler_globalexceptionhandler_handlegeneric",
-      "community": 4,
+      "community": 5,
       "norm_label": ".handlegeneric()"
     },
     {
@@ -2043,7 +2151,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/GlobalExceptionHandler.java",
       "source_location": "L75",
       "id": "globalexceptionhandler_globalexceptionhandler_error",
-      "community": 4,
+      "community": 5,
       "norm_label": ".error()"
     },
     {
@@ -2052,7 +2160,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthException.java",
       "source_location": "L1",
       "id": "backend_src_main_java_com_vitalsync_exception_authexception_java",
-      "community": 5,
+      "community": 2,
       "norm_label": "authexception.java"
     },
     {
@@ -2061,7 +2169,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthException.java",
       "source_location": "L3",
       "id": "authexception_authexception",
-      "community": 5,
+      "community": 2,
       "norm_label": "authexception"
     },
     {
@@ -2070,7 +2178,7 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthException.java",
       "source_location": "L6",
       "id": "authexception_authexception_authexception",
-      "community": 5,
+      "community": 2,
       "norm_label": ".authexception()"
     },
     {
@@ -2079,8 +2187,638 @@
       "source_file": "backend/src/main/java/com/vitalsync/exception/AuthException.java",
       "source_location": "L11",
       "id": "authexception_authexception_code",
-      "community": 5,
+      "community": 2,
       "norm_label": ".code()"
+    },
+    {
+      "label": "main.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_cmd_loadgen_main_go",
+      "community": 3,
+      "norm_label": "main.go"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L16",
+      "id": "main_main",
+      "community": 3,
+      "norm_label": "main()"
+    },
+    {
+      "label": "config.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_config_config_go",
+      "community": 7,
+      "norm_label": "config.go"
+    },
+    {
+      "label": "Config",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L11",
+      "id": "config_config",
+      "community": 7,
+      "norm_label": "config"
+    },
+    {
+      "label": "Parse()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L21",
+      "id": "config_parse",
+      "community": 7,
+      "norm_label": "parse()"
+    },
+    {
+      "label": ".validate()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L52",
+      "id": "config_config_validate",
+      "community": 7,
+      "norm_label": ".validate()"
+    },
+    {
+      "label": ".WindowsPerDay()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L77",
+      "id": "config_config_windowsperday",
+      "community": 3,
+      "norm_label": ".windowsperday()"
+    },
+    {
+      "label": ".TotalSnapshots()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L81",
+      "id": "config_config_totalsnapshots",
+      "community": 3,
+      "norm_label": ".totalsnapshots()"
+    },
+    {
+      "label": "envOrDefault()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L85",
+      "id": "config_envordefault",
+      "community": 7,
+      "norm_label": "envordefault()"
+    },
+    {
+      "label": "envIntOrDefault()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L92",
+      "id": "config_envintordefault",
+      "community": 7,
+      "norm_label": "envintordefault()"
+    },
+    {
+      "label": "envBoolOrDefault()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L102",
+      "id": "config_envboolordefault",
+      "community": 7,
+      "norm_label": "envboolordefault()"
+    },
+    {
+      "label": "envDurationOrDefault()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L112",
+      "id": "config_envdurationordefault",
+      "community": 7,
+      "norm_label": "envdurationordefault()"
+    },
+    {
+      "label": "runner.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_runner_runner_go",
+      "community": 3,
+      "norm_label": "runner.go"
+    },
+    {
+      "label": "Runner",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L18",
+      "id": "runner_runner",
+      "community": 3,
+      "norm_label": "runner"
+    },
+    {
+      "label": "New()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L30",
+      "id": "runner_new",
+      "community": 3,
+      "norm_label": "new()"
+    },
+    {
+      "label": ".Run()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L37",
+      "id": "runner_runner_run",
+      "community": 3,
+      "norm_label": ".run()"
+    },
+    {
+      "label": ".authenticateAll()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L70",
+      "id": "runner_runner_authenticateall",
+      "community": 3,
+      "norm_label": ".authenticateall()"
+    },
+    {
+      "label": ".authenticateUser()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L99",
+      "id": "runner_runner_authenticateuser",
+      "community": 9,
+      "norm_label": ".authenticateuser()"
+    },
+    {
+      "label": ".syncPhase()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L117",
+      "id": "runner_runner_syncphase",
+      "community": 3,
+      "norm_label": ".syncphase()"
+    },
+    {
+      "label": ".runUser()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L144",
+      "id": "runner_runner_runuser",
+      "community": 3,
+      "norm_label": ".runuser()"
+    },
+    {
+      "label": ".sendOnce()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L171",
+      "id": "runner_runner_sendonce",
+      "community": 3,
+      "norm_label": ".sendonce()"
+    },
+    {
+      "label": ".startProgressLogger()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L194",
+      "id": "runner_runner_startprogresslogger",
+      "community": 3,
+      "norm_label": ".startprogresslogger()"
+    },
+    {
+      "label": ".printSummary()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L218",
+      "id": "runner_runner_printsummary",
+      "community": 3,
+      "norm_label": ".printsummary()"
+    },
+    {
+      "label": ".dryRun()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L228",
+      "id": "runner_runner_dryrun",
+      "community": 3,
+      "norm_label": ".dryrun()"
+    },
+    {
+      "label": "storeToken()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L263",
+      "id": "runner_storetoken",
+      "community": 3,
+      "norm_label": "storetoken()"
+    },
+    {
+      "label": "loadToken()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L269",
+      "id": "runner_loadtoken",
+      "community": 3,
+      "norm_label": "loadtoken()"
+    },
+    {
+      "label": "jsonStdout",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L276",
+      "id": "runner_jsonstdout",
+      "community": 3,
+      "norm_label": "jsonstdout"
+    },
+    {
+      "label": ".Write()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L278",
+      "id": "runner_jsonstdout_write",
+      "community": 3,
+      "norm_label": ".write()"
+    },
+    {
+      "label": "stdout.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/runner/stdout.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_runner_stdout_go",
+      "community": 63,
+      "norm_label": "stdout.go"
+    },
+    {
+      "label": "models.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_api_models_go",
+      "community": 13,
+      "norm_label": "models.go"
+    },
+    {
+      "label": "SignupRequest",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L5",
+      "id": "api_signuprequest",
+      "community": 13,
+      "norm_label": "signuprequest"
+    },
+    {
+      "label": "LoginRequest",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L11",
+      "id": "api_loginrequest",
+      "community": 13,
+      "norm_label": "loginrequest"
+    },
+    {
+      "label": "AuthUserDto",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L16",
+      "id": "api_authuserdto",
+      "community": 13,
+      "norm_label": "authuserdto"
+    },
+    {
+      "label": "AuthResponse",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L22",
+      "id": "api_authresponse",
+      "community": 13,
+      "norm_label": "authresponse"
+    },
+    {
+      "label": "ExerciseSession",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L29",
+      "id": "api_exercisesession",
+      "community": 13,
+      "norm_label": "exercisesession"
+    },
+    {
+      "label": "HealthSnapshot",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L39",
+      "id": "api_healthsnapshot",
+      "community": 13,
+      "norm_label": "healthsnapshot"
+    },
+    {
+      "label": "HealthSyncRequest",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L53",
+      "id": "api_healthsyncrequest",
+      "community": 13,
+      "norm_label": "healthsyncrequest"
+    },
+    {
+      "label": "HealthSyncResponse",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L61",
+      "id": "api_healthsyncresponse",
+      "community": 13,
+      "norm_label": "healthsyncresponse"
+    },
+    {
+      "label": "ErrorResponse",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L69",
+      "id": "api_errorresponse",
+      "community": 13,
+      "norm_label": "errorresponse"
+    },
+    {
+      "label": "client.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_api_client_go",
+      "community": 9,
+      "norm_label": "client.go"
+    },
+    {
+      "label": "Client",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L14",
+      "id": "api_client",
+      "community": 9,
+      "norm_label": "client"
+    },
+    {
+      "label": "NewClient()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L19",
+      "id": "client_newclient",
+      "community": 9,
+      "norm_label": "newclient()"
+    },
+    {
+      "label": ".Signup()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L36",
+      "id": "api_client_signup",
+      "community": 9,
+      "norm_label": ".signup()"
+    },
+    {
+      "label": ".Login()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L46",
+      "id": "api_client_login",
+      "community": 9,
+      "norm_label": ".login()"
+    },
+    {
+      "label": ".SyncHealth()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L56",
+      "id": "api_client_synchealth",
+      "community": 9,
+      "norm_label": ".synchealth()"
+    },
+    {
+      "label": "HTTPError",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L68",
+      "id": "api_httperror",
+      "community": 9,
+      "norm_label": "httperror"
+    },
+    {
+      "label": ".Error()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L73",
+      "id": "api_httperror_error",
+      "community": 9,
+      "norm_label": ".error()"
+    },
+    {
+      "label": ".post()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L77",
+      "id": "api_client_post",
+      "community": 9,
+      "norm_label": ".post()"
+    },
+    {
+      "label": "user.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_sim_user_go",
+      "community": 6,
+      "norm_label": "user.go"
+    },
+    {
+      "label": "UserSimulator",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L24",
+      "id": "sim_usersimulator",
+      "community": 6,
+      "norm_label": "usersimulator"
+    },
+    {
+      "label": "NewUserSimulator()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L40",
+      "id": "user_newusersimulator",
+      "community": 3,
+      "norm_label": "newusersimulator()"
+    },
+    {
+      "label": ".NextSnapshot()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L56",
+      "id": "sim_usersimulator_nextsnapshot",
+      "community": 6,
+      "norm_label": ".nextsnapshot()"
+    },
+    {
+      "label": ".maybeRollDay()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L118",
+      "id": "sim_usersimulator_mayberollday",
+      "community": 6,
+      "norm_label": ".mayberollday()"
+    },
+    {
+      "label": ".windowOverlapsExercise()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L127",
+      "id": "sim_usersimulator_windowoverlapsexercise",
+      "community": 6,
+      "norm_label": ".windowoverlapsexercise()"
+    },
+    {
+      "label": ".exerciseSessionFor()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L139",
+      "id": "sim_usersimulator_exercisesessionfor",
+      "community": 6,
+      "norm_label": ".exercisesessionfor()"
+    },
+    {
+      "label": "deterministicKey()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L161",
+      "id": "user_deterministickey",
+      "community": 6,
+      "norm_label": "deterministickey()"
+    },
+    {
+      "label": "ptrF()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L166",
+      "id": "user_ptrf",
+      "community": 6,
+      "norm_label": "ptrf()"
+    },
+    {
+      "label": "ptrI()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L167",
+      "id": "user_ptri",
+      "community": 6,
+      "norm_label": "ptri()"
+    },
+    {
+      "label": "round1()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L169",
+      "id": "user_round1",
+      "community": 6,
+      "norm_label": "round1()"
+    },
+    {
+      "label": "persona.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_sim_persona_go",
+      "community": 3,
+      "norm_label": "persona.go"
+    },
+    {
+      "label": "PersonaKind",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L3",
+      "id": "sim_personakind",
+      "community": 3,
+      "norm_label": "personakind"
+    },
+    {
+      "label": "Persona",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L11",
+      "id": "sim_persona",
+      "community": 3,
+      "norm_label": "persona"
+    },
+    {
+      "label": "PersonaForUser()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L56",
+      "id": "persona_personaforuser",
+      "community": 3,
+      "norm_label": "personaforuser()"
+    },
+    {
+      "label": "diurnal.go",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L1",
+      "id": "scripts_loadgen_internal_sim_diurnal_go",
+      "community": 6,
+      "norm_label": "diurnal.go"
+    },
+    {
+      "label": "diurnalStepWeight()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L13",
+      "id": "diurnal_diurnalstepweight",
+      "community": 6,
+      "norm_label": "diurnalstepweight()"
+    },
+    {
+      "label": "stepsForWindow()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L36",
+      "id": "diurnal_stepsforwindow",
+      "community": 6,
+      "norm_label": "stepsforwindow()"
+    },
+    {
+      "label": "heartRateForWindow()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L65",
+      "id": "diurnal_heartrateforwindow",
+      "community": 6,
+      "norm_label": "heartrateforwindow()"
+    },
+    {
+      "label": "bloodOxygen()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L78",
+      "id": "diurnal_bloodoxygen",
+      "community": 6,
+      "norm_label": "bloodoxygen()"
+    },
+    {
+      "label": "dailyStepsTarget()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L84",
+      "id": "diurnal_dailystepstarget",
+      "community": 6,
+      "norm_label": "dailystepstarget()"
+    },
+    {
+      "label": "clamp()",
+      "file_type": "code",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L92",
+      "id": "diurnal_clamp",
+      "community": 6,
+      "norm_label": "clamp()"
     },
     {
       "label": "VitalSync Project",
@@ -2091,7 +2829,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "vitalsync project",
       "id": "readme_vitalsync_project"
     },
@@ -2104,7 +2842,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "expo frontend application",
       "id": "frontend_expo_app"
     },
@@ -2117,7 +2855,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "expo framework",
       "id": "expo_framework"
     },
@@ -2130,7 +2868,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "android app launcher icon",
       "id": "android_launcher_icon"
     },
@@ -2143,7 +2881,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "app splash screen logo - concentric circles design",
       "id": "splashscreen_logo"
     },
@@ -2156,7 +2894,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "expo file-based routing",
       "id": "expo_file_based_routing"
     },
@@ -2169,7 +2907,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 14,
       "norm_label": "android native module",
       "id": "android_native_module"
     },
@@ -2235,7 +2973,7 @@
       "label": "Kubernetes",
       "type": "platform",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "kubernetes",
       "id": "kubernetes"
     },
@@ -2285,7 +3023,7 @@
       "type": "documentation",
       "file_type": "document",
       "url": "http://localhost:8080/swagger-ui/index.html",
-      "community": 60,
+      "community": 64,
       "norm_label": "swagger ui",
       "id": "swagger_ui"
     },
@@ -2373,7 +3111,7 @@
       "label": "HealthSnapshot",
       "type": "data_model",
       "file_type": "document",
-      "community": 15,
+      "community": 0,
       "norm_label": "healthsnapshot",
       "id": "health_snapshot_model"
     },
@@ -2381,7 +3119,7 @@
       "label": "ExerciseSession",
       "type": "data_model",
       "file_type": "document",
-      "community": 15,
+      "community": 0,
       "norm_label": "exercisesession",
       "id": "exercise_session_model"
     },
@@ -2389,7 +3127,7 @@
       "label": "UserProfile",
       "type": "data_model",
       "file_type": "document",
-      "community": 61,
+      "community": 65,
       "norm_label": "userprofile",
       "id": "user_profile_model"
     },
@@ -2429,7 +3167,7 @@
       "label": "POST /api/v1/auth/logout",
       "type": "endpoint",
       "file_type": "document",
-      "community": 62,
+      "community": 66,
       "norm_label": "post /api/v1/auth/logout",
       "id": "auth_logout_endpoint"
     },
@@ -2437,7 +3175,7 @@
       "label": "POST /api/v1/health/sync",
       "type": "endpoint",
       "file_type": "document",
-      "community": 15,
+      "community": 0,
       "norm_label": "post /api/v1/health/sync",
       "id": "health_sync_endpoint"
     },
@@ -2445,7 +3183,7 @@
       "label": "GET /api/v1/health/summary",
       "type": "endpoint",
       "file_type": "document",
-      "community": 15,
+      "community": 0,
       "norm_label": "get /api/v1/health/summary",
       "id": "health_summary_endpoint"
     },
@@ -2453,7 +3191,7 @@
       "label": "GET /api/v1/health/history",
       "type": "endpoint",
       "file_type": "document",
-      "community": 15,
+      "community": 0,
       "norm_label": "get /api/v1/health/history",
       "id": "health_history_endpoint"
     },
@@ -2461,7 +3199,7 @@
       "label": "GET /api/v1/users/me",
       "type": "endpoint",
       "file_type": "document",
-      "community": 63,
+      "community": 67,
       "norm_label": "get /api/v1/users/me",
       "id": "user_profile_endpoint"
     },
@@ -2469,7 +3207,7 @@
       "label": "PATCH /api/v1/users/me",
       "type": "endpoint",
       "file_type": "document",
-      "community": 64,
+      "community": 68,
       "norm_label": "patch /api/v1/users/me",
       "id": "user_update_endpoint"
     },
@@ -2485,7 +3223,7 @@
       "label": "vitalsync namespace",
       "type": "k8s_resource",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "vitalsync namespace",
       "id": "k8s_namespace"
     },
@@ -2493,7 +3231,7 @@
       "label": "vitalsync-backend Deployment",
       "type": "k8s_resource",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "vitalsync-backend deployment",
       "id": "k8s_deployment"
     },
@@ -2501,7 +3239,7 @@
       "label": "postgres Deployment",
       "type": "k8s_resource",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "postgres deployment",
       "id": "k8s_postgres_deployment"
     },
@@ -2509,7 +3247,7 @@
       "label": "kafka Deployment",
       "type": "k8s_resource",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "kafka deployment",
       "id": "k8s_kafka_deployment"
     },
@@ -2517,7 +3255,7 @@
       "label": "kafka-ui Service",
       "type": "k8s_resource",
       "file_type": "document",
-      "community": 14,
+      "community": 0,
       "norm_label": "kafka-ui service",
       "id": "k8s_kafka_ui"
     },
@@ -2549,7 +3287,7 @@
       "label": "Android Icon (Monochrome)",
       "type": "image_asset",
       "file_type": "image",
-      "community": 65,
+      "community": 69,
       "norm_label": "android icon (monochrome)",
       "id": "android_icon_monochrome"
     },
@@ -2611,7 +3349,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/app/(app)/index.tsx",
-      "source_location": "L17",
+      "source_location": "L21",
       "weight": 1.0,
       "_src": "frontend_app_app_index_tsx",
       "_tgt": "index_todayutc",
@@ -2623,7 +3361,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/app/(app)/index.tsx",
-      "source_location": "L33",
+      "source_location": "L38",
       "weight": 1.0,
       "_src": "frontend_app_app_index_tsx",
       "_tgt": "index_onsyncnow",
@@ -2795,6 +3533,18 @@
       "source_location": "L36",
       "weight": 1.0,
       "_src": "login_onsubmit",
+      "_tgt": "api_client_login",
+      "source": "login_onsubmit",
+      "target": "api_client_login"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "frontend/app/(auth)/login.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "login_onsubmit",
       "_tgt": "authservice_authservice_login",
       "source": "login_onsubmit",
       "target": "authservice_authservice_login"
@@ -2831,6 +3581,18 @@
       "source_location": "L37",
       "weight": 1.0,
       "_src": "signup_onsubmit",
+      "_tgt": "api_client_signup",
+      "source": "signup_onsubmit",
+      "target": "api_client_signup"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "frontend/app/(auth)/signup.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "signup_onsubmit",
       "_tgt": "authservice_authservice_signup",
       "source": "signup_onsubmit",
       "target": "authservice_authservice_signup"
@@ -2845,6 +3607,18 @@
       "_tgt": "layout_authlayout",
       "source": "frontend_app_auth_layout_tsx",
       "target": "layout_authlayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/plugins/withHealthConnectPermissions.js",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_src": "frontend_plugins_withhealthconnectpermissions_js",
+      "_tgt": "withhealthconnectpermissions_injectmainactivity",
+      "source": "frontend_plugins_withhealthconnectpermissions_js",
+      "target": "withhealthconnectpermissions_injectmainactivity",
       "confidence_score": 1.0
     },
     {
@@ -3283,7 +4057,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0,
       "_src": "frontend_src_health_permissions_ts",
       "_tgt": "permissions_ensureinitialized",
@@ -3295,7 +4069,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "_src": "frontend_src_health_permissions_ts",
       "_tgt": "permissions_gethealthconnectstatus",
@@ -3307,7 +4081,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0,
       "_src": "frontend_src_health_permissions_ts",
       "_tgt": "permissions_hashealthpermissions",
@@ -3319,7 +4093,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L57",
+      "source_location": "L58",
       "weight": 1.0,
       "_src": "frontend_src_health_permissions_ts",
       "_tgt": "permissions_ensurehealthpermissions",
@@ -3328,10 +4102,34 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/health/permissions.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "frontend_src_health_permissions_ts",
+      "_tgt": "permissions_getmissinghealthpermissions",
+      "source": "frontend_src_health_permissions_ts",
+      "target": "permissions_getmissinghealthpermissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/health/permissions.ts",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "frontend_src_health_permissions_ts",
+      "_tgt": "permissions_openhealthconnectappsettings",
+      "source": "frontend_src_health_permissions_ts",
+      "target": "permissions_openhealthconnectappsettings",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L49",
+      "source_location": "L50",
       "weight": 1.0,
       "_src": "permissions_hashealthpermissions",
       "_tgt": "permissions_ensureinitialized",
@@ -3343,12 +4141,24 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/health/permissions.ts",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0,
       "_src": "permissions_ensurehealthpermissions",
       "_tgt": "permissions_ensureinitialized",
       "source": "permissions_ensureinitialized",
       "target": "permissions_ensurehealthpermissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/health/permissions.ts",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_src": "permissions_getmissinghealthpermissions",
+      "_tgt": "permissions_ensureinitialized",
+      "source": "permissions_ensureinitialized",
+      "target": "permissions_getmissinghealthpermissions",
       "confidence_score": 1.0
     },
     {
@@ -3940,6 +4750,30 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/src/main/java/com/vitalsync/VitalSyncApplication.java",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "vitalsyncapplication_vitalsyncapplication_main",
+      "_tgt": "runner_runner_run",
+      "source": "vitalsyncapplication_vitalsyncapplication_main",
+      "target": "runner_runner_run"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/src/main/java/com/vitalsync/VitalSyncApplication.java",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "vitalsyncapplication_vitalsyncapplication_main",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "source": "vitalsyncapplication_vitalsyncapplication_main",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_run"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/main/java/com/vitalsync/dto/health/HealthSyncResponse.java",
@@ -4279,13 +5113,13 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "backend/src/main/java/com/vitalsync/auth/config/JwtAuthFilter.java",
+      "source_file": "backend/src/main/java/com/vitalsync/config/JwtAuthFilter.java",
       "source_location": "L60",
       "weight": 1.0,
       "_src": "jwtauthfilter_jwtauthfilter_dofilterinternal",
-      "_tgt": "authservice_authservice_parse",
+      "_tgt": "config_parse",
       "source": "jwtauthfilter_jwtauthfilter_dofilterinternal",
-      "target": "authservice_authservice_parse"
+      "target": "config_parse"
     },
     {
       "relation": "calls",
@@ -4298,6 +5132,18 @@
       "_tgt": "authexception_authexception_code",
       "source": "jwtauthfilter_jwtauthfilter_dofilterinternal",
       "target": "authexception_authexception_code"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/src/main/java/com/vitalsync/auth/config/JwtAuthFilter.java",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "jwtauthfilter_jwtauthfilter_dofilterinternal",
+      "_tgt": "authservice_authservice_parse",
+      "source": "jwtauthfilter_jwtauthfilter_dofilterinternal",
+      "target": "authservice_authservice_parse"
     },
     {
       "relation": "calls",
@@ -4495,7 +5341,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0,
       "_src": "healthquerycontroller_healthquerycontroller",
       "_tgt": "healthquerycontroller_healthquerycontroller_summary",
@@ -4507,7 +5353,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthQueryController.java",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0,
       "_src": "healthquerycontroller_healthquerycontroller",
       "_tgt": "healthquerycontroller_healthquerycontroller_history",
@@ -4615,7 +5461,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthSyncController.java",
-      "source_location": "L20",
+      "source_location": "L18",
       "weight": 1.0,
       "_src": "backend_src_main_java_com_vitalsync_controller_healthsynccontroller_java",
       "_tgt": "healthsynccontroller_healthsynccontroller",
@@ -4627,7 +5473,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/main/java/com/vitalsync/controller/HealthSyncController.java",
-      "source_location": "L30",
+      "source_location": "L28",
       "weight": 1.0,
       "_src": "healthsynccontroller_healthsynccontroller",
       "_tgt": "healthsynccontroller_healthsynccontroller_sync",
@@ -4646,6 +5492,126 @@
       "_tgt": "healthsnapshotpublisher_healthsnapshotpublisher_publish",
       "source": "healthsynccontroller_healthsynccontroller_sync",
       "target": "healthsnapshotpublisher_healthsnapshotpublisher_publish"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "backend_src_main_java_com_vitalsync_dev_kafkadummydataseeder_java",
+      "_tgt": "commandlinerunner",
+      "source": "backend_src_main_java_com_vitalsync_dev_kafkadummydataseeder_java",
+      "target": "commandlinerunner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "backend_src_main_java_com_vitalsync_dev_kafkadummydataseeder_java",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder",
+      "source": "backend_src_main_java_com_vitalsync_dev_kafkadummydataseeder_java",
+      "target": "kafkadummydataseeder_kafkadummydataseeder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder",
+      "_tgt": "commandlinerunner",
+      "source": "kafkadummydataseeder_kafkadummydataseeder",
+      "target": "commandlinerunner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "source": "kafkadummydataseeder_kafkadummydataseeder",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "source": "kafkadummydataseeder_kafkadummydataseeder",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_randomsession",
+      "source": "kafkadummydataseeder_kafkadummydataseeder",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_randomsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "source": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "_tgt": "healthsnapshotpublisher_healthsnapshotpublisher_publish",
+      "source": "kafkadummydataseeder_kafkadummydataseeder_run",
+      "target": "healthsnapshotpublisher_healthsnapshotpublisher_publish"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/KafkaDummyDataSeeder.java",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "_tgt": "kafkadummydataseeder_kafkadummydataseeder_randomsession",
+      "source": "kafkadummydataseeder_kafkadummydataseeder_buildrandomrequest",
+      "target": "kafkadummydataseeder_kafkadummydataseeder_randomsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/src/main/java/com/vitalsync/dev/SeedProperties.java",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "backend_src_main_java_com_vitalsync_dev_seedproperties_java",
+      "_tgt": "seedproperties_seedproperties",
+      "source": "backend_src_main_java_com_vitalsync_dev_seedproperties_java",
+      "target": "seedproperties_seedproperties",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5317,6 +6283,1362 @@
       "_tgt": "authexception_authexception_code",
       "source": "authexception_authexception",
       "target": "authexception_authexception_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_cmd_loadgen_main_go",
+      "_tgt": "main_main",
+      "source": "scripts_loadgen_cmd_loadgen_main_go",
+      "target": "main_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "main_main",
+      "_tgt": "config_parse",
+      "source": "main_main",
+      "target": "config_parse"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "main_main",
+      "_tgt": "runner_new",
+      "source": "main_main",
+      "target": "runner_new"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/cmd/loadgen/main.go",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "main_main",
+      "_tgt": "runner_runner_run",
+      "source": "main_main",
+      "target": "runner_runner_run"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_config",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_parse",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_parse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_envordefault",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_envordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_envintordefault",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_envintordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_envboolordefault",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_envboolordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_config_config_go",
+      "_tgt": "config_envdurationordefault",
+      "source": "scripts_loadgen_internal_config_config_go",
+      "target": "config_envdurationordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "config_config",
+      "_tgt": "config_config_validate",
+      "source": "config_config",
+      "target": "config_config_validate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "config_config",
+      "_tgt": "config_config_windowsperday",
+      "source": "config_config",
+      "target": "config_config_windowsperday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_src": "config_config",
+      "_tgt": "config_config_totalsnapshots",
+      "source": "config_config",
+      "target": "config_config_totalsnapshots",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "config_parse",
+      "_tgt": "config_envordefault",
+      "source": "config_parse",
+      "target": "config_envordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "config_parse",
+      "_tgt": "config_envintordefault",
+      "source": "config_parse",
+      "target": "config_envintordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "config_parse",
+      "_tgt": "config_envdurationordefault",
+      "source": "config_parse",
+      "target": "config_envdurationordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "config_parse",
+      "_tgt": "config_envboolordefault",
+      "source": "config_parse",
+      "target": "config_envboolordefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "config_parse",
+      "_tgt": "config_config_validate",
+      "source": "config_parse",
+      "target": "config_config_validate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/config/config.go",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_src": "config_config_totalsnapshots",
+      "_tgt": "config_config_windowsperday",
+      "source": "config_config_windowsperday",
+      "target": "config_config_totalsnapshots",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_src": "config_config_windowsperday",
+      "_tgt": "runner_runner_syncphase",
+      "source": "config_config_windowsperday",
+      "target": "runner_runner_syncphase"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L233",
+      "weight": 1.0,
+      "_src": "config_config_windowsperday",
+      "_tgt": "runner_runner_dryrun",
+      "source": "config_config_windowsperday",
+      "target": "runner_runner_dryrun"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "config_config_totalsnapshots",
+      "_tgt": "runner_runner_run",
+      "source": "config_config_totalsnapshots",
+      "target": "runner_runner_run"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L224",
+      "weight": 1.0,
+      "_src": "config_config_totalsnapshots",
+      "_tgt": "runner_runner_printsummary",
+      "source": "config_config_totalsnapshots",
+      "target": "runner_runner_printsummary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_runner_runner_go",
+      "_tgt": "runner_runner",
+      "source": "scripts_loadgen_internal_runner_runner_go",
+      "target": "runner_runner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_runner_runner_go",
+      "_tgt": "runner_new",
+      "source": "scripts_loadgen_internal_runner_runner_go",
+      "target": "runner_new",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L263",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_runner_runner_go",
+      "_tgt": "runner_storetoken",
+      "source": "scripts_loadgen_internal_runner_runner_go",
+      "target": "runner_storetoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L269",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_runner_runner_go",
+      "_tgt": "runner_loadtoken",
+      "source": "scripts_loadgen_internal_runner_runner_go",
+      "target": "runner_loadtoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L276",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_runner_runner_go",
+      "_tgt": "runner_jsonstdout",
+      "source": "scripts_loadgen_internal_runner_runner_go",
+      "target": "runner_jsonstdout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_run",
+      "source": "runner_runner",
+      "target": "runner_runner_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_authenticateall",
+      "source": "runner_runner",
+      "target": "runner_runner_authenticateall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_authenticateuser",
+      "source": "runner_runner",
+      "target": "runner_runner_authenticateuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_syncphase",
+      "source": "runner_runner",
+      "target": "runner_runner_syncphase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_runuser",
+      "source": "runner_runner",
+      "target": "runner_runner_runuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_sendonce",
+      "source": "runner_runner",
+      "target": "runner_runner_sendonce",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L194",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_startprogresslogger",
+      "source": "runner_runner",
+      "target": "runner_runner_startprogresslogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L218",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_printsummary",
+      "source": "runner_runner",
+      "target": "runner_runner_printsummary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L228",
+      "weight": 1.0,
+      "_src": "runner_runner",
+      "_tgt": "runner_runner_dryrun",
+      "source": "runner_runner",
+      "target": "runner_runner_dryrun",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_new",
+      "source": "runner_new",
+      "target": "runner_runner_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "runner_new",
+      "_tgt": "client_newclient",
+      "source": "runner_new",
+      "target": "client_newclient"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "runner_new",
+      "_tgt": "user_newusersimulator",
+      "source": "runner_new",
+      "target": "user_newusersimulator"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_runner_dryrun",
+      "source": "runner_runner_run",
+      "target": "runner_runner_dryrun",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_runner_authenticateall",
+      "source": "runner_runner_run",
+      "target": "runner_runner_authenticateall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_runner_startprogresslogger",
+      "source": "runner_runner_run",
+      "target": "runner_runner_startprogresslogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_runner_syncphase",
+      "source": "runner_runner_run",
+      "target": "runner_runner_syncphase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "runner_runner_printsummary",
+      "source": "runner_runner_run",
+      "target": "runner_runner_printsummary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_src": "runner_runner_run",
+      "_tgt": "user_newusersimulator",
+      "source": "runner_runner_run",
+      "target": "user_newusersimulator"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_src": "runner_runner_authenticateall",
+      "_tgt": "runner_runner_authenticateuser",
+      "source": "runner_runner_authenticateall",
+      "target": "runner_runner_authenticateuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_src": "runner_runner_authenticateall",
+      "_tgt": "runner_storetoken",
+      "source": "runner_runner_authenticateall",
+      "target": "runner_storetoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "runner_runner_authenticateuser",
+      "_tgt": "api_client_signup",
+      "source": "runner_runner_authenticateuser",
+      "target": "api_client_signup"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_src": "runner_runner_authenticateuser",
+      "_tgt": "api_client_login",
+      "source": "runner_runner_authenticateuser",
+      "target": "api_client_login"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_src": "runner_runner_syncphase",
+      "_tgt": "runner_loadtoken",
+      "source": "runner_runner_syncphase",
+      "target": "runner_loadtoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_src": "runner_runner_syncphase",
+      "_tgt": "runner_runner_runuser",
+      "source": "runner_runner_syncphase",
+      "target": "runner_runner_runuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_src": "runner_runner_runuser",
+      "_tgt": "runner_runner_sendonce",
+      "source": "runner_runner_runuser",
+      "target": "runner_runner_sendonce",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_src": "runner_runner_runuser",
+      "_tgt": "sim_usersimulator_nextsnapshot",
+      "source": "runner_runner_runuser",
+      "target": "sim_usersimulator_nextsnapshot"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L175",
+      "weight": 1.0,
+      "_src": "runner_runner_sendonce",
+      "_tgt": "api_client_synchealth",
+      "source": "runner_runner_sendonce",
+      "target": "api_client_synchealth"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L250",
+      "weight": 1.0,
+      "_src": "runner_runner_dryrun",
+      "_tgt": "sim_usersimulator_nextsnapshot",
+      "source": "runner_runner_dryrun",
+      "target": "sim_usersimulator_nextsnapshot"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/runner/runner.go",
+      "source_location": "L278",
+      "weight": 1.0,
+      "_src": "runner_jsonstdout",
+      "_tgt": "runner_jsonstdout_write",
+      "source": "runner_jsonstdout",
+      "target": "runner_jsonstdout_write",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_signuprequest",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_signuprequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_loginrequest",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_loginrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_authuserdto",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_authuserdto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_authresponse",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_authresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_exercisesession",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_exercisesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_healthsnapshot",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_healthsnapshot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_healthsyncrequest",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_healthsyncrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_healthsyncresponse",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_healthsyncresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/models.go",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_models_go",
+      "_tgt": "api_errorresponse",
+      "source": "scripts_loadgen_internal_api_models_go",
+      "target": "api_errorresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_client_go",
+      "_tgt": "api_client",
+      "source": "scripts_loadgen_internal_api_client_go",
+      "target": "api_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_client_go",
+      "_tgt": "client_newclient",
+      "source": "scripts_loadgen_internal_api_client_go",
+      "target": "client_newclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_api_client_go",
+      "_tgt": "api_httperror",
+      "source": "scripts_loadgen_internal_api_client_go",
+      "target": "api_httperror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "api_client",
+      "_tgt": "api_client_signup",
+      "source": "api_client",
+      "target": "api_client_signup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "api_client",
+      "_tgt": "api_client_login",
+      "source": "api_client",
+      "target": "api_client_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_src": "api_client",
+      "_tgt": "api_client_synchealth",
+      "source": "api_client",
+      "target": "api_client_synchealth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "api_client",
+      "_tgt": "api_client_post",
+      "source": "api_client",
+      "target": "api_client_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "api_client_signup",
+      "_tgt": "api_client_post",
+      "source": "api_client_signup",
+      "target": "api_client_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "api_client_login",
+      "_tgt": "api_client_post",
+      "source": "api_client_login",
+      "target": "api_client_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_src": "api_client_synchealth",
+      "_tgt": "api_client_post",
+      "source": "api_client_synchealth",
+      "target": "api_client_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/api/client.go",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_src": "api_httperror",
+      "_tgt": "api_httperror_error",
+      "source": "api_httperror",
+      "target": "api_httperror_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "sim_usersimulator",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "sim_usersimulator",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "user_newusersimulator",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "user_newusersimulator",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "user_deterministickey",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "user_deterministickey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "user_ptrf",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "user_ptrf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "user_ptri",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "user_ptri",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L169",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_user_go",
+      "_tgt": "user_round1",
+      "source": "scripts_loadgen_internal_sim_user_go",
+      "target": "user_round1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_src": "sim_usersimulator",
+      "_tgt": "sim_usersimulator_nextsnapshot",
+      "source": "sim_usersimulator",
+      "target": "sim_usersimulator_nextsnapshot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_src": "sim_usersimulator",
+      "_tgt": "sim_usersimulator_mayberollday",
+      "source": "sim_usersimulator",
+      "target": "sim_usersimulator_mayberollday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_src": "sim_usersimulator",
+      "_tgt": "sim_usersimulator_windowoverlapsexercise",
+      "source": "sim_usersimulator",
+      "target": "sim_usersimulator_windowoverlapsexercise",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_src": "sim_usersimulator",
+      "_tgt": "sim_usersimulator_exercisesessionfor",
+      "source": "sim_usersimulator",
+      "target": "sim_usersimulator_exercisesessionfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_src": "user_newusersimulator",
+      "_tgt": "persona_personaforuser",
+      "source": "user_newusersimulator",
+      "target": "persona_personaforuser"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "sim_usersimulator_mayberollday",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "sim_usersimulator_mayberollday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "sim_usersimulator_windowoverlapsexercise",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "sim_usersimulator_windowoverlapsexercise",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "sim_usersimulator_exercisesessionfor",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "sim_usersimulator_exercisesessionfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "user_ptrf",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "user_ptrf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "user_round1",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "user_round1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "user_ptri",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "user_ptri",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "user_deterministickey",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "user_deterministickey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "diurnal_stepsforwindow",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "diurnal_stepsforwindow"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "diurnal_heartrateforwindow",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "diurnal_heartrateforwindow"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_nextsnapshot",
+      "_tgt": "diurnal_bloodoxygen",
+      "source": "sim_usersimulator_nextsnapshot",
+      "target": "diurnal_bloodoxygen"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_mayberollday",
+      "_tgt": "diurnal_dailystepstarget",
+      "source": "sim_usersimulator_mayberollday",
+      "target": "diurnal_dailystepstarget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_exercisesessionfor",
+      "_tgt": "user_ptrf",
+      "source": "sim_usersimulator_exercisesessionfor",
+      "target": "user_ptrf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/user.go",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_src": "sim_usersimulator_exercisesessionfor",
+      "_tgt": "user_round1",
+      "source": "sim_usersimulator_exercisesessionfor",
+      "target": "user_round1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_persona_go",
+      "_tgt": "sim_personakind",
+      "source": "scripts_loadgen_internal_sim_persona_go",
+      "target": "sim_personakind",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_persona_go",
+      "_tgt": "sim_persona",
+      "source": "scripts_loadgen_internal_sim_persona_go",
+      "target": "sim_persona",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/persona.go",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_persona_go",
+      "_tgt": "persona_personaforuser",
+      "source": "scripts_loadgen_internal_sim_persona_go",
+      "target": "persona_personaforuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_diurnalstepweight",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_diurnalstepweight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_stepsforwindow",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_stepsforwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_heartrateforwindow",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_heartrateforwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_bloodoxygen",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_bloodoxygen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_dailystepstarget",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_dailystepstarget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "scripts_loadgen_internal_sim_diurnal_go",
+      "_tgt": "diurnal_clamp",
+      "source": "scripts_loadgen_internal_sim_diurnal_go",
+      "target": "diurnal_clamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "diurnal_stepsforwindow",
+      "_tgt": "diurnal_diurnalstepweight",
+      "source": "diurnal_diurnalstepweight",
+      "target": "diurnal_stepsforwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_src": "diurnal_heartrateforwindow",
+      "_tgt": "diurnal_clamp",
+      "source": "diurnal_heartrateforwindow",
+      "target": "diurnal_clamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/loadgen/internal/sim/diurnal.go",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_src": "diurnal_bloodoxygen",
+      "_tgt": "diurnal_clamp",
+      "source": "diurnal_bloodoxygen",
+      "target": "diurnal_clamp",
       "confidence_score": 1.0
     },
     {

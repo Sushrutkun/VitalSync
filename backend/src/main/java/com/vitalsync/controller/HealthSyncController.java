@@ -37,8 +37,7 @@ public class HealthSyncController {
               example = "Bearer eyJhbGciOiJIUzI1NiJ9...")
           @RequestHeader("Authorization")
           Authentication authentication,
-      @Valid @RequestBody HealthSyncRequest request
-      ) {
+      @Valid @RequestBody HealthSyncRequest request) {
     String authUserId = authentication != null ? authentication.getName() : null;
     if (authUserId == null || !authUserId.equals(request.userId())) {
       throw new AuthException(

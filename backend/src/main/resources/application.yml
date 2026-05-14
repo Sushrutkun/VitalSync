@@ -1,5 +1,6 @@
 server:
   port: 8083
+  address: 0.0.0.0
 
 spring:
   application:
@@ -37,6 +38,11 @@ vitalsync:
       name: ${KAFKA_TOPIC_NAME:vitalsync-data-ingestion}
       partitions: 3
       replication-factor: 1
+  seed:
+    count: ${SEED_COUNT:100000}
+    users: ${SEED_USERS:500}
+    days-back: ${SEED_DAYS_BACK:30}
+    log-every: ${SEED_LOG_EVERY:5000}
   auth:
     jwt:
       secret: ${JWT_SECRET:change-me-in-prod-min-256-bits-of-entropy-please}

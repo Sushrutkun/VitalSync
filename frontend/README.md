@@ -23,8 +23,8 @@ Reverse Metro (8081) and the backend API (8080, see `backend/docker-compose.yml`
 
 ```bash
 adb devices -l
-adb reverse tcp:8081 tcp:8081   # Metro bundler
-adb reverse tcp:8083 tcp:8083   # backend API
+adb reverse tcp:8081 tcp:8081
+adb reverse tcp:8083 tcp:8083
 ```
 
 ## Dev Run (debug, hot reload)
