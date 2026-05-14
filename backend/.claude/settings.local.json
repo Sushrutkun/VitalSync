@@ -15,7 +15,17 @@
       "Bash(docker build *)",
       "Bash(kubectl cluster-info *)",
       "Bash(docker save *)",
-      "Bash(docker run *)"
+      "Bash(docker run *)",
+      "Bash(mkdir -p /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/cmd/loadgen /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/internal/api /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/internal/config /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/internal/sim /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/internal/runner /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/bin)",
+      "Bash(go version *)",
+      "Bash(go build *)",
+      "Bash(./bin/loadgen --users=2 --days=1 --window-minutes=60 --dry-run)",
+      "Bash(./bin/loadgen --users=3 --days=2 --window-minutes=60 --dry-run)",
+      "Bash(./bin/loadgen --users=1 --days=2 --window-minutes=240 --dry-run)",
+      "Bash(./bin/loadgen --users=3 --days=1 --window-minutes=30 --dry-run)",
+      "Bash(rm /tmp/test_ex.go)",
+      "Bash(sed -i.bak 's/maxPerUser := 14/maxPerUser := 20/' /Users/sushrutda/Desktop/personal/VitalSync/scripts/loadgen/internal/runner/runner.go)",
+      "Bash(go vet *)"
     ]
   }
 }
