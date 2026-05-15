@@ -43,8 +43,7 @@ public class KafkaDummyDataSeeder implements CommandLineRunner {
     int daysBack = props.getDaysBack();
     int logEvery = props.getLogEvery();
 
-    log.info(
-        "Seeding count={} users={} daysBack={} logEvery={}", count, users, daysBack, logEvery);
+    log.info("Seeding count={} users={} daysBack={} logEvery={}", count, users, daysBack, logEvery);
 
     long startNs = System.nanoTime();
     long failures = 0;

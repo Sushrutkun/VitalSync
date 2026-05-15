@@ -13,19 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExerciseSession {
-    @NotBlank
-    String type;
+  @NotBlank String type;
 
-    @NotNull
-    Instant startTime;
+  @NotNull Instant startTime;
 
-    @NotNull
-    Instant endTime;
+  @NotNull Instant endTime;
 
-    @PositiveOrZero
-    int durationMinutes;
+  @PositiveOrZero int durationMinutes;
 
-    Double calories;
-    Double distanceMeters;
-    Double avgHeartRateBpm;
+  Double calories;
+  Double distanceMeters;
+  Double avgHeartRateBpm;
 }

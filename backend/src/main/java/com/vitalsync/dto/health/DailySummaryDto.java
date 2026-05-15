@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DailySummaryDto {
-    LocalDate date;
-    long steps;
-    double distanceMeters;
-    double activeCaloriesKcal;
-    long heartRateZoneMinutes;
-    double avgHeartRateBpm;
-    double restingHeartRateBpm;
-    double bloodOxygenPct;
-    long sleepDurationMinutes;
-    List<ExerciseSession> exerciseSessions;
+  LocalDate date;
+  long steps;
+  double distanceMeters;
+  double activeCaloriesKcal;
+  long heartRateZoneMinutes;
+  double avgHeartRateBpm;
+  double restingHeartRateBpm;
+  double bloodOxygenPct;
+  long sleepDurationMinutes;
+  List<ExerciseSession> exerciseSessions;
 }

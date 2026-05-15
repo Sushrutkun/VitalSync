@@ -11,12 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignupRequest {
-    @Email @NotBlank @Size(max = 254)
-    String email;
+  @Email
+  @NotBlank
+  @Size(max = 254)
+  String email;
 
-    @NotBlank @Size(min = 8, max = 128)
-    String password;
+  @NotBlank
+  @Size(min = 8, max = 128)
+  String password;
 
-    @NotBlank @Size(max = 128)
-    String name;
+  @NotBlank
+  @Size(max = 128)
+  String name;
 }

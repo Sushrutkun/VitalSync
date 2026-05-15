@@ -9,6 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LogoutRequest {
-    @NotBlank
-    String refreshToken;
+  @NotBlank String refreshToken;
 }

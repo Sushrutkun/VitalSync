@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserProfileDto {
-    String id;
-    String email;
-    String name;
-    LocalDate dateOfBirth;
-    BigDecimal heightCm;
-    BigDecimal weightKg;
-    Instant createdAt;
+  String id;
+  String email;
+  String name;
+  LocalDate dateOfBirth;
+  BigDecimal heightCm;
+  BigDecimal weightKg;
+  Instant createdAt;
 }

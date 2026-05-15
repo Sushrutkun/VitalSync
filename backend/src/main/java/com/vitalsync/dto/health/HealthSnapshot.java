@@ -16,23 +16,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HealthSnapshot {
-    @NotNull
-    Instant timestamp;
+  @NotNull Instant timestamp;
 
-    @NotNull
-    Instant periodStart;
+  @NotNull Instant periodStart;
 
-    @NotNull
-    Instant periodEnd;
+  @NotNull Instant periodEnd;
 
-    Double heartRateBpm;
-    Long stepsTotal;
-    Long stepsDelta;
-    Double bloodOxygenPct;
-    Double activeCaloriesKcal;
-    Double distanceMeters;
-    Long heartRateZoneMinutes;
+  Double heartRateBpm;
+  Long stepsTotal;
+  Long stepsDelta;
+  Double bloodOxygenPct;
+  Double activeCaloriesKcal;
+  Double distanceMeters;
+  Long heartRateZoneMinutes;
 
-    @Valid
-    List<ExerciseSession> exerciseSessions;
+  @Valid List<ExerciseSession> exerciseSessions;
 }

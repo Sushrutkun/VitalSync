@@ -42,7 +42,8 @@ public class HealthSnapshotPublisher {
         .headers()
         .add(
             new RecordHeader(
-                IDEMPOTENCY_KEY_HEADER, request.getIdempotencyKey().getBytes(StandardCharsets.UTF_8)));
+                IDEMPOTENCY_KEY_HEADER,
+                request.getIdempotencyKey().getBytes(StandardCharsets.UTF_8)));
 
     try {
       SendResult<String, Object> result = kafkaTemplate.send(record).get();
@@ -56,7 +57,8 @@ public class HealthSnapshotPublisher {
       Thread.currentThread().interrupt();
       throw new KafkaPublishException("Interrupted while publishing snapshot", e);
     } catch (Exception e) {
-      throw new KafkaPublishException("Failed to publish snapshot for user " + request.getUserId(), e);
+      throw new KafkaPublishException(
+          "Failed to publish snapshot for user " + request.getUserId(), e);
     }
   }
 

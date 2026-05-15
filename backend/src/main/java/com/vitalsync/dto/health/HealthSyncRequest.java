@@ -18,18 +18,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HealthSyncRequest {
-    @NotBlank
-    String userId;
+  @NotBlank String userId;
 
-    @NotBlank
-    String idempotencyKey;
+  @NotBlank String idempotencyKey;
 
-    @NotNull
-    Instant periodStart;
+  @NotNull Instant periodStart;
 
-    @NotNull
-    Instant periodEnd;
+  @NotNull Instant periodEnd;
 
-    @NotNull @Valid
-    HealthSnapshot snapshot;
+  @NotNull @Valid HealthSnapshot snapshot;
 }

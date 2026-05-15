@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateProfileRequest {
-    @Size(max = 128)
-    String name;
+  @Size(max = 128)
+  String name;
 
-    LocalDate dateOfBirth;
-    BigDecimal heightCm;
-    BigDecimal weightKg;
+  LocalDate dateOfBirth;
+  BigDecimal heightCm;
+  BigDecimal weightKg;
 }

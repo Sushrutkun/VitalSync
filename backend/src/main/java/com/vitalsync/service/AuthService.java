@@ -1,8 +1,6 @@
 package com.vitalsync.service;
 
 import com.vitalsync.dto.auth.AuthResponse;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import com.vitalsync.dto.auth.AuthUserDto;
 import com.vitalsync.dto.auth.LoginRequest;
 import com.vitalsync.dto.auth.SignupRequest;
@@ -16,6 +14,8 @@ import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.HexFormat;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -123,7 +123,8 @@ public class AuthService {
         .ifPresent(
             refreshToken -> {
               if (refreshToken.getUserId().equals(authUserId)
-                  && passwordEncoder.matches(parsedToken.getSecret(), refreshToken.getTokenHash())) {
+                  && passwordEncoder.matches(
+                      parsedToken.getSecret(), refreshToken.getTokenHash())) {
                 refreshTokens.deleteById(refreshToken.getId());
               }
             });

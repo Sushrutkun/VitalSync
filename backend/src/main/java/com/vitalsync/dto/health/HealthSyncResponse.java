@@ -11,29 +11,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HealthSyncResponse {
-    boolean success;
-    String message;
-    String idempotencyKey;
-    Instant timestamp;
-    List<String> errors;
+  boolean success;
+  String message;
+  String idempotencyKey;
+  Instant timestamp;
+  List<String> errors;
 
-    public static HealthSyncResponse accepted(String idempotencyKey) {
-        HealthSyncResponse resp = new HealthSyncResponse();
-        resp.setSuccess(true);
-        resp.setMessage("Snapshot accepted and queued for processing");
-        resp.setIdempotencyKey(idempotencyKey);
-        resp.setTimestamp(Instant.now());
-        resp.setErrors(List.of());
-        return resp;
-    }
+  public static HealthSyncResponse accepted(String idempotencyKey) {
+    HealthSyncResponse resp = new HealthSyncResponse();
+    resp.setSuccess(true);
+    resp.setMessage("Snapshot accepted and queued for processing");
+    resp.setIdempotencyKey(idempotencyKey);
+    resp.setTimestamp(Instant.now());
+    resp.setErrors(List.of());
+    return resp;
+  }
 
-    public static HealthSyncResponse failure(String message, List<String> errors) {
-        HealthSyncResponse resp = new HealthSyncResponse();
-        resp.setSuccess(false);
-        resp.setMessage(message);
-        resp.setIdempotencyKey(null);
-        resp.setTimestamp(Instant.now());
-        resp.setErrors(errors);
-        return resp;
-    }
+  public static HealthSyncResponse failure(String message, List<String> errors) {
+    HealthSyncResponse resp = new HealthSyncResponse();
+    resp.setSuccess(false);
+    resp.setMessage(message);
+    resp.setIdempotencyKey(null);
+    resp.setTimestamp(Instant.now());
+    resp.setErrors(errors);
+    return resp;
+  }
 }
