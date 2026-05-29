@@ -1,15 +1,22 @@
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useFonts as useGeist, Geist_400Regular, Geist_500Medium, Geist_600SemiBold, Geist_700Bold } from "@expo-google-fonts/geist";
+import {
+  useFonts as useSerif,
+  InstrumentSerif_400Regular,
+  InstrumentSerif_400Regular_Italic,
+} from "@expo-google-fonts/instrument-serif";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Theme, useTheme, YStack } from "tamagui";
 
 import { AuthProvider, useAuth } from "@/src/auth/AuthContext";
 import { DebugOverlay } from "@/src/components/DebugOverlay";
+import { AuroraBackground } from "@/src/components/ui";
 import { queryClient } from "@/src/lib/queryClient";
 import { ThemeProvider, useThemePref } from "@/src/theme/ThemeProvider";
 
@@ -51,16 +58,38 @@ function ThemedShell() {
   const { resolved } = useThemePref();
   return (
     <Theme name={resolved}>
-      <YStack flex={1} backgroundColor="$background">
+      <View style={{ flex: 1, backgroundColor: "#0B1426" }}>
+        <AuroraBackground />
         <StatusBar style={resolved === "dark" ? "light" : "dark"} />
-        <RootStack />
+        <YStack flex={1} backgroundColor="transparent">
+          <RootStack />
+        </YStack>
         {__DEV__ ? <DebugOverlay /> : null}
-      </YStack>
+      </View>
     </Theme>
   );
 }
 
 export default function RootLayout() {
+  const [geistLoaded] = useGeist({
+    Geist_400Regular,
+    Geist_500Medium,
+    Geist_600SemiBold,
+    Geist_700Bold,
+  });
+  const [serifLoaded] = useSerif({
+    InstrumentSerif_400Regular,
+    InstrumentSerif_400Regular_Italic,
+  });
+
+  if (!geistLoaded || !serifLoaded) {
+    return (
+      <View style={{ flex: 1, backgroundColor: "#0B1426" }}>
+        <AuroraBackground />
+      </View>
+    );
+  }
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

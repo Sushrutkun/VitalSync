@@ -1,14 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { KeyboardAvoidingView, Platform } from "react-native";
-import { YStack } from "tamagui";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
+import { Text, YStack } from "tamagui";
 import { z } from "zod";
 
-import { Body, Button, Field, Heading, Screen } from "@/src/components/ui";
+import { Body, Button, Field, Screen } from "@/src/components/ui";
 import { useAuth } from "@/src/auth/AuthContext";
 import { ApiError } from "@/src/lib/api";
+import { brand, gradients } from "@/src/theme/tokens";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -46,51 +49,59 @@ export default function LoginScreen() {
   };
 
   return (
-    <Screen scroll contentPadding={24}>
+    <Screen scroll contentPadding={28}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <YStack flex={1} justifyContent="center" gap="$4">
-          <YStack gap="$2" alignItems="center" marginBottom="$6">
-            <Heading level={1}>VitalSync</Heading>
-            <Body tone="muted">Sign in to continue</Body>
-          </YStack>
+        <YStack flex={1} justifyContent="center" gap={28}>
+          <Animated.View entering={FadeInDown.duration(600)}>
+            <YStack gap={12} alignItems="center" marginBottom={20}>
+              <BrandMark />
+              <Body tone="secondary" size="md" textAlign="center" letterSpacing={0.5}>
+                Track the signal, not the noise.
+              </Body>
+            </YStack>
+          </Animated.View>
 
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Field
-                label="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                placeholder="you@example.com"
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                error={errors.email?.message}
+          <Animated.View entering={FadeInDown.delay(120).duration(500)}>
+            <YStack gap={22}>
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="email-address"
+                    placeholder="you@example.com"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.email?.message}
+                  />
+                )}
               />
-            )}
-          />
 
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Field
-                label="Password"
-                secureTextEntry
-                autoCapitalize="none"
-                placeholder="••••••••"
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                error={errors.password?.message}
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Password"
+                    secureTextEntry
+                    autoCapitalize="none"
+                    placeholder="••••••••"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.password?.message}
+                  />
+                )}
               />
-            )}
-          />
+            </YStack>
+          </Animated.View>
 
           {submitError ? (
             <Body tone="danger" textAlign="center">
@@ -98,17 +109,60 @@ export default function LoginScreen() {
             </Body>
           ) : null}
 
-          <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting} marginTop="$2">
-            Sign in
-          </Button>
+          <Animated.View entering={FadeInDown.delay(220).duration(500)}>
+            <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting}>
+              Sign in
+            </Button>
+          </Animated.View>
 
           <Link href="/(auth)/signup" asChild>
-            <Body tone="accent" textAlign="center" marginTop="$3">
-              Don&apos;t have an account? Sign up
+            <Body tone="muted" textAlign="center" marginTop={6}>
+              Don&apos;t have an account?{" "}
+              <Body tone="accent" weight="semibold">
+                Create one
+              </Body>
             </Body>
           </Link>
         </YStack>
       </KeyboardAvoidingView>
     </Screen>
+  );
+}
+
+export function BrandMark() {
+  return (
+    <View style={{ height: 80, justifyContent: "center", alignItems: "center" }}>
+      <LinearGradient
+        colors={[gradients.aurora[0], gradients.aurora[1]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          paddingHorizontal: 4,
+          paddingVertical: 2,
+        }}
+      >
+        <Text
+          fontFamily="$heading"
+          fontStyle="italic"
+          fontSize={56}
+          lineHeight={64}
+          color="#0B1426"
+          letterSpacing={-1.5}
+        >
+          VitalSync
+        </Text>
+      </LinearGradient>
+      <Text
+        fontFamily="$body"
+        fontSize={9}
+        letterSpacing={4}
+        fontWeight="600"
+        color={brand.dark.muted as any}
+        marginTop={6}
+        style={{ textTransform: "uppercase" }}
+      >
+        body · data · light
+      </Text>
+    </View>
   );
 }

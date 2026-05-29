@@ -1,52 +1,56 @@
+import { Pressable } from "react-native";
+import { Text, XStack, YStack } from "tamagui";
+
 import { useThemePref } from "@/src/theme/ThemeProvider";
+import { brand } from "@/src/theme/tokens";
 import type { ThemePreference } from "@/src/theme/tokens";
-import { XStack, styled, Text } from "tamagui";
-
-const Segment = styled(Text, {
-  flex: 1,
-  textAlign: "center",
-  paddingVertical: 8,
-  fontSize: 13,
-  fontWeight: "600",
-  color: "$muted",
-  borderRadius: 8,
-
-  variants: {
-    active: {
-      true: {
-        backgroundColor: "$accent",
-        color: "#0B0B0F",
-      },
-    },
-  } as const,
-});
 
 const OPTIONS: { label: string; value: ThemePreference }[] = [
-  { label: "System", value: "system" },
-  { label: "Light", value: "light" },
-  { label: "Dark", value: "dark" },
+  { label: "☼", value: "light" },
+  { label: "◐", value: "system" },
+  { label: "☾", value: "dark" },
 ];
 
 export function ThemeToggle() {
   const { preference, setPreference } = useThemePref();
   return (
     <XStack
-      backgroundColor="$card"
-      borderRadius={10}
+      backgroundColor="rgba(255,255,255,0.04)"
+      borderRadius={999}
       padding={4}
       borderWidth={1}
       borderColor="$borderColor"
       gap={4}
+      alignSelf="flex-start"
     >
-      {OPTIONS.map((o) => (
-        <Segment
-          key={o.value}
-          active={preference === o.value}
-          onPress={() => void setPreference(o.value)}
-        >
-          {o.label}
-        </Segment>
-      ))}
+      {OPTIONS.map((o) => {
+        const active = preference === o.value;
+        return (
+          <Pressable key={o.value} onPress={() => void setPreference(o.value)}>
+            <YStack
+              width={44}
+              height={36}
+              borderRadius={999}
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor={active ? brand.accent : "transparent"}
+              shadowColor={active ? brand.accent : "transparent"}
+              shadowOpacity={active ? 0.5 : 0}
+              shadowRadius={active ? 12 : 0}
+              shadowOffset={{ width: 0, height: 0 }}
+            >
+              <Text
+                fontFamily="$body"
+                fontSize={16}
+                color={active ? "#0B1426" : (brand.dark.muted as any)}
+                fontWeight="600"
+              >
+                {o.label}
+              </Text>
+            </YStack>
+          </Pressable>
+        );
+      })}
     </XStack>
   );
 }
