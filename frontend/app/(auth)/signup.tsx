@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as Google from "expo-auth-session/providers/google";
 import { Link } from "expo-router";
-import { useState } from "react";
+import * as WebBrowser from "expo-web-browser";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -11,7 +13,11 @@ import { Body, Button, Field, Screen } from "@/src/components/ui";
 import { useAuth } from "@/src/auth/AuthContext";
 import { ApiError } from "@/src/lib/api";
 
-import { BrandMark } from "./login";
+import { BrandMark, GoogleButton, Divider } from "./login";
+
+WebBrowser.maybeCompleteAuthSession();
+
+const GOOGLE_WEB_CLIENT_ID = "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -22,8 +28,33 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export default function SignupScreen() {
-  const { signup } = useAuth();
+  const { signup, googleLogin } = useAuth();
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId: GOOGLE_WEB_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response?.type === "success" && response.authentication?.accessToken) {
+      void handleGoogleToken(response.authentication.accessToken);
+    } else if (response?.type === "error") {
+      setSubmitError("Google sign-in failed. Try again.");
+    }
+  }, [response]);
+
+  const handleGoogleToken = async (accessToken: string) => {
+    setSubmitError(null);
+    try {
+      await googleLogin(accessToken);
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setSubmitError(error.message);
+      } else {
+        setSubmitError("Google sign-in failed. Try again.");
+      }
+    }
+  };
 
   const {
     control,
@@ -128,9 +159,15 @@ export default function SignupScreen() {
           ) : null}
 
           <Animated.View entering={FadeInDown.delay(220).duration(500)}>
-            <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting}>
-              Create account
-            </Button>
+            <YStack gap={12}>
+              <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting}>
+                Create account
+              </Button>
+
+              <Divider />
+
+              <GoogleButton onPress={() => void promptAsync()} disabled={!request} />
+            </YStack>
           </Animated.View>
 
           <Link href="/(auth)/login" asChild>

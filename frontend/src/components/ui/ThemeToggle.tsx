@@ -6,9 +6,9 @@ import { brand } from "@/src/theme/tokens";
 import type { ThemePreference } from "@/src/theme/tokens";
 
 const OPTIONS: { label: string; value: ThemePreference }[] = [
-  { label: "☼", value: "light" },
-  { label: "◐", value: "system" },
-  { label: "☾", value: "dark" },
+  { label: "Light", value: "light" },
+  { label: "System", value: "system" },
+  { label: "Dark", value: "dark" },
 ];
 
 export function ThemeToggle() {

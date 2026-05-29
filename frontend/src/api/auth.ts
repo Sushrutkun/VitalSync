@@ -16,6 +16,13 @@ export const authApi = {
       auth: false,
     });
   },
+  googleLogin(accessToken: string): Promise<LoginResponse> {
+    return request<LoginResponse>("/api/v1/auth/google", {
+      method: "POST",
+      body: { accessToken },
+      auth: false,
+    });
+  },
   refresh(refreshToken: string): Promise<RefreshResponse> {
     return request<RefreshResponse>("/api/v1/auth/refresh", {
       method: "POST",

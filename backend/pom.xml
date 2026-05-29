@@ -61,6 +61,10 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
 
         <!-- Swagger UI / OpenAPI 3 -->
         <dependency>
@@ -176,6 +180,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -184,6 +191,19 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>resolve-lombok</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -197,6 +217,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <javacArgs>
+                        <javacArg>-parameters</javacArg>
+                        <javacArg>-processorpath</javacArg>
+                        <javacArg>${org.projectlombok:lombok:jar}</javacArg>
+                    </javacArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

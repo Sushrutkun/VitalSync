@@ -17,5 +17,6 @@ public class UserProfileDto {
   LocalDate dateOfBirth;
   BigDecimal heightCm;
   BigDecimal weightKg;
+  String themePreference;
   Instant createdAt;
 }

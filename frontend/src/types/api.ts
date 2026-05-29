@@ -114,6 +114,7 @@ export type UserProfile = {
   dateOfBirth?: string;
   heightCm?: number;
   weightKg?: number;
+  themePreference?: string;
   createdAt: string;
 };
 
@@ -122,4 +123,14 @@ export type UpdateProfileRequest = {
   dateOfBirth?: string;
   heightCm?: number;
   weightKg?: number;
+  themePreference?: string;
+};
+
+export type AnalyticsDataPoint = { timestamp: string; value: number };
+export type AnalyticsStats = { avg: number; min: number; max: number; latest: number };
+export type AnalyticsResponse = {
+  metric: string;
+  range: string;
+  points: AnalyticsDataPoint[];
+  stats: AnalyticsStats;
 };

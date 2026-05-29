@@ -1,6 +1,7 @@
 package com.vitalsync.controller;
 
 import com.vitalsync.dto.auth.AuthResponse;
+import com.vitalsync.dto.auth.GoogleLoginRequest;
 import com.vitalsync.dto.auth.LoginRequest;
 import com.vitalsync.dto.auth.LogoutRequest;
 import com.vitalsync.dto.auth.RefreshRequest;
@@ -35,6 +36,11 @@ public class AuthController {
   @PostMapping("/login")
   public AuthResponse login(@Valid @RequestBody LoginRequest req) {
     return authService.login(req);
+  }
+
+  @PostMapping("/google")
+  public AuthResponse googleLogin(@Valid @RequestBody GoogleLoginRequest req) {
+    return authService.googleLogin(req.getAccessToken());
   }
 
   @PostMapping("/refresh")

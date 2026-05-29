@@ -5,16 +5,18 @@ import { format } from "date-fns";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, useTheme, XStack, YStack } from "tamagui";
+import { Text, XStack, YStack } from "tamagui";
 import { z } from "zod";
 
 import { usersApi } from "@/src/api/users";
 import { useAuth } from "@/src/auth/AuthContext";
-import { Body, Button, Card, Field, Heading, ThemeToggle } from "@/src/components/ui";
+import { Body, Button, Card, Field, Heading } from "@/src/components/ui";
+import { useThemePref } from "@/src/theme/ThemeProvider";
 import { ApiError } from "@/src/lib/api";
 import { brand, gradients } from "@/src/theme/tokens";
+import type { ThemePreference } from "@/src/theme/tokens";
 import type { UpdateProfileRequest, UserProfile } from "@/src/types/api";
 
 const numberInRange = (min: number, max: number) =>
@@ -24,7 +26,7 @@ const numberInRange = (min: number, max: number) =>
   );
 
 const schema = z.object({
-  name: z.string().min(1, "Required").max(100),
+  name: z.string().max(100),
   heightCm: numberInRange(50, 300),
   weightKg: numberInRange(10, 500),
   dateOfBirth: z
@@ -42,7 +44,7 @@ function parseOptionalNumber(v: string): number | undefined {
 
 export default function ProfileScreen() {
   const { logout } = useAuth();
-  const theme = useTheme();
+  const { preference, setPreference } = useThemePref();
   const queryClient = useQueryClient();
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
 
@@ -58,6 +60,11 @@ export default function ProfileScreen() {
       setSavedMessage("Saved.");
     },
   });
+
+  const handleThemeChange = async (next: ThemePreference) => {
+    await setPreference(next);
+    usersApi.updateMe({ themePreference: next }).catch(() => {/* silent — local change still applies */});
+  };
 
   const {
     control,
@@ -77,13 +84,16 @@ export default function ProfileScreen() {
         weightKg: profile.data.weightKg != null ? String(profile.data.weightKg) : "",
         dateOfBirth: profile.data.dateOfBirth ?? "",
       });
+      if (profile.data.themePreference) {
+        void setPreference(profile.data.themePreference as ThemePreference);
+      }
     }
-  }, [profile.data, reset]);
+  }, [profile.data, reset, setPreference]);
 
   const onSubmit = (values: FormValues) => {
     setSavedMessage(null);
     const patch: UpdateProfileRequest = {
-      name: values.name,
+      name: values.name.trim() !== "" ? values.name : (profile.data?.name ?? ""),
       heightCm: parseOptionalNumber(values.heightCm),
       weightKg: parseOptionalNumber(values.weightKg),
       dateOfBirth: values.dateOfBirth.length > 0 ? values.dateOfBirth : undefined,
@@ -95,7 +105,7 @@ export default function ProfileScreen() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top", "bottom"]}>
         <YStack flex={1} alignItems="center" justifyContent="center">
-          <ActivityIndicator color={theme.accent?.val} />
+          <ActivityIndicator color={brand.accent} />
         </YStack>
       </SafeAreaView>
     );
@@ -133,7 +143,7 @@ export default function ProfileScreen() {
 
           <YStack gap={10}>
             <Heading level={3}>Appearance</Heading>
-            <ThemeToggle />
+            <ThemeToggleWithPersist preference={preference} onPress={handleThemeChange} />
           </YStack>
 
           <YStack gap={14}>
@@ -326,6 +336,57 @@ function Row({ label, value }: { label: string; value: string }) {
       <Body weight="medium" numberOfLines={1} flexShrink={1} textAlign="right">
         {value}
       </Body>
+    </XStack>
+  );
+}
+
+const THEME_OPTIONS: { label: string; value: ThemePreference }[] = [
+  { label: "Light", value: "light" },
+  { label: "System", value: "system" },
+  { label: "Dark", value: "dark" },
+];
+
+function ThemeToggleWithPersist({
+  preference,
+  onPress,
+}: {
+  preference: ThemePreference;
+  onPress: (next: ThemePreference) => void;
+}) {
+  return (
+    <XStack
+      backgroundColor="rgba(255,255,255,0.04)"
+      borderRadius={999}
+      padding={4}
+      borderWidth={1}
+      borderColor="$borderColor"
+      gap={4}
+      alignSelf="flex-start"
+    >
+      {THEME_OPTIONS.map((o) => {
+        const active = preference === o.value;
+        return (
+          <Pressable key={o.value} onPress={() => onPress(o.value)}>
+            <YStack
+              width={64}
+              height={36}
+              borderRadius={999}
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor={active ? brand.accent : "transparent"}
+            >
+              <Text
+                fontFamily="$body"
+                fontSize={13}
+                color={active ? "#0B1426" : (brand.dark.muted as any)}
+                fontWeight="600"
+              >
+                {o.label}
+              </Text>
+            </YStack>
+          </Pressable>
+        );
+      })}
     </XStack>
   );
 }

@@ -35,6 +35,8 @@ export default function AppLayout() {
       {TABS.map((t) => (
         <Tabs.Screen key={t.name} name={t.name} options={{ title: t.title }} />
       ))}
+      <Tabs.Screen name="analytics/[metric]" options={{ title: "Analytics", href: null }} />
+      <Tabs.Screen name="devices" options={{ title: "Devices", href: null }} />
     </Tabs>
   );
 }

@@ -1,5 +1,6 @@
 import { request } from "../lib/api";
 import type {
+  AnalyticsResponse,
   DailySummary,
   HealthSyncRequest,
   HealthSyncResponse,
@@ -30,6 +31,12 @@ export const healthApi = {
         limit: q.limit,
         cursor: q.cursor,
       },
+    });
+  },
+  analytics(metric: string, range: string): Promise<AnalyticsResponse> {
+    return request<AnalyticsResponse>("/api/v1/health/analytics", {
+      method: "GET",
+      query: { metric, range },
     });
   },
 };

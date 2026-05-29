@@ -21,4 +21,7 @@ public class UpdateProfileRequest {
   LocalDate dateOfBirth;
   BigDecimal heightCm;
   BigDecimal weightKg;
+
+  @Size(max = 10)
+  String themePreference;
 }

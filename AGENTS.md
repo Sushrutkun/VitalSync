@@ -64,6 +64,41 @@ override fun onCreate(savedInstanceState: Bundle?) {
 **Root cause**: `localhost:8083` on physical device resolves to the device, not the Mac.
 **Fix**: `adb reverse tcp:8083 tcp:8083` tunnels device localhost → Mac port 8083. Must re-run after USB reconnect.
 
+### 3. App crashes on launch — `ExpoLinearGradient` native module missing
+**Root cause**: `expo-linear-gradient` added to `package.json` but native Android module never compiled into the build. `AuroraBackground.tsx` imported `LinearGradient` from it — crash before JS bundle executes.
+
+**Fix** (`frontend/src/components/ui/AuroraBackground.tsx`): Removed `expo-linear-gradient` import. Replaced with two stacked `View`s to simulate gradient:
+```tsx
+<View style={[StyleSheet.absoluteFill, { backgroundColor: stops[0] }]} />
+<View style={[StyleSheet.absoluteFill, { backgroundColor: deep, opacity: 0.6 }]} />
+```
+> If `expo-linear-gradient` is ever needed: run `npx expo run:android` to recompile native modules after adding any new native dependency.
+
+### 4. `AuroraBackground` rendered outside TamaguiProvider — Tamagui render error
+**Root cause**: Font-loading fallback in `app/_layout.tsx` rendered `<AuroraBackground />` before `ThemeProvider` (which wraps `TamaguiProvider`) was mounted. `useTheme()` inside `AuroraBackground` threw "Can't find Tamagui configuration".
+
+**Fix** (`frontend/app/_layout.tsx`):
+```tsx
+// Before (broken):
+if (!geistLoaded || !serifLoaded) {
+  return (
+    <View style={{ flex: 1, backgroundColor: "#0B1426" }}>
+      <AuroraBackground />  // useTheme() crashes — no TamaguiProvider yet
+    </View>
+  );
+}
+
+// After (fixed):
+if (!geistLoaded || !serifLoaded) {
+  return <View style={{ flex: 1, backgroundColor: "#0B1426" }} />;
+}
+```
+
+### 5. DevLauncher connects but app stays black — deep link race condition
+**Root cause**: Sending two competing deep links (expo run:android auto-open + manual deep link) caused a Java crash. DevLauncher then showed the crash warning and refused to auto-connect.
+
+**Fix**: Force stop app → start MainActivity → wait for DevLauncher → **tap "VitalSync" in the "Recently Opened" section** rather than sending a deep link. The DevLauncher already has `http://localhost:8082` saved and shows a green dot when reachable.
+
 ## Health Connect Permissions Flow
 1. User taps "Sync now" on Today screen
 2. `ensureHealthPermissions()` called → requests missing permissions

@@ -29,6 +29,7 @@ public class HealthSnapshot {
   Double activeCaloriesKcal;
   Double distanceMeters;
   Long heartRateZoneMinutes;
+  Long sleepDurationMinutes;
 
   @Valid List<ExerciseSession> exerciseSessions;
 }

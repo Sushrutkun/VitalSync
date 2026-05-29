@@ -24,7 +24,7 @@ public class User {
   @Column(nullable = false, unique = true, length = 254)
   private String email;
 
-  @Column(name = "password_hash", nullable = false)
+  @Column(name = "password_hash")
   private String passwordHash;
 
   @Column(nullable = false)
@@ -38,6 +38,9 @@ public class User {
 
   @Column(name = "weight_kg", precision = 5, scale = 2)
   private BigDecimal weightKg;
+
+  @Column(name = "theme_preference", length = 10)
+  private String themePreference;
 
   @Column(name = "created_at", nullable = false)
   private Instant createdAt;

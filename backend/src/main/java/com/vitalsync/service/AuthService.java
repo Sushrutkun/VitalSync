@@ -13,22 +13,33 @@ import com.vitalsync.repository.UserRepository;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.HexFormat;
+import java.util.Map;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class AuthService {
+
+  private static final String GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v3/userinfo";
 
   private final UserRepository users;
   private final RefreshTokenRepository refreshTokens;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwt;
   private final long refreshTtlSeconds;
+  private final RestTemplate restTemplate = new RestTemplate();
   private final SecureRandom random = new SecureRandom();
 
   public AuthService(
@@ -69,10 +80,58 @@ public class AuthService {
                 () ->
                     new AuthException(
                         AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect"));
+    if (user.getPasswordHash() == null) {
+      throw new AuthException(AuthErrorCode.INVALID_CREDENTIALS, "This account uses Google Sign-In. Please continue with Google.");
+    }
     if (!passwordEncoder.matches(req.getPassword(), user.getPasswordHash())) {
       throw new AuthException(AuthErrorCode.INVALID_CREDENTIALS, "Email or password is incorrect");
     }
     return issueTokens(user);
+  }
+
+  /**
+   * Validates a Google OAuth access token via Google's userinfo endpoint,
+   * then finds or creates a local user account for the Google email.
+   */
+  @Transactional
+  public AuthResponse googleLogin(String accessToken) {
+    Map<String, Object> userInfo = fetchGoogleUserInfo(accessToken);
+    String email = (String) userInfo.get("email");
+    if (email == null) {
+      throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Google token missing email");
+    }
+    String name = (String) userInfo.getOrDefault("name", email.split("@")[0]);
+
+    User user = users.findByEmail(email).orElseGet(() -> {
+      User newUser = User.builder()
+          .id("user_" + shortId())
+          .email(email)
+          .passwordHash(null) // Google users have no local password
+          .name(name)
+          .build();
+      return users.save(newUser);
+    });
+
+    return issueTokens(user);
+  }
+
+  private Map<String, Object> fetchGoogleUserInfo(String accessToken) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setBearerAuth(accessToken);
+    HttpEntity<Void> entity = new HttpEntity<>(headers);
+    try {
+      ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
+          GOOGLE_USERINFO_URL,
+          HttpMethod.GET,
+          entity,
+          new ParameterizedTypeReference<>() {});
+      if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+        throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Invalid Google access token");
+      }
+      return response.getBody();
+    } catch (RestClientException ex) {
+      throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Could not verify Google token");
+    }
   }
 
   /**

@@ -35,6 +35,7 @@ public class UserProfileService {
     if (patch.getDateOfBirth() != null) user.setDateOfBirth(patch.getDateOfBirth());
     if (patch.getHeightCm() != null) user.setHeightCm(patch.getHeightCm());
     if (patch.getWeightKg() != null) user.setWeightKg(patch.getWeightKg());
+    if (patch.getThemePreference() != null) user.setThemePreference(patch.getThemePreference());
 
     User saved = userRepository.save(user);
     return toDto(saved);
@@ -48,6 +49,7 @@ public class UserProfileService {
         u.getDateOfBirth(),
         u.getHeightCm(),
         u.getWeightKg(),
+        u.getThemePreference(),
         u.getCreatedAt());
   }
 }

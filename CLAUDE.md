@@ -58,6 +58,19 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
+### AuroraBackground — removed expo-linear-gradient (native module missing)
+`expo-linear-gradient` was in `package.json` but native Android module was never compiled. Caused crash before JS bundle executed. Replaced `LinearGradient` with two stacked `View`s in `AuroraBackground.tsx`.
+> After adding any new native package: always run `npx expo run:android` to recompile native modules.
+
+### _layout.tsx — AuroraBackground outside TamaguiProvider
+Font-loading fallback rendered `<AuroraBackground />` before `ThemeProvider`/`TamaguiProvider` was mounted, causing "Can't find Tamagui configuration" crash. Fixed: fallback now returns a plain `<View>` only.
+
+### DevLauncher connection — use Recently Opened, not deep link
+Sending competing deep links (auto-open + manual) causes Java crash. Instead:
+1. `adb shell am force-stop com.vitalsync.app`
+2. `adb shell am start -n com.vitalsync.app/.MainActivity`
+3. Wait for DevLauncher → tap **"VitalSync"** in **"Recently Opened"** (green dot = Metro reachable)
+
 ## graphify
 
 This project uses a graphify knowledge graph at `graphify-out/` to save tokens on architecture / codebase questions. The dir is gitignored — `scripts/setup.sh` regenerates it on a fresh clone.

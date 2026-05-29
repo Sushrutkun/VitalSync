@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { View } from "react-native";
 import Animated, {
   Easing,
   FadeIn,
@@ -7,7 +8,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Stop } from "react-native-svg";
-import { Text, YStack } from "tamagui";
+import { Text } from "tamagui";
 
 import { Body } from "./Heading";
 
@@ -135,21 +136,29 @@ export function Ring({
       </Svg>
 
       {!hideCenter ? (
-        <YStack position="absolute" alignItems="center" justifyContent="center">
-          <Body
-            tone="muted"
-            weight="medium"
-            fontSize={10}
-            letterSpacing={2}
-          >
-            {label.toUpperCase()}
-          </Body>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: size,
+            height: size,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {label ? (
+            <Body tone="muted" weight="medium" fontSize={10} letterSpacing={2}>
+              {label.toUpperCase()}
+            </Body>
+          ) : null}
           <Text
             fontFamily="$heading"
-            fontStyle="italic"
-            color={color as any}
-            fontSize={Math.round(size * 0.34)}
-            lineHeight={Math.round(size * 0.36)}
+            fontWeight="700"
+            color="#FFFFFF"
+            fontSize={Math.round(size * 0.28)}
+            lineHeight={Math.round(size * 0.32)}
+            textAlign="center"
           >
             {value}
           </Text>
@@ -158,7 +167,7 @@ export function Ring({
               {unit.toUpperCase()}
             </Body>
           ) : null}
-        </YStack>
+        </View>
       ) : null}
     </Animated.View>
   );

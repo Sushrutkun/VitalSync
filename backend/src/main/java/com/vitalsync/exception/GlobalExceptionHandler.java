@@ -13,6 +13,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * Renders all errors using the API.md §3 envelope: { "error": { "code": "...", "message": "...",
@@ -75,6 +76,16 @@ public class GlobalExceptionHandler {
         "INTERNAL_ERROR",
         "Failed to enqueue snapshot for processing",
         Map.of());
+  }
+
+  @ExceptionHandler(ResponseStatusException.class)
+  public ResponseEntity<ApiErrorResponse> handleResponseStatus(ResponseStatusException ex) {
+    HttpStatus status = HttpStatus.resolve(ex.getStatusCode().value());
+    if (status == null) status = HttpStatus.INTERNAL_SERVER_ERROR;
+    if (status.is5xxServerError()) log.error("Response status exception", ex);
+    else log.debug("Response status: {} {}", status.value(), ex.getReason());
+    String message = ex.getReason() != null ? ex.getReason() : ex.getMessage();
+    return error(status, status.name(), message, Map.of());
   }
 
   @ExceptionHandler(Exception.class)
