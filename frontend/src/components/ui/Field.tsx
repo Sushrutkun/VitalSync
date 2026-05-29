@@ -1,29 +1,51 @@
-import { Input as TInput, Label, Text, YStack, type InputProps } from "tamagui";
+import { useState } from "react";
+import { Input as TInput, Text, YStack, type InputProps } from "tamagui";
 
 type Props = {
   label: string;
   error?: string;
 } & InputProps;
 
-export function Field({ label, error, ...inputProps }: Props) {
+export function Field({ label, error, onFocus, onBlur, ...inputProps }: Props) {
+  const [focused, setFocused] = useState(false);
+  const borderColor = error ? "$danger" : focused ? "$accent" : "$borderColor";
   return (
-    <YStack gap="$2">
-      <Label fontSize={13} fontWeight="600" color="$color">
+    <YStack gap={6}>
+      <Text
+        fontFamily="$body"
+        fontSize={10}
+        fontWeight="600"
+        letterSpacing={2}
+        color="$muted"
+        style={{ textTransform: "uppercase" }}
+      >
         {label}
-      </Label>
+      </Text>
       <TInput
-        size="$5"
-        borderRadius={12}
-        borderWidth={1}
-        borderColor={error ? "$danger" : "$borderColor"}
-        backgroundColor="$card"
+        unstyled
+        fontFamily="$body"
+        fontSize={16}
+        height={44}
+        paddingHorizontal={2}
+        borderRadius={0}
+        borderWidth={0}
+        borderBottomWidth={1}
+        borderBottomColor={borderColor as any}
+        backgroundColor="transparent"
         color="$color"
         placeholderTextColor="$placeholderColor"
-        focusStyle={{ borderColor: "$accent" }}
+        onFocus={(e) => {
+          setFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          onBlur?.(e);
+        }}
         {...inputProps}
       />
       {error ? (
-        <Text fontSize={12} color="$danger">
+        <Text fontFamily="$body" fontSize={12} color="$danger">
           {error}
         </Text>
       ) : null}

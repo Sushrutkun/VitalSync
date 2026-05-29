@@ -1,93 +1,142 @@
 import type { ReactNode } from "react";
-import { ActivityIndicator } from "react-native";
-import { styled, Text, XStack, type XStackProps } from "tamagui";
+import { ActivityIndicator, Pressable, type PressableProps, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Text } from "tamagui";
 
-const Base = styled(XStack, {
-  borderRadius: 12,
-  height: 50,
-  paddingHorizontal: 18,
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "row",
-  pressStyle: { opacity: 0.85 },
+import { brand, gradients } from "@/src/theme/tokens";
 
-  variants: {
-    intent: {
-      primary: {
-        backgroundColor: "$accent",
-        borderWidth: 0,
-      },
-      secondary: {
-        backgroundColor: "$card",
-        borderColor: "$borderColor",
-        borderWidth: 1,
-      },
-      ghost: {
-        backgroundColor: "transparent",
-        borderWidth: 0,
-      },
-      danger: {
-        backgroundColor: "$danger",
-        borderWidth: 0,
-      },
-    },
-    appSize: {
-      sm: { height: 36, paddingHorizontal: 12, borderRadius: 10 },
-      md: { height: 44, paddingHorizontal: 16 },
-      lg: { height: 52, paddingHorizontal: 20 },
-    },
-  } as const,
+type Intent = "primary" | "secondary" | "ghost" | "danger" | "violet";
+type Size = "sm" | "md" | "lg";
 
-  defaultVariants: {
-    intent: "primary",
-    appSize: "lg",
-  },
-});
-
-const TEXT_COLOR: Record<string, string> = {
-  primary: "#0B0B0F",
-  secondary: "$color",
-  ghost: "$color",
-  danger: "#FFFFFF",
-};
-
-const FONT_SIZE: Record<string, number> = { sm: 13, md: 14, lg: 16 };
-
-type Props = XStackProps & {
-  intent?: "primary" | "secondary" | "ghost" | "danger";
-  size?: "sm" | "md" | "lg";
+type Props = Omit<PressableProps, "children" | "style"> & {
+  intent?: Intent;
+  size?: Size;
   loading?: boolean;
-  disabled?: boolean;
   children?: ReactNode;
+  marginTop?: number | string;
 };
+
+const HEIGHT: Record<Size, number> = { sm: 38, md: 46, lg: 54 };
+const FONT_SIZE: Record<Size, number> = { sm: 12, md: 13, lg: 14 };
+const PADDING_H: Record<Size, number> = { sm: 16, md: 22, lg: 28 };
 
 export function Button({
+  intent = "primary",
+  size = "lg",
   loading,
   disabled,
   children,
-  intent = "primary",
-  size = "lg",
+  onPress,
+  marginTop,
   ...rest
 }: Props) {
-  const spinnerColor =
-    intent === "primary" ? "#0B0B0F" : intent === "danger" ? "#FFFFFF" : undefined;
-  return (
-    <Base
-      intent={intent}
-      appSize={size}
-      disabled={disabled || loading}
-      opacity={disabled || loading ? 0.6 : 1}
-      {...rest}
+  const h = HEIGHT[size];
+  const fontSize = FONT_SIZE[size];
+  const padH = PADDING_H[size];
+  const radius = 999;
+
+  const isString = typeof children === "string";
+  const isDisabled = disabled || loading;
+
+  const textColor = textColorFor(intent);
+  const spinnerColor = textColor === "#FFFFFF" ? "#FFFFFF" : "#0B1426";
+
+  const content = (
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        paddingHorizontal: padH,
+        height: h,
+      }}
     >
       {loading ? (
         <ActivityIndicator color={spinnerColor} />
-      ) : typeof children === "string" ? (
-        <Text fontSize={FONT_SIZE[size]} fontWeight="600" color={TEXT_COLOR[intent] as any}>
+      ) : isString ? (
+        <Text
+          fontFamily="$body"
+          fontWeight="600"
+          fontSize={fontSize}
+          letterSpacing={1.6}
+          color={textColor as any}
+          style={{ textTransform: "uppercase" }}
+        >
           {children}
         </Text>
       ) : (
         children
       )}
-    </Base>
+    </View>
   );
+
+  const pressable = (inner: ReactNode) => (
+    <Pressable
+      onPress={onPress}
+      disabled={isDisabled}
+      style={({ pressed }) => ({
+        borderRadius: radius,
+        opacity: isDisabled ? 0.5 : pressed ? 0.85 : 1,
+        transform: [{ scale: pressed ? 0.97 : 1 }],
+        marginTop: marginTop as any,
+        overflow: "hidden",
+      })}
+      {...rest}
+    >
+      {inner}
+    </Pressable>
+  );
+
+  if (intent === "primary" || intent === "danger" || intent === "violet") {
+    const stops =
+      intent === "primary"
+        ? gradients.recovery
+        : intent === "danger"
+          ? gradients.danger
+          : gradients.violet;
+    return pressable(
+      <LinearGradient
+        colors={[stops[0], stops[1]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ borderRadius: radius }}
+      >
+        {content}
+      </LinearGradient>,
+    );
+  }
+
+  if (intent === "secondary") {
+    return pressable(
+      <View
+        style={{
+          borderRadius: radius,
+          borderWidth: 1,
+          borderColor: "rgba(255,255,255,0.18)",
+          backgroundColor: "rgba(255,255,255,0.04)",
+        }}
+      >
+        {content}
+      </View>,
+    );
+  }
+
+  // ghost
+  return pressable(<View style={{ borderRadius: radius }}>{content}</View>);
+}
+
+function textColorFor(intent: Intent): string {
+  switch (intent) {
+    case "primary":
+      return "#0B1426";
+    case "violet":
+      return "#FFFFFF";
+    case "danger":
+      return "#FFFFFF";
+    case "secondary":
+      return brand.dark.text;
+    case "ghost":
+      return brand.accent;
+  }
 }

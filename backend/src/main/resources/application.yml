@@ -6,6 +6,10 @@ spring:
   application:
     name: vitalsync-backend
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/vitalsync}
     username: ${DB_USER:vitalsync}
@@ -30,6 +34,11 @@ spring:
         enable.idempotence: true
         max.in.flight.requests.per.connection: 1
         spring.json.add.type.headers: false
+    consumer:
+      group-id: vitalsync-health-consumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
 # Kafka topic configuration
 vitalsync:
@@ -48,6 +57,8 @@ vitalsync:
       secret: ${JWT_SECRET:change-me-in-prod-min-256-bits-of-entropy-please}
       access-token-ttl-seconds: 86400      # 24h
       refresh-token-ttl-seconds: 15552000  # 180d (~6mo)
+    google:
+      client-id: ${GOOGLE_CLIENT_ID:YOUR_WEB_CLIENT_ID_HERE}
 
 # Actuator
 management:

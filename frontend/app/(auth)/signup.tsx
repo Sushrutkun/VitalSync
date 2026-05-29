@@ -1,14 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as Google from "expo-auth-session/providers/google";
 import { Link } from "expo-router";
-import { useState } from "react";
+import * as WebBrowser from "expo-web-browser";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { YStack } from "tamagui";
 import { z } from "zod";
 
-import { Body, Button, Field, Heading, Screen } from "@/src/components/ui";
+import { Body, Button, Field, Screen } from "@/src/components/ui";
 import { useAuth } from "@/src/auth/AuthContext";
 import { ApiError } from "@/src/lib/api";
+
+import { BrandMark, GoogleButton, Divider } from "./login";
+
+WebBrowser.maybeCompleteAuthSession();
+
+const GOOGLE_WEB_CLIENT_ID = "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -19,8 +28,33 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export default function SignupScreen() {
-  const { signup } = useAuth();
+  const { signup, googleLogin } = useAuth();
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId: GOOGLE_WEB_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response?.type === "success" && response.authentication?.accessToken) {
+      void handleGoogleToken(response.authentication.accessToken);
+    } else if (response?.type === "error") {
+      setSubmitError("Google sign-in failed. Try again.");
+    }
+  }, [response]);
+
+  const handleGoogleToken = async (accessToken: string) => {
+    setSubmitError(null);
+    try {
+      await googleLogin(accessToken);
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setSubmitError(error.message);
+      } else {
+        setSubmitError("Google sign-in failed. Try again.");
+      }
+    }
+  };
 
   const {
     control,
@@ -47,68 +81,76 @@ export default function SignupScreen() {
   };
 
   return (
-    <Screen scroll contentPadding={24}>
+    <Screen scroll contentPadding={28}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <YStack flex={1} justifyContent="center" gap="$4">
-          <YStack gap="$2" alignItems="center" marginBottom="$6">
-            <Heading level={1}>VitalSync</Heading>
-            <Body tone="muted">Create your account</Body>
-          </YStack>
+        <YStack flex={1} justifyContent="center" gap={28}>
+          <Animated.View entering={FadeInDown.duration(600)}>
+            <YStack gap={12} alignItems="center" marginBottom={20}>
+              <BrandMark />
+              <Body tone="secondary" size="md" textAlign="center" letterSpacing={0.5}>
+                Begin tracking your inner weather.
+              </Body>
+            </YStack>
+          </Animated.View>
 
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Field
-                label="Full name"
-                autoCapitalize="words"
-                autoCorrect={false}
-                placeholder="Jane Smith"
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                error={errors.name?.message}
+          <Animated.View entering={FadeInDown.delay(120).duration(500)}>
+            <YStack gap={22}>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Full name"
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                    placeholder="Jane Smith"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.name?.message}
+                  />
+                )}
               />
-            )}
-          />
 
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Field
-                label="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                placeholder="you@example.com"
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                error={errors.email?.message}
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="email-address"
+                    placeholder="you@example.com"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.email?.message}
+                  />
+                )}
               />
-            )}
-          />
 
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Field
-                label="Password"
-                secureTextEntry
-                autoCapitalize="none"
-                placeholder="••••••••"
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                error={errors.password?.message}
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Password"
+                    secureTextEntry
+                    autoCapitalize="none"
+                    placeholder="••••••••"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.password?.message}
+                  />
+                )}
               />
-            )}
-          />
+            </YStack>
+          </Animated.View>
 
           {submitError ? (
             <Body tone="danger" textAlign="center">
@@ -116,13 +158,24 @@ export default function SignupScreen() {
             </Body>
           ) : null}
 
-          <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting} marginTop="$2">
-            Create account
-          </Button>
+          <Animated.View entering={FadeInDown.delay(220).duration(500)}>
+            <YStack gap={12}>
+              <Button onPress={handleSubmit(onSubmit)} loading={isSubmitting}>
+                Create account
+              </Button>
+
+              <Divider />
+
+              <GoogleButton onPress={() => void promptAsync()} disabled={!request} />
+            </YStack>
+          </Animated.View>
 
           <Link href="/(auth)/login" asChild>
-            <Body tone="accent" textAlign="center" marginTop="$3">
-              Already have an account? Sign in
+            <Body tone="muted" textAlign="center" marginTop={6}>
+              Already have an account?{" "}
+              <Body tone="accent" weight="semibold">
+                Sign in
+              </Body>
             </Body>
           </Link>
         </YStack>

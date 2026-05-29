@@ -7,3 +7,4 @@ export { MetricCard } from "./MetricCard";
 export { Ring } from "./Ring";
 export { RowItem } from "./RowItem";
 export { ThemeToggle } from "./ThemeToggle";
+export { AuroraBackground } from "./AuroraBackground";

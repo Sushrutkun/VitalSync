@@ -2,18 +2,21 @@ import { Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme, XStack, YStack } from "tamagui";
+import { Text, XStack, YStack } from "tamagui";
 import { z } from "zod";
 
 import { usersApi } from "@/src/api/users";
 import { useAuth } from "@/src/auth/AuthContext";
-import { Body, Button, Card, Field, Heading, ThemeToggle } from "@/src/components/ui";
+import { Body, Button, Card, Field, Heading } from "@/src/components/ui";
+import { useThemePref } from "@/src/theme/ThemeProvider";
 import { ApiError } from "@/src/lib/api";
-import { brand } from "@/src/theme/tokens";
+import { brand, gradients } from "@/src/theme/tokens";
+import type { ThemePreference } from "@/src/theme/tokens";
 import type { UpdateProfileRequest, UserProfile } from "@/src/types/api";
 
 const numberInRange = (min: number, max: number) =>
@@ -23,7 +26,7 @@ const numberInRange = (min: number, max: number) =>
   );
 
 const schema = z.object({
-  name: z.string().min(1, "Required").max(100),
+  name: z.string().max(100),
   heightCm: numberInRange(50, 300),
   weightKg: numberInRange(10, 500),
   dateOfBirth: z
@@ -41,7 +44,7 @@ function parseOptionalNumber(v: string): number | undefined {
 
 export default function ProfileScreen() {
   const { logout } = useAuth();
-  const theme = useTheme();
+  const { preference, setPreference } = useThemePref();
   const queryClient = useQueryClient();
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
 
@@ -57,6 +60,11 @@ export default function ProfileScreen() {
       setSavedMessage("Saved.");
     },
   });
+
+  const handleThemeChange = async (next: ThemePreference) => {
+    await setPreference(next);
+    usersApi.updateMe({ themePreference: next }).catch(() => {/* silent — local change still applies */});
+  };
 
   const {
     control,
@@ -76,13 +84,16 @@ export default function ProfileScreen() {
         weightKg: profile.data.weightKg != null ? String(profile.data.weightKg) : "",
         dateOfBirth: profile.data.dateOfBirth ?? "",
       });
+      if (profile.data.themePreference) {
+        void setPreference(profile.data.themePreference as ThemePreference);
+      }
     }
-  }, [profile.data, reset]);
+  }, [profile.data, reset, setPreference]);
 
   const onSubmit = (values: FormValues) => {
     setSavedMessage(null);
     const patch: UpdateProfileRequest = {
-      name: values.name,
+      name: values.name.trim() !== "" ? values.name : (profile.data?.name ?? ""),
       heightCm: parseOptionalNumber(values.heightCm),
       weightKg: parseOptionalNumber(values.weightKg),
       dateOfBirth: values.dateOfBirth.length > 0 ? values.dateOfBirth : undefined,
@@ -92,9 +103,9 @@ export default function ProfileScreen() {
 
   if (profile.isLoading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top", "bottom"]}>
         <YStack flex={1} alignItems="center" justifyContent="center">
-          <ActivityIndicator color={theme.accent?.val} />
+          <ActivityIndicator color={brand.accent} />
         </YStack>
       </SafeAreaView>
     );
@@ -102,7 +113,7 @@ export default function ProfileScreen() {
 
   if (profile.error) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top", "bottom"]}>
         <YStack flex={1} alignItems="center" justifyContent="center" padding={20}>
           <Body tone="danger">
             {profile.error instanceof ApiError ? profile.error.message : "Could not load profile."}
@@ -113,78 +124,88 @@ export default function ProfileScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background?.val }} edges={["top", "bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top"]}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 16 }} keyboardShouldPersistTaps="handled">
-          <Heading level={1}>Profile</Heading>
+        <ScrollView
+          style={{ flex: 1, backgroundColor: "transparent" }}
+          contentContainerStyle={{ padding: 24, paddingBottom: 140, gap: 24 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <YStack gap={6}>
+            <Body tone="muted" eyebrow>
+              Your account
+            </Body>
+            <Heading level={1}>Profile.</Heading>
+          </YStack>
 
           {profile.data ? <ProfileHero profile={profile.data} /> : null}
           {profile.data ? <AccountInfo profile={profile.data} /> : null}
 
-          <Card gap={10} padding={16}>
-            <Body tone="muted" size="sm" weight="semibold">
-              APPEARANCE
-            </Body>
-            <ThemeToggle />
-          </Card>
+          <YStack gap={10}>
+            <Heading level={3}>Appearance</Heading>
+            <ThemeToggleWithPersist preference={preference} onPress={handleThemeChange} />
+          </YStack>
 
-          <YStack gap={12}>
-            <Controller
-              control={control}
-              name="name"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Field
-                  label="Name"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  error={errors.name?.message}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="dateOfBirth"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Field
-                  label="Date of birth (YYYY-MM-DD)"
-                  placeholder="1995-06-15"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  autoCapitalize="none"
-                  error={errors.dateOfBirth?.message}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="heightCm"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Field
-                  label="Height (cm)"
-                  keyboardType="numeric"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  error={errors.heightCm?.message}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="weightKg"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Field
-                  label="Weight (kg)"
-                  keyboardType="numeric"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  error={errors.weightKg?.message}
-                />
-              )}
-            />
+          <YStack gap={14}>
+            <Heading level={3}>Details</Heading>
+            <Card padding={20} gap={18}>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Name"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.name?.message}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="dateOfBirth"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Date of birth (YYYY-MM-DD)"
+                    placeholder="1995-06-15"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    autoCapitalize="none"
+                    error={errors.dateOfBirth?.message}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="heightCm"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Height (cm)"
+                    keyboardType="numeric"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.heightCm?.message}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="weightKg"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Field
+                    label="Weight (kg)"
+                    keyboardType="numeric"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    error={errors.weightKg?.message}
+                  />
+                )}
+              />
+            </Card>
           </YStack>
 
           {update.error ? (
@@ -206,19 +227,23 @@ export default function ProfileScreen() {
             Save changes
           </Button>
 
-          <Card gap={10} padding={16} marginTop="$3">
-            <Body tone="muted" size="sm" weight="semibold">
-              ACCOUNT
-            </Body>
-            <Button intent="danger" onPress={() => void logout()}>
+          <YStack alignItems="center" marginTop={12}>
+            <Button intent="ghost" onPress={() => void logout()}>
               <XStack alignItems="center" gap={8}>
-                <Ionicons name="log-out-outline" size={18} color="#FFFFFF" />
-                <Body weight="semibold" color="#FFFFFF">
+                <Ionicons name="log-out-outline" size={16} color={brand.coral} />
+                <Text
+                  fontFamily="$body"
+                  fontWeight="600"
+                  fontSize={13}
+                  letterSpacing={1.6}
+                  color={brand.coral as any}
+                  style={{ textTransform: "uppercase" }}
+                >
                   Sign out
-                </Body>
+                </Text>
               </XStack>
             </Button>
-          </Card>
+          </YStack>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -234,55 +259,134 @@ function initials(name: string): string {
 
 function ProfileHero({ profile }: { profile: UserProfile }) {
   return (
-    <Card elevated gap={12} padding={20} alignItems="center">
-      <YStack
-        width={84}
-        height={84}
-        borderRadius={42}
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor={brand.accent as any}
+    <YStack alignItems="center" gap={14} paddingVertical={8}>
+      {/* Gradient ring */}
+      <View
+        style={{
+          width: 124,
+          height: 124,
+          borderRadius: 62,
+          padding: 3,
+        }}
       >
-        <Body fontSize={32} weight="bold" color="#0B0B0F">
-          {initials(profile.name)}
-        </Body>
-      </YStack>
-      <YStack alignItems="center" gap={2}>
-        <Body size="lg" weight="bold" fontSize={20}>
-          {profile.name}
-        </Body>
+        <LinearGradient
+          colors={[gradients.aurora[0], gradients.aurora[1]]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{ flex: 1, borderRadius: 62, padding: 3 }}
+        >
+          <YStack
+            flex={1}
+            borderRadius={62}
+            alignItems="center"
+            justifyContent="center"
+            backgroundColor="#0B1426"
+          >
+            <Text
+              fontFamily="$heading"
+              fontStyle="italic"
+              fontSize={48}
+              color={brand.accent as any}
+            >
+              {initials(profile.name)}
+            </Text>
+          </YStack>
+        </LinearGradient>
+      </View>
+      <YStack alignItems="center" gap={4}>
+        <Heading level={2}>{profile.name}</Heading>
         <XStack alignItems="center" gap={6}>
-          <Ionicons name="mail-outline" size={14} color={brand.dark.muted} />
+          <Ionicons name="mail-outline" size={12} color={brand.dark.muted} />
           <Body tone="muted" size="sm">
             {profile.email}
           </Body>
         </XStack>
       </YStack>
-    </Card>
+    </YStack>
   );
 }
 
 function AccountInfo({ profile }: { profile: UserProfile }) {
   return (
-    <Card gap={6} padding={16}>
-      <Body tone="muted" size="sm" weight="semibold">
-        DETAILS
-      </Body>
-      <Row label="Username" value={profile.email.split("@")[0]} />
-      <Row label="Email" value={profile.email} />
-      <Row label="User ID" value={profile.id.slice(0, 8)} />
-      <Row label="Member since" value={format(new Date(profile.createdAt), "d MMM yyyy")} />
-    </Card>
+    <YStack gap={10}>
+      <Heading level={3}>Account</Heading>
+      <Card padding={18} gap={2}>
+        <Row label="Username" value={profile.email.split("@")[0]} />
+        <Row label="Email" value={profile.email} />
+        <Row label="User ID" value={profile.id.slice(0, 8)} />
+        <Row label="Member since" value={format(new Date(profile.createdAt), "d MMM yyyy")} />
+      </Card>
+    </YStack>
   );
 }
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <XStack justifyContent="space-between" paddingVertical={4} gap={12}>
-      <Body tone="muted">{label}</Body>
-      <Body weight="semibold" numberOfLines={1} flexShrink={1} textAlign="right">
+    <XStack
+      justifyContent="space-between"
+      alignItems="center"
+      paddingVertical={10}
+      gap={12}
+      borderBottomWidth={1}
+      borderBottomColor="$borderColor"
+    >
+      <Body tone="muted" size="sm">
+        {label}
+      </Body>
+      <Body weight="medium" numberOfLines={1} flexShrink={1} textAlign="right">
         {value}
       </Body>
+    </XStack>
+  );
+}
+
+const THEME_OPTIONS: { label: string; value: ThemePreference }[] = [
+  { label: "Light", value: "light" },
+  { label: "System", value: "system" },
+  { label: "Dark", value: "dark" },
+];
+
+function ThemeToggleWithPersist({
+  preference,
+  onPress,
+}: {
+  preference: ThemePreference;
+  onPress: (next: ThemePreference) => void;
+}) {
+  return (
+    <XStack
+      backgroundColor="rgba(255,255,255,0.04)"
+      borderRadius={999}
+      padding={4}
+      borderWidth={1}
+      borderColor="$borderColor"
+      gap={4}
+      alignSelf="flex-start"
+    >
+      {THEME_OPTIONS.map((o) => {
+        const active = preference === o.value;
+        return (
+          <Pressable key={o.value} onPress={() => onPress(o.value)}>
+            <YStack
+              width={64}
+              height={36}
+              borderRadius={999}
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor={active ? brand.accent : "transparent"}
+            >
+              <Text
+                fontFamily="$body"
+                fontSize={13}
+                color={active ? "#0B1426" : (brand.dark.muted as any)}
+                fontWeight="600"
+              >
+                {o.label}
+              </Text>
+            </YStack>
+          </Pressable>
+        );
+      })}
     </XStack>
   );
 }

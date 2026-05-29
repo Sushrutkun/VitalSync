@@ -43,8 +43,7 @@ public class KafkaDummyDataSeeder implements CommandLineRunner {
     int daysBack = props.getDaysBack();
     int logEvery = props.getLogEvery();
 
-    log.info(
-        "Seeding count={} users={} daysBack={} logEvery={}", count, users, daysBack, logEvery);
+    log.info("Seeding count={} users={} daysBack={} logEvery={}", count, users, daysBack, logEvery);
 
     long startNs = System.nanoTime();
     long failures = 0;
@@ -106,6 +105,7 @@ public class KafkaDummyDataSeeder implements CommandLineRunner {
             rng.nextDouble(0, 800),
             rng.nextDouble(0, 8_000),
             rng.nextLong(0, 60),
+            rng.nextLong(0, 480),
             sessions);
 
     return new HealthSyncRequest(userId, UUID.randomUUID().toString(), start, end, snapshot);

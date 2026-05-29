@@ -1,6 +1,7 @@
 package com.vitalsync.controller;
 
 import com.vitalsync.dto.auth.AuthResponse;
+import com.vitalsync.dto.auth.GoogleLoginRequest;
 import com.vitalsync.dto.auth.LoginRequest;
 import com.vitalsync.dto.auth.LogoutRequest;
 import com.vitalsync.dto.auth.RefreshRequest;
@@ -37,9 +38,14 @@ public class AuthController {
     return authService.login(req);
   }
 
+  @PostMapping("/google")
+  public AuthResponse googleLogin(@Valid @RequestBody GoogleLoginRequest req) {
+    return authService.googleLogin(req.getAccessToken());
+  }
+
   @PostMapping("/refresh")
   public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
-    return authService.refresh(req.refreshToken());
+    return authService.refresh(req.getRefreshToken());
   }
 
   @PostMapping("/logout")
@@ -48,7 +54,7 @@ public class AuthController {
     if (authentication == null || authentication.getName() == null) {
       throw new AuthException(AuthErrorCode.TOKEN_INVALID, "Authentication required");
     }
-    authService.logout(req.refreshToken(), authentication.getName());
+    authService.logout(req.getRefreshToken(), authentication.getName());
     return ResponseEntity.noContent().build();
   }
 }
