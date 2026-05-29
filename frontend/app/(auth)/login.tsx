@@ -1,9 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as Google from "expo-auth-session/providers/google";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform, Pressable, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -15,11 +13,6 @@ import { useAuth } from "@/src/auth/AuthContext";
 import { ApiError } from "@/src/lib/api";
 import { brand, gradients } from "@/src/theme/tokens";
 
-WebBrowser.maybeCompleteAuthSession();
-
-// Replace with your Google Web Client ID from Google Cloud Console
-const GOOGLE_WEB_CLIENT_ID = "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
-
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
   password: z.string().min(8, "At least 8 characters"),
@@ -28,33 +21,8 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export default function LoginScreen() {
-  const { login, googleLogin } = useAuth();
+  const { login } = useAuth();
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    webClientId: GOOGLE_WEB_CLIENT_ID,
-  });
-
-  useEffect(() => {
-    if (response?.type === "success" && response.authentication?.accessToken) {
-      void handleGoogleToken(response.authentication.accessToken);
-    } else if (response?.type === "error") {
-      setSubmitError("Google sign-in failed. Try again.");
-    }
-  }, [response]);
-
-  const handleGoogleToken = async (accessToken: string) => {
-    setSubmitError(null);
-    try {
-      await googleLogin(accessToken);
-    } catch (error) {
-      if (error instanceof ApiError) {
-        setSubmitError(error.message);
-      } else {
-        setSubmitError("Google sign-in failed. Try again.");
-      }
-    }
-  };
 
   const {
     control,
@@ -149,7 +117,7 @@ export default function LoginScreen() {
 
               <Divider />
 
-              <GoogleButton onPress={() => void promptAsync()} disabled={!request} />
+              <GoogleButton onPress={() => {}} disabled />
             </YStack>
           </Animated.View>
 

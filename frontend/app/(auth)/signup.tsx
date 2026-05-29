@@ -1,8 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as Google from "expo-auth-session/providers/google";
 import { Link } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -15,10 +13,6 @@ import { ApiError } from "@/src/lib/api";
 
 import { BrandMark, GoogleButton, Divider } from "./login";
 
-WebBrowser.maybeCompleteAuthSession();
-
-const GOOGLE_WEB_CLIENT_ID = "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
-
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Enter a valid email"),
@@ -28,33 +22,8 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export default function SignupScreen() {
-  const { signup, googleLogin } = useAuth();
+  const { signup } = useAuth();
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    webClientId: GOOGLE_WEB_CLIENT_ID,
-  });
-
-  useEffect(() => {
-    if (response?.type === "success" && response.authentication?.accessToken) {
-      void handleGoogleToken(response.authentication.accessToken);
-    } else if (response?.type === "error") {
-      setSubmitError("Google sign-in failed. Try again.");
-    }
-  }, [response]);
-
-  const handleGoogleToken = async (accessToken: string) => {
-    setSubmitError(null);
-    try {
-      await googleLogin(accessToken);
-    } catch (error) {
-      if (error instanceof ApiError) {
-        setSubmitError(error.message);
-      } else {
-        setSubmitError("Google sign-in failed. Try again.");
-      }
-    }
-  };
 
   const {
     control,
@@ -166,7 +135,7 @@ export default function SignupScreen() {
 
               <Divider />
 
-              <GoogleButton onPress={() => void promptAsync()} disabled={!request} />
+              <GoogleButton onPress={() => {}} disabled />
             </YStack>
           </Animated.View>
 
