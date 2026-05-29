@@ -112,23 +112,26 @@ async function doFetch(path: string, opts: RequestOptions, accessToken: string |
       signal: opts.signal,
     });
     const duration = Date.now() - start;
-    debugLog.add(
-      res.ok ? "api" : "error",
-      `${method} ${path}`,
-      res.ok ? undefined : `HTTP ${res.status}`,
-      res.status,
-      duration,
-    );
+    debugLog.add(res.ok ? "api" : "error", `${method} ${path}`, {
+      detail: res.ok ? undefined : `HTTP ${res.status}`,
+      status: res.status,
+      durationMs: duration,
+      method,
+      path,
+      requestBody: opts.body,
+      queryParams: opts.query,
+    });
     return res;
   } catch (err) {
     const duration = Date.now() - start;
-    debugLog.add(
-      "error",
-      `${method} ${path}`,
-      err instanceof Error ? err.message : String(err),
-      undefined,
-      duration,
-    );
+    debugLog.add("error", `${method} ${path}`, {
+      detail: err instanceof Error ? err.message : String(err),
+      durationMs: duration,
+      method,
+      path,
+      requestBody: opts.body,
+      queryParams: opts.query,
+    });
     throw err;
   }
 }

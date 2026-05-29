@@ -18,6 +18,14 @@ const colors = {
   accent: "#6cf0c2",
 };
 
+const METHOD_COLORS: Record<string, string> = {
+  GET: "#6cf0c2",
+  POST: "#7AB6FF",
+  PUT: "#f5b754",
+  PATCH: "#c084fc",
+  DELETE: "#ef6b6b",
+};
+
 function kindColor(kind: DebugEntry["kind"], status?: number): string {
   if (kind === "error") return colors.err;
   if (status && status >= 400) return colors.err;
@@ -32,6 +40,15 @@ function fmtTime(ts: number): string {
   return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
+function MethodBadge({ method }: { method?: string }) {
+  const m = method ?? "?";
+  return (
+    <View style={[styles.methodBadge, { borderColor: METHOD_COLORS[m] ?? colors.muted }]}>
+      <Text style={[styles.methodText, { color: METHOD_COLORS[m] ?? colors.muted }]}>{m}</Text>
+    </View>
+  );
+}
+
 function StatusRow({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
   return (
     <View style={styles.row}>
@@ -43,9 +60,93 @@ function StatusRow({ label, value, valueColor }: { label: string; value: string;
   );
 }
 
+function JsonBlock({ label, data }: { label: string; data: unknown }) {
+  if (data === undefined || data === null) return null;
+  const text =
+    typeof data === "object" ? JSON.stringify(data, null, 2) : String(data);
+  return (
+    <View style={styles.jsonBlock}>
+      <Text style={styles.jsonLabel}>{label}</Text>
+      <ScrollView horizontal style={styles.jsonScroll}>
+        <Text style={styles.jsonText}>{text}</Text>
+      </ScrollView>
+    </View>
+  );
+}
+
+function DetailView({ entry, onBack }: { entry: DebugEntry; onBack: () => void }) {
+  const statusColor = kindColor(entry.kind, entry.status);
+  const hasQuery =
+    entry.queryParams && Object.keys(entry.queryParams).length > 0;
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={styles.detailHeader}>
+        <Pressable onPress={onBack} style={styles.backBtn}>
+          <Text style={styles.backText}>← Back</Text>
+        </Pressable>
+        <Text style={styles.detailTitle} numberOfLines={1}>
+          {entry.path ?? entry.title}
+        </Text>
+      </View>
+
+      <ScrollView style={styles.body} contentContainerStyle={{ paddingBottom: 60 }}>
+        {/* Method + Status row */}
+        <View style={styles.detailTopRow}>
+          <MethodBadge method={entry.method} />
+          {entry.status != null ? (
+            <View style={[styles.statusBadge, { borderColor: statusColor }]}>
+              <Text style={[styles.statusBadgeText, { color: statusColor }]}>
+                {entry.status}
+              </Text>
+            </View>
+          ) : null}
+          {entry.durationMs != null ? (
+            <Text style={styles.durationText}>{entry.durationMs}ms</Text>
+          ) : null}
+          <Text style={styles.timestampText}>{fmtTime(entry.ts)}</Text>
+        </View>
+
+        {/* URL */}
+        <View style={styles.urlBlock}>
+          <Text style={styles.jsonLabel}>URL</Text>
+          <ScrollView horizontal>
+            <Text style={styles.urlText}>
+              {env.apiBaseUrl}{entry.path ?? ""}
+            </Text>
+          </ScrollView>
+        </View>
+
+        {/* Query params */}
+        {hasQuery ? (
+          <JsonBlock label="QUERY PARAMS" data={entry.queryParams} />
+        ) : null}
+
+        {/* Request body */}
+        {entry.requestBody !== undefined ? (
+          <JsonBlock label="REQUEST BODY" data={entry.requestBody} />
+        ) : (
+          <View style={styles.emptySection}>
+            <Text style={styles.emptySectionText}>No request body</Text>
+          </View>
+        )}
+
+        {/* Error detail */}
+        {entry.detail ? (
+          <View style={styles.jsonBlock}>
+            <Text style={[styles.jsonLabel, { color: colors.err }]}>ERROR</Text>
+            <Text style={[styles.jsonText, { color: colors.err }]}>{entry.detail}</Text>
+          </View>
+        ) : null}
+      </ScrollView>
+    </View>
+  );
+}
+
 export function DebugOverlay() {
   const [open, setOpen] = useState(false);
   const [entries, setEntries] = useState<DebugEntry[]>([]);
+  const [selected, setSelected] = useState<DebugEntry | null>(null);
   const [hcStatus, setHcStatus] = useState<string>("checking…");
   const [hcGranted, setHcGranted] = useState<boolean | null>(null);
   const [hcMissing, setHcMissing] = useState<string[]>([]);
@@ -76,12 +177,17 @@ export function DebugOverlay() {
         }
       }
     })();
-    return () => {
-      alive = false;
-    };
+    return () => { alive = false; };
   }, [open]);
 
-  const errorCount = entries.filter((e) => e.kind === "error" || (e.status && e.status >= 400)).length;
+  const errorCount = entries.filter(
+    (e) => e.kind === "error" || (e.status && e.status >= 400),
+  ).length;
+
+  function handleClose() {
+    setOpen(false);
+    setSelected(null);
+  }
 
   return (
     <>
@@ -97,72 +203,96 @@ export function DebugOverlay() {
         ) : null}
       </Pressable>
 
-      <Modal visible={open} animationType="slide" transparent onRequestClose={() => setOpen(false)}>
+      <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose}>
         <View style={styles.modal}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Debug</Text>
-            <Pressable onPress={() => setOpen(false)} style={styles.closeBtn}>
-              <Text style={styles.closeText}>Close</Text>
-            </Pressable>
-          </View>
+          {selected ? (
+            <DetailView entry={selected} onBack={() => setSelected(null)} />
+          ) : (
+            <>
+              <View style={styles.header}>
+                <Text style={styles.title}>Debug</Text>
+                <Pressable onPress={handleClose} style={styles.closeBtn}>
+                  <Text style={styles.closeText}>Close</Text>
+                </Pressable>
+              </View>
 
-          <ScrollView style={styles.body} contentContainerStyle={{ paddingBottom: 40 }}>
-            <Text style={styles.section}>Environment</Text>
-            <View style={styles.card}>
-              <StatusRow label="API base" value={env.apiBaseUrl} />
-              <StatusRow
-                label="Auth"
-                value={!isReady ? "loading" : userId ? `signed in (${userId.slice(0, 8)}…)` : "anonymous"}
-                valueColor={userId ? colors.ok : colors.warn}
-              />
-              <StatusRow
-                label="HC status"
-                value={hcStatus}
-                valueColor={hcStatus === "available" ? colors.ok : colors.warn}
-              />
-              <StatusRow
-                label="HC perms"
-                value={hcGranted === null ? "checking…" : hcGranted ? "granted" : "missing"}
-                valueColor={hcGranted ? colors.ok : colors.err}
-              />
-              {hcMissing.length > 0 ? (
-                <StatusRow label="HC missing" value={hcMissing.join(", ")} valueColor={colors.err} />
-              ) : null}
-            </View>
-
-            <View style={styles.sectionRow}>
-              <Text style={styles.section}>API calls ({entries.length})</Text>
-              <Pressable onPress={() => debugLog.clear()} style={styles.clearBtn}>
-                <Text style={styles.clearText}>Clear</Text>
-              </Pressable>
-            </View>
-
-            {entries.length === 0 ? (
-              <Text style={styles.empty}>No calls yet.</Text>
-            ) : (
-              entries.map((e) => (
-                <View key={e.id} style={styles.entry}>
-                  <View style={styles.entryHeader}>
-                    <Text style={[styles.entryTitle, { color: kindColor(e.kind, e.status) }]} numberOfLines={1}>
-                      {e.title}
-                    </Text>
-                    <Text style={styles.entryTime}>{fmtTime(e.ts)}</Text>
-                  </View>
-                  <View style={styles.entryMeta}>
-                    {e.status != null ? (
-                      <Text style={[styles.entryStatus, { color: kindColor(e.kind, e.status) }]}>
-                        {e.status}
-                      </Text>
-                    ) : null}
-                    {e.durationMs != null ? (
-                      <Text style={styles.entryDuration}>{e.durationMs}ms</Text>
-                    ) : null}
-                  </View>
-                  {e.detail ? <Text style={styles.entryDetail}>{e.detail}</Text> : null}
+              <ScrollView style={styles.body} contentContainerStyle={{ paddingBottom: 40 }}>
+                <Text style={styles.section}>Environment</Text>
+                <View style={styles.card}>
+                  <StatusRow label="API base" value={env.apiBaseUrl} />
+                  <StatusRow
+                    label="Auth"
+                    value={!isReady ? "loading" : userId ? `signed in (${userId.slice(0, 8)}…)` : "anonymous"}
+                    valueColor={userId ? colors.ok : colors.warn}
+                  />
+                  <StatusRow
+                    label="HC status"
+                    value={hcStatus}
+                    valueColor={hcStatus === "available" ? colors.ok : colors.warn}
+                  />
+                  <StatusRow
+                    label="HC perms"
+                    value={hcGranted === null ? "checking…" : hcGranted ? "granted" : "missing"}
+                    valueColor={hcGranted ? colors.ok : colors.err}
+                  />
+                  {hcMissing.length > 0 ? (
+                    <StatusRow label="HC missing" value={hcMissing.join(", ")} valueColor={colors.err} />
+                  ) : null}
                 </View>
-              ))
-            )}
-          </ScrollView>
+
+                <View style={styles.sectionRow}>
+                  <Text style={styles.section}>API calls ({entries.length})</Text>
+                  <Pressable
+                    onPress={() => debugLog.clear()}
+                    style={styles.clearBtn}
+                  >
+                    <Text style={styles.clearText}>Clear</Text>
+                  </Pressable>
+                </View>
+
+                {entries.length === 0 ? (
+                  <Text style={styles.empty}>No calls yet.</Text>
+                ) : (
+                  entries.map((e) => (
+                    <Pressable
+                      key={e.id}
+                      onPress={() => setSelected(e)}
+                      style={({ pressed }) => [
+                        styles.entry,
+                        { borderLeftColor: kindColor(e.kind, e.status) },
+                        pressed && { opacity: 0.7 },
+                      ]}
+                    >
+                      <View style={styles.entryHeader}>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: 6, flex: 1 }}>
+                          <MethodBadge method={e.method} />
+                          <Text
+                            style={[styles.entryTitle, { color: kindColor(e.kind, e.status) }]}
+                            numberOfLines={1}
+                          >
+                            {e.path ?? e.title}
+                          </Text>
+                        </View>
+                        <Text style={styles.entryTime}>{fmtTime(e.ts)}</Text>
+                      </View>
+                      <View style={styles.entryMeta}>
+                        {e.status != null ? (
+                          <Text style={[styles.entryStatus, { color: kindColor(e.kind, e.status) }]}>
+                            {e.status}
+                          </Text>
+                        ) : null}
+                        {e.durationMs != null ? (
+                          <Text style={styles.entryDuration}>{e.durationMs}ms</Text>
+                        ) : null}
+                        <Text style={[styles.entryDuration, { marginLeft: "auto" }]}>tap for details ›</Text>
+                      </View>
+                      {e.detail ? <Text style={styles.entryDetail}>{e.detail}</Text> : null}
+                    </Pressable>
+                  ))
+                )}
+              </ScrollView>
+            </>
+          )}
         </View>
       </Modal>
     </>
@@ -243,8 +373,76 @@ const styles = StyleSheet.create({
   entryHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   entryTitle: { fontSize: 13, fontWeight: "600", flex: 1, marginRight: 8 },
   entryTime: { color: colors.muted, fontSize: 11, fontFamily: "Menlo" },
-  entryMeta: { flexDirection: "row", gap: 12, marginTop: 4 },
+  entryMeta: { flexDirection: "row", gap: 12, marginTop: 4, alignItems: "center" },
   entryStatus: { fontSize: 11, fontWeight: "700", fontFamily: "Menlo" },
   entryDuration: { color: colors.muted, fontSize: 11, fontFamily: "Menlo" },
   entryDetail: { color: colors.muted, fontSize: 11, marginTop: 6, fontFamily: "Menlo" },
+  // Detail view
+  detailHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingTop: 60,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  backBtn: { paddingRight: 8 },
+  backText: { color: colors.accent, fontWeight: "600", fontSize: 15 },
+  detailTitle: { color: colors.text, fontSize: 14, fontWeight: "600", flex: 1, fontFamily: "Menlo" },
+  detailTopRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 16,
+    marginTop: 4,
+    flexWrap: "wrap",
+  },
+  methodBadge: {
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  methodText: { fontSize: 11, fontWeight: "700", fontFamily: "Menlo" },
+  statusBadge: {
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  statusBadgeText: { fontSize: 11, fontWeight: "700", fontFamily: "Menlo" },
+  durationText: { color: colors.muted, fontSize: 12, fontFamily: "Menlo" },
+  timestampText: { color: colors.muted, fontSize: 12, fontFamily: "Menlo", marginLeft: "auto" },
+  urlBlock: {
+    backgroundColor: colors.card,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  urlText: { color: colors.text, fontSize: 12, fontFamily: "Menlo" },
+  jsonBlock: {
+    backgroundColor: colors.card,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  jsonLabel: { color: colors.muted, fontSize: 10, fontWeight: "700", marginBottom: 8, letterSpacing: 1 },
+  jsonScroll: { maxHeight: 300 },
+  jsonText: { color: colors.text, fontSize: 12, fontFamily: "Menlo" },
+  emptySection: {
+    backgroundColor: colors.card,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: "center",
+  },
+  emptySectionText: { color: colors.muted, fontSize: 12 },
 });

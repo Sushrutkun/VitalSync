@@ -8,6 +8,10 @@ export type DebugEntry = {
   detail?: string;
   status?: number;
   durationMs?: number;
+  method?: string;
+  path?: string;
+  requestBody?: unknown;
+  queryParams?: Record<string, string | number | undefined>;
 };
 
 const MAX_ENTRIES = 100;
@@ -19,16 +23,24 @@ function notify(): void {
   for (const l of listeners) l(entries);
 }
 
+type AddOpts = {
+  detail?: string;
+  status?: number;
+  durationMs?: number;
+  method?: string;
+  path?: string;
+  requestBody?: unknown;
+  queryParams?: Record<string, string | number | undefined>;
+};
+
 export const debugLog = {
-  add(kind: DebugEntryKind, title: string, detail?: string, status?: number, durationMs?: number): void {
+  add(kind: DebugEntryKind, title: string, opts: AddOpts = {}): void {
     const entry: DebugEntry = {
       id: `${Date.now()}-${counter++}`,
       ts: Date.now(),
       kind,
       title,
-      detail,
-      status,
-      durationMs,
+      ...opts,
     };
     entries = [entry, ...entries].slice(0, MAX_ENTRIES);
     notify();
