@@ -29,7 +29,7 @@ export default function AppLayout() {
 
   return (
     <Tabs
-      screenOptions={{ headerShown: false, tabBarStyle: { display: "none" } }}
+      screenOptions={{ headerShown: false, tabBarStyle: { display: "none" }, sceneStyle: { backgroundColor: "transparent" } }}
       tabBar={(props: any) => <FloatingTabBar {...props} />}
     >
       {TABS.map((t) => (

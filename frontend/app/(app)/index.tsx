@@ -1,15 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { useState } from "react";
-import { RefreshControl, ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme, XStack, YStack } from "tamagui";
 
 import { healthApi } from "@/src/api/health";
 import { usersApi } from "@/src/api/users";
-import { Body, Button, Card, Heading, MetricCard, Ring, RowItem } from "@/src/components/ui";
+import { Body, Button, Card, Heading, MetricCard, Ring, RowItem, ThemeToggle } from "@/src/components/ui";
 import { formatSleep, recoveryScore, sleepScore, strainScore } from "@/src/dashboard/scores";
 import {
   ensureHealthPermissions,
@@ -64,6 +64,19 @@ export default function TodayScreen() {
     staleTime: 5 * 60_000,
   });
 
+  // Auto-sync on mount silently
+  useEffect(() => {
+    void (async () => {
+      const status = await getHealthConnectStatus();
+      if (status !== "available") return;
+      const perm = await ensureHealthPermissions();
+      if (!perm.granted) return;
+      await syncLastMinute();
+      void summary.refetch();
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onSyncNow = async () => {
     setSyncing(true);
     setSyncMessage(null);
@@ -90,7 +103,18 @@ export default function TodayScreen() {
       return;
     }
     const result = await syncLastMinute();
-    setSyncMessage(result.ok ? "Synced last minute." : `Sync failed: ${result.reason}`);
+    setSyncMessage(result.ok ? "Synced." : `Sync failed: ${result.reason}`);
+    void summary.refetch();
+    setSyncing(false);
+  };
+
+  const onRefresh = async () => {
+    setSyncing(true);
+    const status = await getHealthConnectStatus();
+    if (status === "available") {
+      const perm = await ensureHealthPermissions();
+      if (perm.granted) await syncLastMinute();
+    }
     void summary.refetch();
     setSyncing(false);
   };
@@ -105,35 +129,58 @@ export default function TodayScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top"]}>
       <ScrollView
+        style={{ flex: 1, backgroundColor: "transparent" }}
         contentContainerStyle={{ padding: 24, paddingBottom: 140, gap: 28 }}
         refreshControl={
           <RefreshControl
-            refreshing={summary.isFetching}
-            onRefresh={() => summary.refetch()}
+            refreshing={summary.isFetching || syncing}
+            onRefresh={onRefresh}
             tintColor={theme.accent?.val}
           />
         }
       >
         {/* HERO GREETING */}
         <Animated.View entering={FadeInDown.duration(500)}>
-          <YStack gap={4}>
-            <Body tone="muted" eyebrow>
-              {format(new Date(), "EEEE · d MMM yyyy")}
-            </Body>
-            <Heading level={1}>
-              {greeting()},{"\n"}
-              {firstName(profile.data?.name)}.
-            </Heading>
-            {recovery ? (
-              <Body tone="secondary" size="lg" marginTop={6}>
-                Today {recoveryNarrative(recovery.value)} —{" "}
-                <Body tone="default" weight="semibold" size="lg" editorial>
-                  {recovery.value}%
-                </Body>{" "}
-                recovered.
+          <XStack alignItems="flex-start" justifyContent="space-between" gap={12}>
+            <YStack gap={4} flex={1}>
+              <Body tone="muted" eyebrow>
+                {format(new Date(), "EEEE · d MMM yyyy")}
               </Body>
-            ) : null}
-          </YStack>
+              <Heading level={1}>
+                {greeting()},{"\n"}
+                {firstName(profile.data?.name)}.
+              </Heading>
+              {recovery ? (
+                <Body tone="secondary" size="lg" marginTop={6}>
+                  Today {recoveryNarrative(recovery.value)} —{" "}
+                  <Body tone="default" weight="semibold" size="lg" editorial>
+                    {recovery.value}%
+                  </Body>{" "}
+                  recovered.
+                </Body>
+              ) : null}
+              {syncMessage ? (
+                <Body tone="muted" size="sm" marginTop={4}>
+                  {syncMessage}
+                </Body>
+              ) : null}
+              {needsSettings ? (
+                <Button onPress={openHealthConnectAppSettings} intent="secondary" size="sm" marginTop={4}>
+                  Open Health Connect settings
+                </Button>
+              ) : null}
+            </YStack>
+            <XStack alignItems="center" gap={8}>
+              {syncing ? (
+                <ActivityIndicator size="small" color={brand.accent} />
+              ) : (
+                <Pressable onPress={onSyncNow} hitSlop={12} style={{ padding: 6 }}>
+                  <Ionicons name="refresh-outline" size={20} color={brand.dark.muted} />
+                </Pressable>
+              )}
+              <ThemeToggle />
+            </XStack>
+          </XStack>
         </Animated.View>
 
         {summary.isLoading ? (
@@ -148,7 +195,7 @@ export default function TodayScreen() {
                 Nothing tracked yet today.
               </Body>
               <Body tone="muted" textAlign="center">
-                Pull down to sync, or tap below to upload your latest readings.
+                Pull down to sync, or tap the refresh icon to upload your latest readings.
               </Body>
             </Card>
           </Animated.View>
@@ -255,11 +302,11 @@ export default function TodayScreen() {
               </YStack>
             </Animated.View>
 
-            {/* VITALS GRID */}
+            {/* VITALS GRID — explicit 2×2 layout */}
             <Animated.View entering={FadeInDown.delay(280).duration(500)}>
               <YStack gap={10}>
                 <Heading level={2}>Vitals</Heading>
-                <XStack gap={10} flexWrap="wrap">
+                <XStack gap={10}>
                   <MetricCard
                     label="Avg HR"
                     value={data.avgHeartRateBpm != null ? `${data.avgHeartRateBpm}` : "—"}
@@ -274,6 +321,8 @@ export default function TodayScreen() {
                     accent={brand.recovery}
                     icon={<Ionicons name="pulse-outline" size={16} color={brand.recovery} />}
                   />
+                </XStack>
+                <XStack gap={10}>
                   <MetricCard
                     label="SpO₂"
                     value={data.bloodOxygenPct != null ? `${data.bloodOxygenPct}` : "—"}
@@ -322,24 +371,6 @@ export default function TodayScreen() {
             ) : null}
           </>
         ) : null}
-
-        <Animated.View entering={FadeInDown.delay(440).duration(500)}>
-          <YStack gap={10}>
-            <Button onPress={onSyncNow} loading={syncing}>
-              Sync now
-            </Button>
-            {syncMessage ? (
-              <Body tone="muted" textAlign="center" size="sm">
-                {syncMessage}
-              </Body>
-            ) : null}
-            {needsSettings ? (
-              <Button onPress={openHealthConnectAppSettings} intent="secondary">
-                Open Health Connect settings
-              </Button>
-            ) : null}
-          </YStack>
-        </Animated.View>
       </ScrollView>
     </SafeAreaView>
   );

@@ -117,6 +117,7 @@ export default function ProfileScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }} edges={["top"]}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <ScrollView
+          style={{ flex: 1, backgroundColor: "transparent" }}
           contentContainerStyle={{ padding: 24, paddingBottom: 140, gap: 24 }}
           keyboardShouldPersistTaps="handled"
         >

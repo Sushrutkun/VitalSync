@@ -19,6 +19,7 @@ import { DebugOverlay } from "@/src/components/DebugOverlay";
 import { AuroraBackground } from "@/src/components/ui";
 import { queryClient } from "@/src/lib/queryClient";
 import { ThemeProvider, useThemePref } from "@/src/theme/ThemeProvider";
+import { brand } from "@/src/theme/tokens";
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -58,14 +59,14 @@ function ThemedShell() {
   const { resolved } = useThemePref();
   return (
     <Theme name={resolved}>
-      <View style={{ flex: 1, backgroundColor: "#0B1426" }}>
-        <AuroraBackground />
+      <YStack flex={1} backgroundColor={resolved === "light" ? brand.light.background : brand.dark.background}>
+        <AuroraBackground isLight={resolved === "light"} />
         <StatusBar style={resolved === "dark" ? "light" : "dark"} />
         <YStack flex={1} backgroundColor="transparent">
           <RootStack />
         </YStack>
         {__DEV__ ? <DebugOverlay /> : null}
-      </View>
+      </YStack>
     </Theme>
   );
 }
@@ -83,11 +84,7 @@ export default function RootLayout() {
   });
 
   if (!geistLoaded || !serifLoaded) {
-    return (
-      <View style={{ flex: 1, backgroundColor: "#0B1426" }}>
-        <AuroraBackground />
-      </View>
-    );
+    return <View style={{ flex: 1, backgroundColor: "#0B1426" }} />;
   }
 
   return (
