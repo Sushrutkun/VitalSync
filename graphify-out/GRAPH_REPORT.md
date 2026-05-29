@@ -1,11 +1,11 @@
 # Graph Report - VitalSync  (2026-05-30)
 
 ## Corpus Check
-- 107 files · ~67,652 words
+- 107 files · ~68,285 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 895 nodes · 955 edges · 67 communities detected
+- 896 nodes · 956 edges · 67 communities detected
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 73 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
@@ -109,28 +109,28 @@ Cohesion: 0.04
 Nodes (46): Add Coder, Advanced WebP codec options (0.8+), Animated WebP Encoding (0.10+), Author, Carthage, CocoaPods, code:ruby (pod 'SDWebImageWebPCoder'), code:objective-c (// WebP progressive loading for animated image) (+38 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.07
-Nodes (21): Client, HTTPError, NewClient(), Config, envBoolOrDefault(), envDurationOrDefault(), envIntOrDefault(), envOrDefault() (+13 more)
-
-### Community 2 - "Community 2"
 Cohesion: 0.04
 Nodes (44): aom, Author, AV1 Codec, AVIF Image Viewer, Carthage, Choose codec at runtime, CocoaPods, code:ruby (pod 'libavif/liaom') (+36 more)
 
-### Community 3 - "Community 3"
+### Community 2 - "Community 2"
 Cohesion: 0.04
 Nodes (46): 4.0 `POST /api/v1/auth/signup`, 4.1 `POST /api/v1/auth/login`, 4.2 `POST /api/v1/auth/refresh`, 4.3 `POST /api/v1/auth/logout`, 4.4 `POST /api/v1/health/sync`, 4.5 `GET /api/v1/health/summary`, 4.6 `GET /api/v1/health/history`, 4.7 `GET /api/v1/users/me` (+38 more)
 
-### Community 4 - "Community 4"
+### Community 3 - "Community 3"
 Cohesion: 0.05
 Nodes (42): 1. General Conventions, 2. Authentication, 3. Error Format, 5. Data Models, 6. Database Schema, 7.1 Password Storage, 7.2 Refresh Token Rotation, 7.3 Idempotency (Health Sync) (+34 more)
+
+### Community 4 - "Community 4"
+Cohesion: 0.08
+Nodes (19): Client, HTTPError, NewClient(), Config, envBoolOrDefault(), envDurationOrDefault(), envIntOrDefault(), envOrDefault() (+11 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.06
 Nodes (42): Android Icon (Background), Android Icon (Foreground), ApiResponse DTO, ATRT Authentication, POST /api/v1/auth/login, POST /api/v1/auth/refresh, POST /api/v1/auth/signup, bcrypt (+34 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.07
-Nodes (11): AuthController, status(), AuthException, ApiErrorResponse, ErrorBody, GlobalExceptionHandler, HealthSnapshotPublisher, KafkaPublishException (+3 more)
+Cohesion: 0.05
+Nodes (6): AuroraBackground(), onSubmit(), React, onSubmit(), useThemePref(), ThemeToggle()
 
 ### Community 7 - "Community 7"
 Cohesion: 0.05
@@ -141,8 +141,8 @@ Cohesion: 0.09
 Nodes (6): DailySummary, DailySummaryRepository, HealthConsumerService, HealthQueryController, HealthQueryService, HealthSnapshotRecordRepository
 
 ### Community 9 - "Community 9"
-Cohesion: 0.06
-Nodes (4): AuroraBackground(), React, useThemePref(), ThemeToggle()
+Cohesion: 0.07
+Nodes (10): AuthController, status(), AuthException, ApiErrorResponse, ErrorBody, GlobalExceptionHandler, KafkaPublishException, JwtAuthFilter (+2 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.06
@@ -169,12 +169,12 @@ Cohesion: 0.09
 Nodes (21): ADB Setup, Clean Rebuild, code:bash (npm install), code:bash (npm run ios       # iOS simulator), code:bash (adb devices -l), code:bash (npx expo run:android), code:bash (npm start), code:bash (cd android) (+13 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.16
-Nodes (9): onRefresh(), onSyncNow(), ensureHealthPermissions(), ensureInitialized(), getHealthConnectStatus(), getMissingHealthPermissions(), hasHealthPermissions(), buildSnapshotForWindow() (+1 more)
+Cohesion: 0.12
+Nodes (6): CommandLineRunner, HealthSnapshotPublisher, HealthSyncController, HealthSyncResponse, KafkaDummyDataSeeder, VitalSyncApplication
 
 ### Community 17 - "Community 17"
-Cohesion: 0.14
-Nodes (5): CommandLineRunner, HealthSyncController, HealthSyncResponse, KafkaDummyDataSeeder, VitalSyncApplication
+Cohesion: 0.16
+Nodes (9): onRefresh(), onSyncNow(), ensureHealthPermissions(), ensureInitialized(), getHealthConnectStatus(), getMissingHealthPermissions(), hasHealthPermissions(), buildSnapshotForWindow() (+1 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.23
@@ -445,17 +445,17 @@ Nodes (1): Android Icon (Monochrome)
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `onSubmit()` connect `Community 1` to `Community 13`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `onSubmit()` connect `Community 1` to `Community 13`?**
+- **Why does `onSubmit()` connect `Community 6` to `Community 4`, `Community 13`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `onSubmit()` connect `Community 6` to `Community 4`, `Community 13`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **What connects `LogoutRequest`, `GoogleLoginRequest`, `RefreshRequest` to the rest of the system?**
   _309 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.07 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.04 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
