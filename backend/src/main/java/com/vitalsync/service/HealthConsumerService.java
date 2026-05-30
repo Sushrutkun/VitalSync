@@ -84,6 +84,7 @@ public class HealthConsumerService {
     return HealthSnapshotRecord.builder()
         .userId(userId)
         .idempotencyKey(idempotencyKey)
+        .source(request.resolveSource())
         .periodStart(request.getPeriodStart())
         .periodEnd(request.getPeriodEnd())
         .heartRateBpm(snap.getHeartRateBpm())

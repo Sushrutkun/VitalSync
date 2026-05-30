@@ -31,6 +31,7 @@ export async function syncFromCheckpoint(): Promise<SyncResult> {
     const result = await healthApi.sync({
       userId,
       idempotencyKey: Crypto.randomUUID(),
+      source: "HEALTH_CONNECT",
       periodStart: periodStart.toISOString(),
       periodEnd: periodEnd.toISOString(),
       snapshot,
@@ -56,6 +57,7 @@ export async function syncWindow(periodStart: Date, periodEnd: Date): Promise<Sy
     const result = await healthApi.sync({
       userId,
       idempotencyKey: Crypto.randomUUID(),
+      source: "HEALTH_CONNECT",
       periodStart: periodStart.toISOString(),
       periodEnd: periodEnd.toISOString(),
       snapshot,

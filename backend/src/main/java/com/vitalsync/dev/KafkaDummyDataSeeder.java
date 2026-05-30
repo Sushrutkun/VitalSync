@@ -108,7 +108,7 @@ public class KafkaDummyDataSeeder implements CommandLineRunner {
             rng.nextLong(0, 480),
             sessions);
 
-    return new HealthSyncRequest(userId, UUID.randomUUID().toString(), start, end, snapshot);
+    return new HealthSyncRequest(userId, UUID.randomUUID().toString(), com.vitalsync.entity.HealthSource.HEALTH_CONNECT, start, end, snapshot);
   }
 
   private ExerciseSession randomSession(Instant start, Instant end, ThreadLocalRandom rng) {

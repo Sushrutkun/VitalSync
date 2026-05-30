@@ -64,9 +64,18 @@ export type HealthSnapshot = {
   exerciseSessions: ExerciseSession[];
 };
 
+export type HealthSource =
+  | "HEALTH_CONNECT"
+  | "HEALTHKIT"
+  | "GADGETBRIDGE"
+  | "FITBIT"
+  | "STRAVA"
+  | "WHOOP";
+
 export type HealthSyncRequest = {
   userId: string;
   idempotencyKey: string;
+  source: HealthSource;
   periodStart: string;
   periodEnd: string;
   snapshot: HealthSnapshot;

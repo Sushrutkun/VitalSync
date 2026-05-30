@@ -1,5 +1,6 @@
 package com.vitalsync.dto.health;
 
+import com.vitalsync.entity.HealthSource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
  *
  * <p>The mobile client posts one request per sync window. {@link #idempotencyKey} is generated
  * client-side and used by downstream consumers to deduplicate retries of the same window.
+ * {@link #source} identifies the originating system; defaults to HEALTH_CONNECT for older
+ * app builds that pre-date multi-source support.
  */
 @Data
 @NoArgsConstructor
@@ -22,9 +25,15 @@ public class HealthSyncRequest {
 
   @NotBlank String idempotencyKey;
 
+  HealthSource source;
+
   @NotNull Instant periodStart;
 
   @NotNull Instant periodEnd;
 
   @NotNull @Valid HealthSnapshot snapshot;
+
+  public HealthSource resolveSource() {
+    return source != null ? source : HealthSource.HEALTH_CONNECT;
+  }
 }

@@ -2,6 +2,7 @@ package com.vitalsync.controller;
 
 import com.vitalsync.dto.health.HealthSyncRequest;
 import com.vitalsync.dto.health.HealthSyncResponse;
+import com.vitalsync.entity.HealthSource;
 import com.vitalsync.exception.AuthErrorCode;
 import com.vitalsync.exception.AuthException;
 import com.vitalsync.service.HealthSnapshotPublisher;
@@ -36,15 +37,23 @@ public class HealthSyncController {
           AuthErrorCode.FORBIDDEN, "userId in body does not match authenticated user");
     }
 
+    // Multi-source: namespace the idempotency key by source so the same window from
+    // two different sources (e.g. HC + Fitbit) doesn't collide on the unique constraint.
+    HealthSource source = request.resolveSource();
+    request.setSource(source);
+    String namespacedKey = source.name() + ":" + request.getIdempotencyKey();
+    request.setIdempotencyKey(namespacedKey);
+
     log.info(
-        "Health sync received user=[{}] idempotencyKey=[{}] window=[{} -> {}]",
+        "Health sync received user=[{}] source=[{}] idempotencyKey=[{}] window=[{} -> {}]",
         request.getUserId(),
-        request.getIdempotencyKey(),
+        source,
+        namespacedKey,
         request.getPeriodStart(),
         request.getPeriodEnd());
 
     publisher.publish(request);
 
-    return ResponseEntity.accepted().body(HealthSyncResponse.accepted(request.getIdempotencyKey()));
+    return ResponseEntity.accepted().body(HealthSyncResponse.accepted(namespacedKey));
   }
 }
