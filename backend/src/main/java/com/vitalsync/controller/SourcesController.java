@@ -1,10 +1,12 @@
 package com.vitalsync.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vitalsync.dto.sources.BackfillStatusDto;
 import com.vitalsync.dto.sources.ConnectResponse;
 import com.vitalsync.dto.sources.CredentialSubmitRequest;
 import com.vitalsync.dto.sources.SourcesListResponse;
 import com.vitalsync.entity.HealthSource;
+import com.vitalsync.service.source.BackfillRunner;
 import com.vitalsync.service.source.OAuthStateService;
 import com.vitalsync.service.source.SourcesService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +34,7 @@ public class SourcesController {
   private final SourcesService sourcesService;
   private final OAuthStateService stateService;
   private final ObjectMapper objectMapper;
+  private final BackfillRunner backfillRunner;
 
   @Value("${vitalsync.sources.deeplink-success}")
   private String deeplinkSuccess;
@@ -73,6 +76,25 @@ public class SourcesController {
     } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
       throw new IllegalArgumentException("Invalid credentials payload", e);
     }
+  }
+
+  @PostMapping("/{source}/backfill")
+  @Operation(summary = "Start or resume a backfill phase")
+  public BackfillStatusDto startBackfill(
+      @PathVariable("source") HealthSource source,
+      @RequestParam(name = "phase", defaultValue = "1") int phase,
+      Authentication auth) {
+    backfillRunner.start(auth.getName(), source, phase);
+    return backfillRunner.status(auth.getName(), source, phase);
+  }
+
+  @GetMapping("/{source}/backfill/status")
+  @Operation(summary = "Get current backfill progress")
+  public BackfillStatusDto backfillStatus(
+      @PathVariable("source") HealthSource source,
+      @RequestParam(name = "phase", defaultValue = "1") int phase,
+      Authentication auth) {
+    return backfillRunner.status(auth.getName(), source, phase);
   }
 
   /**

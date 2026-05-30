@@ -118,6 +118,7 @@ export default function SourcesScreen() {
             busy={busy === s.source}
             onConnect={() => handleConnect(s.source)}
             onDisconnect={() => handleDisconnect(s.source)}
+            onBackfill={() => router.push({ pathname: "/source-backfill", params: { source: s.source } } as any)}
           />
         ))}
       </ScrollView>
@@ -130,11 +131,13 @@ function SourceCard({
   busy,
   onConnect,
   onDisconnect,
+  onBackfill,
 }: {
   source: SourceStatusDto;
   busy: boolean;
   onConnect: () => void;
   onDisconnect: () => void;
+  onBackfill: () => void;
 }) {
   const isConnected = source.status === "CONNECTED";
   const statusColor = isConnected
@@ -168,13 +171,24 @@ function SourceCard({
 
       <View style={styles.actions}>
         {isConnected ? (
-          <Pressable
-            style={[styles.btn, styles.btnDanger]}
-            onPress={onDisconnect}
-            disabled={busy}
-          >
-            <Text style={styles.btnDangerText}>{busy ? "..." : "Disconnect"}</Text>
-          </Pressable>
+          <>
+            {source.supportsBackfill ? (
+              <Pressable
+                style={[styles.btn, styles.btnSecondary]}
+                onPress={onBackfill}
+                disabled={busy}
+              >
+                <Text style={styles.btnSecondaryText}>Backfill</Text>
+              </Pressable>
+            ) : null}
+            <Pressable
+              style={[styles.btn, styles.btnDanger]}
+              onPress={onDisconnect}
+              disabled={busy}
+            >
+              <Text style={styles.btnDangerText}>{busy ? "..." : "Disconnect"}</Text>
+            </Pressable>
+          </>
         ) : (
           <Pressable
             style={[styles.btn, styles.btnPrimary]}
@@ -221,10 +235,12 @@ const styles = StyleSheet.create({
   statusDot: { width: 10, height: 10, borderRadius: 5 },
   statusText: { fontSize: 12, fontWeight: "700", letterSpacing: 0.5, marginTop: 4 },
   metaText: { color: colors.muted, fontSize: 11, fontFamily: "Menlo" },
-  actions: { flexDirection: "row", marginTop: 10 },
+  actions: { flexDirection: "row", gap: 8, marginTop: 10 },
   btn: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8 },
   btnPrimary: { backgroundColor: colors.accent },
   btnPrimaryText: { color: "#0a0a0c", fontWeight: "700", fontSize: 13 },
+  btnSecondary: { borderWidth: 1, borderColor: colors.accent },
+  btnSecondaryText: { color: colors.accent, fontWeight: "700", fontSize: 13 },
   btnDanger: { borderWidth: 1, borderColor: colors.err },
   btnDangerText: { color: colors.err, fontWeight: "700", fontSize: 13 },
 });

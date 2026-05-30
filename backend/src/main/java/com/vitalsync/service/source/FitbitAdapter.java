@@ -170,6 +170,31 @@ public class FitbitAdapter implements SourceAdapter {
     return List.of(req);
   }
 
+  @Override
+  public List<HealthSyncRequest> fetchBackfillChunk(
+      String userId, LocalDate from, LocalDate to) {
+    UserSourceCredential cred =
+        credRepo.findByUserIdAndSource(userId, HealthSource.FITBIT).orElse(null);
+    if (cred == null || cred.getStatus() != Status.CONNECTED) return List.of();
+    String accessToken = vault.decrypt(cred.getAccessTokenEnc());
+
+    List<HealthSyncRequest> out = new ArrayList<>();
+    for (LocalDate d = from; !d.isAfter(to); d = d.plusDays(1)) {
+      HealthSnapshot snap = fetchTodaySnapshot(accessToken, d);
+      if (snap == null) continue;
+      HealthSyncRequest req = new HealthSyncRequest();
+      req.setUserId(userId);
+      req.setSource(HealthSource.FITBIT);
+      // Stable per-day key so re-runs of the same date dedupe at the DB layer
+      req.setIdempotencyKey("day-" + d);
+      req.setPeriodStart(d.atStartOfDay(java.time.ZoneOffset.UTC).toInstant());
+      req.setPeriodEnd(d.plusDays(1).atStartOfDay(java.time.ZoneOffset.UTC).toInstant());
+      req.setSnapshot(snap);
+      out.add(req);
+    }
+    return out;
+  }
+
   /** Fetches today's daily aggregate. Intraday is a Phase-2.1 enhancement. */
   private HealthSnapshot fetchTodaySnapshot(String accessToken, LocalDate date) {
     HttpHeaders headers = new HttpHeaders();

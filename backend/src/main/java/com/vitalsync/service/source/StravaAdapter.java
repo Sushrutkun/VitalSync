@@ -169,6 +169,46 @@ public class StravaAdapter implements SourceAdapter {
     }
   }
 
+  @Override
+  public List<HealthSyncRequest> fetchBackfillChunk(
+      String userId, java.time.LocalDate from, java.time.LocalDate to) {
+    UserSourceCredential cred =
+        credRepo.findByUserIdAndSource(userId, HealthSource.STRAVA).orElse(null);
+    if (cred == null || cred.getStatus() != Status.CONNECTED) return List.of();
+    String accessToken = vault.decrypt(cred.getAccessTokenEnc());
+
+    long after = from.atStartOfDay(java.time.ZoneOffset.UTC).toEpochSecond();
+    long before = to.plusDays(1).atStartOfDay(java.time.ZoneOffset.UTC).toEpochSecond();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setBearerAuth(accessToken);
+    HttpEntity<Void> req = new HttpEntity<>(headers);
+
+    List<HealthSyncRequest> out = new ArrayList<>();
+    int page = 1;
+    while (true) {
+      try {
+        JsonNode activities =
+            http.exchange(
+                    API_BASE + "/athlete/activities?after=" + after + "&before=" + before
+                        + "&per_page=200&page=" + page,
+                    HttpMethod.GET, req, JsonNode.class)
+                .getBody();
+        if (activities == null || !activities.isArray() || activities.isEmpty()) break;
+        for (JsonNode act : activities) {
+          HealthSyncRequest hr = activityToRequest(userId, act);
+          if (hr != null) out.add(hr);
+        }
+        if (activities.size() < 200) break;
+        page++;
+      } catch (Exception e) {
+        log.warn("Strava backfill page {} failed user=[{}]: {}", page, userId, e.getMessage());
+        break;
+      }
+    }
+    return out;
+  }
+
   private HealthSyncRequest activityToRequest(String userId, JsonNode act) {
     String startStr = act.path("start_date").asText(null);
     if (startStr == null) return null;

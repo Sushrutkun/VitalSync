@@ -30,3 +30,18 @@ export type ConnectResponse = {
   fields?: string[];
   instructions?: string;
 };
+
+export type BackfillPhaseStatus = "PENDING" | "IN_PROGRESS" | "DONE" | "FAILED";
+
+export type BackfillStatusDto = {
+  source: HealthSource;
+  phase: number;
+  phaseStatus: BackfillPhaseStatus;
+  cursorDate: string | null;
+  targetDate: string | null;
+  daysSynced: number;
+  totalDays: number;
+  percentComplete: number;
+  lastError: string | null;
+  updatedAt: string;
+};
