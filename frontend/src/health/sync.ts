@@ -41,3 +41,27 @@ export async function syncFromCheckpoint(): Promise<SyncResult> {
     return { ok: false, reason: "error", error };
   }
 }
+
+// Sync an explicit window without touching the checkpoint — used for backfill.
+export async function syncWindow(periodStart: Date, periodEnd: Date): Promise<SyncResult> {
+  const userId = await tokenStorage.getUserId();
+  if (!userId) return { ok: false, reason: "unauthenticated" };
+
+  const granted = await hasHealthPermissions();
+  if (!granted) return { ok: false, reason: "no-permission" };
+
+  const snapshot = await buildSnapshotForWindow(periodStart, periodEnd);
+
+  try {
+    const result = await healthApi.sync({
+      userId,
+      idempotencyKey: Crypto.randomUUID(),
+      periodStart: periodStart.toISOString(),
+      periodEnd: periodEnd.toISOString(),
+      snapshot,
+    });
+    return { ok: true, result };
+  } catch (error) {
+    return { ok: false, reason: "error", error };
+  }
+}

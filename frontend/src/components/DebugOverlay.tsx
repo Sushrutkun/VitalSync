@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { useRouter } from "expo-router";
+
 import { useAuth } from "../auth/AuthContext";
 import { env } from "../config/env";
 import { getHealthConnectStatus, getMissingHealthPermissions } from "../health/permissions";
@@ -182,6 +184,7 @@ export function DebugOverlay() {
   const [hcGranted, setHcGranted] = useState<boolean | null>(null);
   const [hcMissing, setHcMissing] = useState<string[]>([]);
   const { userId, isReady, logout } = useAuth();
+  const router = useRouter();
 
   useEffect(() => debugLog.subscribe(setEntries), []);
 
@@ -277,6 +280,19 @@ export function DebugOverlay() {
                   {hcMissing.length > 0 ? (
                     <StatusRow label="HC missing" value={hcMissing.join(", ")} valueColor={colors.err} />
                   ) : null}
+                </View>
+
+                <View style={styles.sectionRow}>
+                  <Text style={styles.section}>Tools</Text>
+                </View>
+                <View style={styles.card}>
+                  <Pressable
+                    style={styles.toolBtn}
+                    onPress={() => { handleClose(); router.push("/backfill" as any); }}
+                  >
+                    <Text style={styles.toolBtnText}>Health Backfill →</Text>
+                    <Text style={styles.toolBtnHint}>Bulk-sync past days to backend</Text>
+                  </Pressable>
                 </View>
 
                 <View style={styles.sectionRow}>
@@ -494,4 +510,9 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   logoutText: { color: colors.err, fontSize: 12, fontWeight: "700" },
+  toolBtn: {
+    gap: 2,
+  },
+  toolBtnText: { color: colors.accent, fontSize: 13, fontWeight: "600" },
+  toolBtnHint: { color: colors.muted, fontSize: 11 },
 });
