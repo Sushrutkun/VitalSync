@@ -293,6 +293,14 @@ export function DebugOverlay() {
                     <Text style={styles.toolBtnText}>Health Backfill →</Text>
                     <Text style={styles.toolBtnHint}>Bulk-sync past days to backend</Text>
                   </Pressable>
+                  <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 8 }} />
+                  <Pressable
+                    style={styles.toolBtn}
+                    onPress={() => { handleClose(); router.push("/sources" as any); }}
+                  >
+                    <Text style={styles.toolBtnText}>Data Sources →</Text>
+                    <Text style={styles.toolBtnHint}>Connect Fitbit, Strava, WHOOP, Health Connect</Text>
+                  </Pressable>
                 </View>
 
                 <View style={styles.sectionRow}>

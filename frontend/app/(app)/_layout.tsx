@@ -8,6 +8,7 @@ import { Text, XStack, YStack } from "tamagui";
 
 import { useForegroundSync } from "@/src/health/foregroundLoop";
 import { registerBackgroundSync } from "@/src/health/background";
+import { SourcesProvider } from "@/src/sources/SourcesContext";
 import { brand } from "@/src/theme/tokens";
 
 type IconName = keyof typeof Ionicons.glyphMap;
@@ -28,16 +29,20 @@ export default function AppLayout() {
   }, []);
 
   return (
-    <Tabs
-      screenOptions={{ headerShown: false, tabBarStyle: { display: "none" }, sceneStyle: { backgroundColor: "transparent" } }}
-      tabBar={(props: any) => <FloatingTabBar {...props} />}
-    >
-      {TABS.map((t) => (
-        <Tabs.Screen key={t.name} name={t.name} options={{ title: t.title }} />
-      ))}
-      <Tabs.Screen name="analytics/[metric]" options={{ title: "Analytics", href: null }} />
-      <Tabs.Screen name="devices" options={{ title: "Devices", href: null }} />
-    </Tabs>
+    <SourcesProvider>
+      <Tabs
+        screenOptions={{ headerShown: false, tabBarStyle: { display: "none" }, sceneStyle: { backgroundColor: "transparent" } }}
+        tabBar={(props: any) => <FloatingTabBar {...props} />}
+      >
+        {TABS.map((t) => (
+          <Tabs.Screen key={t.name} name={t.name} options={{ title: t.title }} />
+        ))}
+        <Tabs.Screen name="analytics/[metric]" options={{ title: "Analytics", href: null }} />
+        <Tabs.Screen name="devices" options={{ title: "Devices", href: null }} />
+        <Tabs.Screen name="sources" options={{ title: "Sources", href: null }} />
+        <Tabs.Screen name="backfill" options={{ title: "Backfill", href: null }} />
+      </Tabs>
+    </SourcesProvider>
   );
 }
 
