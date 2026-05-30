@@ -5,10 +5,6 @@ import { exerciseTypeName } from "./exerciseTypes";
 
 const HR_ZONE_MIN_BPM = 120;
 
-function startOfUtcDay(d: Date): Date {
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-}
-
 function diffMinutes(start: string, end: string): number {
   return Math.max(0, Math.round((new Date(end).getTime() - new Date(start).getTime()) / 60_000));
 }
@@ -118,7 +114,6 @@ export async function buildSnapshotForWindow(
 ): Promise<HealthSnapshot> {
   const startIso = periodStart.toISOString();
   const endIso = periodEnd.toISOString();
-  const dayStartIso = startOfUtcDay(periodEnd).toISOString();
 
   const [
     heartRateBpm,
@@ -132,11 +127,11 @@ export async function buildSnapshotForWindow(
   ] = await Promise.all([
     readHeartRateAvg(startIso, endIso),
     readStepsSum(startIso, endIso),
-    readStepsSum(dayStartIso, endIso),
+    readStepsSum(startIso, endIso),
     readLatestSpO2(startIso, endIso),
     readActiveCalories(startIso, endIso),
-    readDistanceMeters(dayStartIso, endIso),
-    readHeartRateZoneMinutes(dayStartIso, endIso),
+    readDistanceMeters(startIso, endIso),
+    readHeartRateZoneMinutes(startIso, endIso),
     readExerciseSessions(startIso, endIso),
   ]);
 

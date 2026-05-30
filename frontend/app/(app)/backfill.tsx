@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 
 import { syncWindow } from "@/src/health/sync";
+import type { HealthSnapshot } from "@/src/types/api";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -21,7 +22,7 @@ const colors = {
 
 type Mode = "quick" | "range";
 type DayStatus = "pending" | "running" | "ok" | "error";
-type DayResult = { label: string; status: DayStatus; error?: string };
+type DayResult = { label: string; status: DayStatus; error?: string; snapshot?: HealthSnapshot };
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
@@ -210,7 +211,7 @@ export default function BackfillScreen() {
       setResults([...updated]);
       const result = await syncWindow(windows[i].start, windows[i].end);
       if (result.ok) {
-        updated[i] = { ...updated[i], status: "ok" };
+        updated[i] = { ...updated[i], status: "ok", snapshot: result.snapshot };
       } else {
         const msg =
           result.reason === "error" && result.error instanceof Error
@@ -343,17 +344,29 @@ export default function BackfillScreen() {
                 key={i}
                 style={[styles.dayRow, { borderLeftColor: statusColor(r.status) }]}
               >
-                <Text style={styles.dayLabel}>{r.label}</Text>
+                <View style={styles.dayLeft}>
+                  <Text style={styles.dayLabel}>{r.label}</Text>
+                  {r.status === "ok" && r.snapshot ? (
+                    <Text style={styles.daySummary}>
+                      {[
+                        r.snapshot.stepsTotal != null ? `${r.snapshot.stepsTotal} steps` : null,
+                        r.snapshot.heartRateBpm != null ? `${r.snapshot.heartRateBpm} bpm` : null,
+                        r.snapshot.activeCaloriesKcal != null ? `${Math.round(r.snapshot.activeCaloriesKcal)} kcal` : null,
+                      ].filter(Boolean).join(" · ") || "no HC data for this day"}
+                    </Text>
+                  ) : null}
+                  {r.status === "error" ? (
+                    <Text style={[styles.daySummary, { color: colors.err }]}>✗ {r.error}</Text>
+                  ) : null}
+                </View>
                 <View style={styles.dayRight}>
                   {r.status === "running" ? (
                     <Text style={[styles.dayStatus, { color: colors.warn }]}>syncing…</Text>
                   ) : r.status === "ok" ? (
                     <Text style={[styles.dayStatus, { color: colors.ok }]}>✓</Text>
-                  ) : r.status === "error" ? (
-                    <Text style={[styles.dayStatus, { color: colors.err }]}>✗ {r.error}</Text>
-                  ) : (
+                  ) : r.status === "pending" ? (
                     <Text style={[styles.dayStatus, { color: colors.muted }]}>pending</Text>
-                  )}
+                  ) : null}
                 </View>
               </View>
             ))}
@@ -490,6 +503,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
   },
   dayLabel: { color: colors.text, fontSize: 13, fontFamily: "Menlo" },
-  dayRight: { flex: 1, alignItems: "flex-end" },
+  dayLeft: { flex: 1, gap: 3 },
+  daySummary: { color: colors.muted, fontSize: 11, fontFamily: "Menlo" },
+  dayRight: { alignItems: "flex-end", paddingLeft: 8 },
   dayStatus: { fontSize: 12, fontFamily: "Menlo", textAlign: "right", flexShrink: 1 },
 });

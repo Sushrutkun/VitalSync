@@ -2,12 +2,12 @@ import * as Crypto from "expo-crypto";
 
 import { healthApi } from "../api/health";
 import { checkpointStorage, tokenStorage } from "../lib/storage";
-import type { HealthSyncResponse } from "../types/api";
+import type { HealthSnapshot, HealthSyncResponse } from "../types/api";
 import { hasHealthPermissions } from "./permissions";
 import { buildSnapshotForWindow } from "./snapshot";
 
 export type SyncResult =
-  | { ok: true; result: HealthSyncResponse }
+  | { ok: true; result: HealthSyncResponse; snapshot: HealthSnapshot }
   | { ok: false; reason: "unauthenticated" | "no-permission" | "error"; error?: unknown };
 
 const DEFAULT_LOOKBACK_MS = 24 * 60 * 60 * 1000;
@@ -36,7 +36,7 @@ export async function syncFromCheckpoint(): Promise<SyncResult> {
       snapshot,
     });
     await checkpointStorage.setLastSnapshotTimestamp(periodEnd.toISOString());
-    return { ok: true, result };
+    return { ok: true, result, snapshot };
   } catch (error) {
     return { ok: false, reason: "error", error };
   }
@@ -60,7 +60,7 @@ export async function syncWindow(periodStart: Date, periodEnd: Date): Promise<Sy
       periodEnd: periodEnd.toISOString(),
       snapshot,
     });
-    return { ok: true, result };
+    return { ok: true, result, snapshot };
   } catch (error) {
     return { ok: false, reason: "error", error };
   }
