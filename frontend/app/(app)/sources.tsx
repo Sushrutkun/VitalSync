@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 
 import { sourcesApi } from "@/src/api/sources";
 import { useSources } from "@/src/sources/SourcesContext";
+import { startOAuthConnect } from "@/src/sources/oauth";
 import type { SourceStatusDto } from "@/src/sources/types";
 import type { HealthSource } from "@/src/types/api";
 
@@ -48,14 +49,16 @@ export default function SourcesScreen() {
     try {
       const res = await sourcesApi.connect(source);
       if (res.flow === "OAUTH") {
-        Alert.alert(
-          "OAuth flow coming soon",
-          `Will open ${res.authorizeUrl} in browser. Stubbed in Phase 1.`,
-        );
+        const result = await startOAuthConnect(source);
+        if (result.ok) {
+          await refresh();
+        } else if (result.reason === "error") {
+          Alert.alert("Connect failed", result.detail ?? "Unknown error");
+        }
       } else if (res.flow === "CREDENTIALS") {
         Alert.alert(
           "Credentials form coming soon",
-          `Will collect: ${res.fields?.join(", ")}. Stubbed in Phase 1.`,
+          `Will collect: ${res.fields?.join(", ")}. Lands in Phase 3.`,
         );
       } else {
         Alert.alert("Device source", res.instructions ?? "Configure on device.");

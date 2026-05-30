@@ -62,6 +62,15 @@ vitalsync:
   crypto:
     master-key: ${VITALSYNC_CRED_KEY:dev-key-do-not-use-in-prod}
     salt: ${VITALSYNC_CRED_SALT:5f4dcc3b5aa765d6}
+  sources:
+    deeplink-success: ${VS_DEEPLINK_SUCCESS:vitalsync://oauth-success}
+    deeplink-failure: ${VS_DEEPLINK_FAILURE:vitalsync://oauth-failure}
+    state-ttl-seconds: 600
+    fitbit:
+      client-id: ${FITBIT_CLIENT_ID:}
+      client-secret: ${FITBIT_CLIENT_SECRET:}
+      redirect-uri: ${FITBIT_REDIRECT_URI:http://localhost:8083/api/v1/sources/FITBIT/callback}
+      scopes: activity heartrate sleep profile
 
 # Actuator
 management:
