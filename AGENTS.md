@@ -117,7 +117,10 @@ Fix: add `{"android":{"modules":["com.vitalsync.gadgetbridge.GadgetbridgeModule"
 
 ### React Compiler + Tamagui RC infinite render loop
 `"reactCompiler": true` in `app.json` triggers Tamagui's `useSyncExternalStore` to return unstable snapshots → "Maximum update depth exceeded" inside `<Theme2>`.
-Fix: `"reactCompiler": false` AND wrap `TamaguiProvider` in `memo()` so it only re-renders when `resolved` theme actually changes.
+Fix: `"reactCompiler": false` AND wrap `TamaguiProvider` in `memo()` with **static** `defaultTheme="dark"` (dynamic `defaultTheme={resolved}` also loops on React 19.2 + Tamagui 2 RC). Color tokens still drive via `useThemePref().resolved` in app components.
+
+### Nested `<Theme>` inside `<TamaguiProvider>` loops Theme2
+`ThemedShell` redundantly wrapped children in `<Theme name={resolved}>`. Inner Theme2 instance's `useSyncExternalStore` re-fires every parent render. Fix: drop the inner `<Theme>` — `defaultTheme` on the provider is enough.
 
 ### `CredentialVault` — "No default constructor found"
 Lombok `@RequiredArgsConstructor` conflicted with the explicit `@Value`-injecting constructor.

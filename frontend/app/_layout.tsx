@@ -58,16 +58,14 @@ function RootStack() {
 function ThemedShell() {
   const { resolved } = useThemePref();
   return (
-    <Theme name={resolved}>
-      <YStack flex={1} backgroundColor={resolved === "light" ? brand.light.background : brand.dark.background}>
-        <AuroraBackground isLight={resolved === "light"} />
-        <StatusBar style={resolved === "dark" ? "light" : "dark"} />
-        <YStack flex={1} backgroundColor="transparent">
-          <RootStack />
-        </YStack>
-        {__DEV__ ? <DebugOverlay /> : null}
+    <YStack flex={1} backgroundColor={resolved === "light" ? brand.light.background : brand.dark.background}>
+      <AuroraBackground isLight={resolved === "light"} />
+      <StatusBar style={resolved === "dark" ? "light" : "dark"} />
+      <YStack flex={1} backgroundColor="transparent">
+        <RootStack />
       </YStack>
-    </Theme>
+      {__DEV__ ? <DebugOverlay /> : null}
+    </YStack>
   );
 }
 

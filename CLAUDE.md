@@ -104,7 +104,11 @@ Sending competing deep links (auto-open + manual) causes Java crash. Instead:
 
 ### React Compiler + Tamagui RC = infinite render loop
 `"reactCompiler": true` in `app.json` makes Tamagui's `useSyncExternalStore` return unstable snapshots → `Maximum update depth exceeded` inside `<Theme2>` / `<TamaguiProvider>`.
-**Fix**: set `"reactCompiler": false` in `app.json` AND wrap `TamaguiProvider` in `React.memo()` so it only re-renders when `resolved` theme actually changes.
+**Fix**: set `"reactCompiler": false` in `app.json` AND wrap `TamaguiProvider` in `React.memo()` with a **static** `defaultTheme="dark"`. Dynamic `defaultTheme={resolved}` also triggers the loop on React 19.2 + Tamagui 2 RC. Theme switching at the Tamagui layer is disabled; our own components still read `useThemePref().resolved` for color tokens.
+
+### Nested `<Theme>` inside `<TamaguiProvider>` triggers Theme2 loop
+`ThemedShell` wrapped children in `<Theme name={resolved}>` redundantly (Tamagui's own `defaultTheme` already handles this). The inner `<Theme>` mounts a separate `Theme2` instance whose internal `useSyncExternalStore` re-fires on every parent render → "Maximum update depth exceeded".
+**Fix**: remove the inner `<Theme>` wrapper entirely. `defaultTheme` on the provider is sufficient.
 
 ### Local Expo module not autolinked
 `frontend/modules/gadgetbridge/expo-module.config.json` must declare the module class explicitly:

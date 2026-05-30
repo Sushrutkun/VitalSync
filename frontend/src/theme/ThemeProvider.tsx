@@ -19,17 +19,16 @@ function isPreference(v: string | null): v is ThemePreference {
   return v === "system" || v === "light" || v === "dark";
 }
 
-// Memoized to break Tamagui's internal useSyncExternalStore re-render loop —
-// only re-renders when `resolved` actually changes, not on every parent render.
+// Static theme on Tamagui — dynamic theme switching at this level triggers a
+// React-19/Tamagui-RC re-render loop in Theme2. Effective theming still drives
+// our own components via `useThemePref().resolved`. Tamagui defaults to dark.
 const TamaguiShell = memo(function TamaguiShell({
-  resolved,
   children,
 }: {
-  resolved: ResolvedTheme;
   children: ReactNode;
 }) {
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={resolved}>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="dark">
       {children}
     </TamaguiProvider>
   );
@@ -62,7 +61,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={value}>
-      <TamaguiShell resolved={resolved}>{children}</TamaguiShell>
+      <TamaguiShell>{children}</TamaguiShell>
     </ThemeContext.Provider>
   );
 }
