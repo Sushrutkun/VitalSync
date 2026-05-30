@@ -8,6 +8,8 @@ import { Text, XStack, YStack } from "tamagui";
 
 import { useForegroundSync } from "@/src/health/foregroundLoop";
 import { registerBackgroundSync } from "@/src/health/background";
+import { startGadgetbridge } from "@/src/health/gadgetbridge";
+import { sourceFlags } from "@/src/lib/storage";
 import { SourcesProvider } from "@/src/sources/SourcesContext";
 import { brand } from "@/src/theme/tokens";
 
@@ -26,6 +28,11 @@ export default function AppLayout() {
 
   useEffect(() => {
     void registerBackgroundSync();
+    void (async () => {
+      if (await sourceFlags.isGadgetbridgeEnabled()) {
+        await startGadgetbridge();
+      }
+    })();
   }, []);
 
   return (

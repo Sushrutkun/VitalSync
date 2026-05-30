@@ -6,6 +6,7 @@ const KEYS = {
   refreshToken: "vs.refreshToken",
   userId: "vs.userId",
   lastSnapshotTimestamp: "vs.lastSnapshotTimestamp",
+  gadgetbridgeEnabled: "vs.gadgetbridgeEnabled",
 } as const;
 
 const isWeb = Platform.OS === "web";
@@ -63,5 +64,15 @@ export const checkpointStorage = {
   },
   async clear(): Promise<void> {
     await store.delete(KEYS.lastSnapshotTimestamp);
+  },
+};
+
+export const sourceFlags = {
+  async isGadgetbridgeEnabled(): Promise<boolean> {
+    return (await store.get(KEYS.gadgetbridgeEnabled)) === "1";
+  },
+  async setGadgetbridgeEnabled(on: boolean): Promise<void> {
+    if (on) await store.set(KEYS.gadgetbridgeEnabled, "1");
+    else await store.delete(KEYS.gadgetbridgeEnabled);
   },
 };

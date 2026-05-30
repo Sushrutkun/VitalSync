@@ -1,0 +1,7 @@
+{
+  "name": "gadgetbridge",
+  "version": "0.1.0",
+  "description": "Listens to Gadgetbridge BLE wearable broadcast intents",
+  "main": "index.ts",
+  "private": true
+}

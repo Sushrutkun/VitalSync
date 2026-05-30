@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { useRouter } from "expo-router";
 
 import { sourcesApi } from "@/src/api/sources";
+import { isGadgetbridgeInstalled, startGadgetbridge, stopGadgetbridge } from "@/src/health/gadgetbridge";
+import { sourceFlags } from "@/src/lib/storage";
 import { useSources } from "@/src/sources/SourcesContext";
 import { startOAuthConnect } from "@/src/sources/oauth";
 import type { SourceStatusDto } from "@/src/sources/types";
@@ -43,10 +45,33 @@ export default function SourcesScreen() {
   const router = useRouter();
   const { sources, loading, error, refresh } = useSources();
   const [busy, setBusy] = useState<HealthSource | null>(null);
+  const [gbEnabled, setGbEnabled] = useState(false);
+
+  useEffect(() => {
+    void sourceFlags.isGadgetbridgeEnabled().then(setGbEnabled);
+  }, [busy]);
 
   async function handleConnect(source: HealthSource) {
     setBusy(source);
     try {
+      if (source === "GADGETBRIDGE") {
+        const installed = await isGadgetbridgeInstalled();
+        if (!installed) {
+          Alert.alert(
+            "Gadgetbridge not installed",
+            "Install Gadgetbridge from F-Droid, pair your wearable, then return here.",
+          );
+          return;
+        }
+        const ok = await startGadgetbridge();
+        if (ok) {
+          await sourceFlags.setGadgetbridgeEnabled(true);
+          Alert.alert("Connected", "Listening for Gadgetbridge samples. Data syncs every 15 min.");
+        } else {
+          Alert.alert("Connect failed", "Could not start Gadgetbridge listener.");
+        }
+        return;
+      }
       const res = await sourcesApi.connect(source);
       if (res.flow === "OAUTH") {
         const result = await startOAuthConnect(source);
@@ -75,6 +100,23 @@ export default function SourcesScreen() {
   }
 
   async function handleDisconnect(source: HealthSource) {
+    if (source === "GADGETBRIDGE") {
+      Alert.alert("Disconnect Gadgetbridge?", "Stops the listener; no data is deleted.", [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Disconnect",
+          style: "destructive",
+          onPress: async () => {
+            setBusy(source);
+            try {
+              await stopGadgetbridge();
+              await sourceFlags.setGadgetbridgeEnabled(false);
+            } finally { setBusy(null); }
+          },
+        },
+      ]);
+      return;
+    }
     Alert.alert("Disconnect " + SOURCE_LABELS[source] + "?", "This removes stored credentials.", [
       { text: "Cancel", style: "cancel" },
       {
@@ -111,16 +153,22 @@ export default function SourcesScreen() {
 
         {error ? <Text style={styles.errText}>{error}</Text> : null}
 
-        {sources.map((s) => (
-          <SourceCard
-            key={s.source}
-            source={s}
-            busy={busy === s.source}
-            onConnect={() => handleConnect(s.source)}
-            onDisconnect={() => handleDisconnect(s.source)}
-            onBackfill={() => router.push({ pathname: "/source-backfill", params: { source: s.source } } as any)}
-          />
-        ))}
+        {sources.map((s) => {
+          // GADGETBRIDGE state lives on-device only — overlay local flag onto card
+          const card = s.source === "GADGETBRIDGE" && gbEnabled
+            ? { ...s, status: "CONNECTED" as const }
+            : s;
+          return (
+            <SourceCard
+              key={s.source}
+              source={card}
+              busy={busy === s.source}
+              onConnect={() => handleConnect(s.source)}
+              onDisconnect={() => handleDisconnect(s.source)}
+              onBackfill={() => router.push({ pathname: "/source-backfill", params: { source: s.source } } as any)}
+            />
+          );
+        })}
       </ScrollView>
     </View>
   );

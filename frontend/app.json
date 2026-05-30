@@ -59,6 +59,7 @@
           ]
         }
       ],
+      "./plugins/withGadgetbridgeQueries",
       [
         "expo-build-properties",
         {
