@@ -49,7 +49,7 @@ export default function SourcesScreen() {
 
   useEffect(() => {
     void sourceFlags.isGadgetbridgeEnabled().then(setGbEnabled);
-  }, [busy]);
+  }, []);
 
   async function handleConnect(source: HealthSource) {
     setBusy(source);

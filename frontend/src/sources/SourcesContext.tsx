@@ -14,7 +14,7 @@ type SourcesContextValue = {
 const SourcesContext = createContext<SourcesContextValue | null>(null);
 
 export function SourcesProvider({ children }: { children: React.ReactNode }) {
-  const { userId } = useAuth();
+  const { userId, isReady } = useAuth();
   const [sources, setSources] = useState<SourceStatusDto[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,9 +33,12 @@ export function SourcesProvider({ children }: { children: React.ReactNode }) {
     }
   }, [userId]);
 
+  // Fetch once when auth becomes ready with a userId. Don't depend on `refresh`
+  // identity to avoid re-firing if useCallback returns a new ref.
   useEffect(() => {
-    void refresh();
-  }, [refresh]);
+    if (isReady && userId) void refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady, userId]);
 
   const value = useMemo(
     () => ({ sources, loading, error, refresh }),

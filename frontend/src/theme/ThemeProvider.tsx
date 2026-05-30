@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, memo, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useColorScheme } from "react-native";
 import { TamaguiProvider } from "tamagui";
 
@@ -18,6 +18,22 @@ const ThemeContext = createContext<Ctx | null>(null);
 function isPreference(v: string | null): v is ThemePreference {
   return v === "system" || v === "light" || v === "dark";
 }
+
+// Memoized to break Tamagui's internal useSyncExternalStore re-render loop —
+// only re-renders when `resolved` actually changes, not on every parent render.
+const TamaguiShell = memo(function TamaguiShell({
+  resolved,
+  children,
+}: {
+  resolved: ResolvedTheme;
+  children: ReactNode;
+}) {
+  return (
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={resolved}>
+      {children}
+    </TamaguiProvider>
+  );
+});
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const system = useColorScheme();
@@ -46,9 +62,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={value}>
-      <TamaguiProvider config={tamaguiConfig} defaultTheme={resolved}>
-        {children}
-      </TamaguiProvider>
+      <TamaguiShell resolved={resolved}>{children}</TamaguiShell>
     </ThemeContext.Provider>
   );
 }
