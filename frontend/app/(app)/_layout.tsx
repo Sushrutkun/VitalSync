@@ -40,6 +40,7 @@ export default function AppLayout() {
         <Tabs.Screen name="analytics/[metric]" options={{ title: "Analytics", href: null }} />
         <Tabs.Screen name="devices" options={{ title: "Devices", href: null }} />
         <Tabs.Screen name="sources" options={{ title: "Sources", href: null }} />
+        <Tabs.Screen name="sources-whoop" options={{ title: "WHOOP", href: null }} />
         <Tabs.Screen name="backfill" options={{ title: "Backfill", href: null }} />
       </Tabs>
     </SourcesProvider>

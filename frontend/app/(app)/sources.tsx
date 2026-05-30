@@ -56,10 +56,14 @@ export default function SourcesScreen() {
           Alert.alert("Connect failed", result.detail ?? "Unknown error");
         }
       } else if (res.flow === "CREDENTIALS") {
-        Alert.alert(
-          "Credentials form coming soon",
-          `Will collect: ${res.fields?.join(", ")}. Lands in Phase 3.`,
-        );
+        if (source === "WHOOP") {
+          router.push("/sources-whoop" as any);
+        } else {
+          Alert.alert(
+            "Credentials flow",
+            `${source} expects: ${res.fields?.join(", ")}. UI not built yet.`,
+          );
+        }
       } else {
         Alert.alert("Device source", res.instructions ?? "Configure on device.");
       }

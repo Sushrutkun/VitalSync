@@ -11,6 +11,12 @@ export const sourcesApi = {
       method: "POST",
     });
   },
+  submitCredentials(source: HealthSource, credentials: Record<string, string>): Promise<void> {
+    return request<void>(`/api/v1/sources/${source}/credentials`, {
+      method: "POST",
+      body: { credentials },
+    });
+  },
   disconnect(source: HealthSource): Promise<void> {
     return request<void>(`/api/v1/sources/${source}`, { method: "DELETE" });
   },

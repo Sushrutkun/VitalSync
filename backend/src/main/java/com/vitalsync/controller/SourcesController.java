@@ -1,12 +1,15 @@
 package com.vitalsync.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vitalsync.dto.sources.ConnectResponse;
+import com.vitalsync.dto.sources.CredentialSubmitRequest;
 import com.vitalsync.dto.sources.SourcesListResponse;
 import com.vitalsync.entity.HealthSource;
 import com.vitalsync.service.source.OAuthStateService;
 import com.vitalsync.service.source.SourcesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -28,6 +31,7 @@ public class SourcesController {
 
   private final SourcesService sourcesService;
   private final OAuthStateService stateService;
+  private final ObjectMapper objectMapper;
 
   @Value("${vitalsync.sources.deeplink-success}")
   private String deeplinkSuccess;
@@ -54,6 +58,21 @@ public class SourcesController {
       @PathVariable("source") HealthSource source, Authentication auth) {
     sourcesService.disconnect(auth.getName(), source);
     return ResponseEntity.noContent().build();
+  }
+
+  @PostMapping("/{source}/credentials")
+  @Operation(summary = "Submit raw credentials (WHOOP email+password)")
+  public ResponseEntity<Void> submitCredentials(
+      @PathVariable("source") HealthSource source,
+      @Valid @RequestBody CredentialSubmitRequest body,
+      Authentication auth) {
+    try {
+      String json = objectMapper.writeValueAsString(body.getCredentials());
+      sourcesService.submitCredentials(auth.getName(), source, json);
+      return ResponseEntity.noContent().build();
+    } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+      throw new IllegalArgumentException("Invalid credentials payload", e);
+    }
   }
 
   /**

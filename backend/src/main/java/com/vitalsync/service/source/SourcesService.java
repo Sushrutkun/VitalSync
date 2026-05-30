@@ -73,6 +73,15 @@ public class SourcesService {
     adapter.completeOAuth(userId, code);
   }
 
+  public void submitCredentials(String userId, HealthSource source, String credentialsJson) {
+    SourceAdapter adapter = adapters.get(source);
+    if (adapter == null) {
+      throw new ResponseStatusException(
+          HttpStatus.NOT_IMPLEMENTED, "No adapter for source " + source);
+    }
+    adapter.submitCredentials(userId, credentialsJson);
+  }
+
   public void disconnect(String userId, HealthSource source) {
     credRepo
         .findByUserIdAndSource(userId, source)
