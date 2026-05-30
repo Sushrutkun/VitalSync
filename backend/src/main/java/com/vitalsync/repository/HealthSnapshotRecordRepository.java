@@ -12,4 +12,6 @@ public interface HealthSnapshotRecordRepository extends JpaRepository<HealthSnap
   boolean existsByIdempotencyKey(String idempotencyKey);
   List<HealthSnapshotRecord> findByUserIdAndPeriodStartBetweenOrderByPeriodStartAsc(
       String userId, Instant from, Instant to);
+  List<HealthSnapshotRecord> findByPeriodStartBetweenOrderByPeriodStartAsc(
+      Instant from, Instant to);
 }
