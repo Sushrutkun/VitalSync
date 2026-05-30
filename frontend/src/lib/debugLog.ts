@@ -12,6 +12,7 @@ export type DebugEntry = {
   path?: string;
   requestBody?: unknown;
   queryParams?: Record<string, string | number | undefined>;
+  requestHeaders?: Record<string, string>;
 };
 
 const MAX_ENTRIES = 100;
@@ -31,6 +32,7 @@ type AddOpts = {
   path?: string;
   requestBody?: unknown;
   queryParams?: Record<string, string | number | undefined>;
+  requestHeaders?: Record<string, string>;
 };
 
 export const debugLog = {

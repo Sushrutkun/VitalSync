@@ -74,6 +74,29 @@ function JsonBlock({ label, data }: { label: string; data: unknown }) {
   );
 }
 
+function CurlBlock({ entry, baseUrl }: { entry: DebugEntry; baseUrl: string }) {
+  const method = entry.method ?? "GET";
+  const url = `${baseUrl}${entry.path ?? ""}`;
+  const lines: string[] = [`curl -X ${method} '${url}'`];
+  if (entry.requestHeaders) {
+    for (const [k, v] of Object.entries(entry.requestHeaders)) {
+      lines.push(`  -H '${k}: ${v}'`);
+    }
+  }
+  if (entry.requestBody !== undefined) {
+    lines.push(`  -d '${JSON.stringify(entry.requestBody)}'`);
+  }
+  const curlText = lines.join(" \\\n");
+  return (
+    <View style={styles.jsonBlock}>
+      <Text style={styles.jsonLabel}>CURL</Text>
+      <ScrollView horizontal style={styles.jsonScroll}>
+        <Text style={styles.jsonText}>{curlText}</Text>
+      </ScrollView>
+    </View>
+  );
+}
+
 function DetailView({ entry, onBack }: { entry: DebugEntry; onBack: () => void }) {
   const statusColor = kindColor(entry.kind, entry.status);
   const hasQuery =
@@ -122,6 +145,14 @@ function DetailView({ entry, onBack }: { entry: DebugEntry; onBack: () => void }
           <JsonBlock label="QUERY PARAMS" data={entry.queryParams} />
         ) : null}
 
+        {/* Request headers */}
+        {entry.requestHeaders && Object.keys(entry.requestHeaders).length > 0 ? (
+          <JsonBlock label="REQUEST HEADERS" data={entry.requestHeaders} />
+        ) : null}
+
+        {/* curl */}
+        <CurlBlock entry={entry} baseUrl={env.apiBaseUrl} />
+
         {/* Request body */}
         {entry.requestBody !== undefined ? (
           <JsonBlock label="REQUEST BODY" data={entry.requestBody} />
@@ -150,7 +181,7 @@ export function DebugOverlay() {
   const [hcStatus, setHcStatus] = useState<string>("checking…");
   const [hcGranted, setHcGranted] = useState<boolean | null>(null);
   const [hcMissing, setHcMissing] = useState<string[]>([]);
-  const { userId, isReady } = useAuth();
+  const { userId, isReady, logout } = useAuth();
 
   useEffect(() => debugLog.subscribe(setEntries), []);
 
@@ -225,6 +256,14 @@ export function DebugOverlay() {
                     value={!isReady ? "loading" : userId ? `signed in (${userId.slice(0, 8)}…)` : "anonymous"}
                     valueColor={userId ? colors.ok : colors.warn}
                   />
+                  {userId ? (
+                    <Pressable
+                      onPress={() => { void logout(); handleClose(); }}
+                      style={styles.logoutBtn}
+                    >
+                      <Text style={styles.logoutText}>Force Logout</Text>
+                    </Pressable>
+                  ) : null}
                   <StatusRow
                     label="HC status"
                     value={hcStatus}
@@ -445,4 +484,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptySectionText: { color: colors.muted, fontSize: 12 },
+  logoutBtn: {
+    marginTop: 4,
+    alignSelf: "flex-start",
+    borderWidth: 1,
+    borderColor: colors.err,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  logoutText: { color: colors.err, fontSize: 12, fontWeight: "700" },
 });

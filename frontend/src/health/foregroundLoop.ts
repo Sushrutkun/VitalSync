@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { AppState, type AppStateStatus } from "react-native";
 
-import { syncLastMinute } from "./sync";
+import { syncFromCheckpoint } from "./sync";
 
-const FOREGROUND_INTERVAL_MS = 60_000;
+const FOREGROUND_INTERVAL_MS = 15 * 60_000;
 
 export function useForegroundSync(enabled: boolean): void {
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -16,7 +16,7 @@ export function useForegroundSync(enabled: boolean): void {
       if (inFlight.current) return;
       inFlight.current = true;
       try {
-        await syncLastMinute();
+        await syncFromCheckpoint();
       } finally {
         inFlight.current = false;
       }

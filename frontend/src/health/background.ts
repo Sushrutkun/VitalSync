@@ -1,7 +1,7 @@
 import * as BackgroundTask from "expo-background-task";
 import * as TaskManager from "expo-task-manager";
 
-import { syncLastMinute } from "./sync";
+import { syncFromCheckpoint } from "./sync";
 
 export const BACKGROUND_SYNC_TASK = "vitalsync.background-sync";
 
@@ -14,7 +14,7 @@ const MIN_INTERVAL_MINUTES = 15;
 if (!TaskManager.isTaskDefined(BACKGROUND_SYNC_TASK)) {
   TaskManager.defineTask(BACKGROUND_SYNC_TASK, async () => {
     try {
-      const result = await syncLastMinute();
+      const result = await syncFromCheckpoint();
       return result.ok
         ? BackgroundTask.BackgroundTaskResult.Success
         : BackgroundTask.BackgroundTaskResult.Failed;

@@ -1,16 +1,18 @@
 import * as Crypto from "expo-crypto";
 
 import { healthApi } from "../api/health";
-import { tokenStorage } from "../lib/storage";
+import { checkpointStorage, tokenStorage } from "../lib/storage";
 import type { HealthSyncResponse } from "../types/api";
-import { ensureHealthPermissions, hasHealthPermissions } from "./permissions";
+import { hasHealthPermissions } from "./permissions";
 import { buildSnapshotForWindow } from "./snapshot";
 
 export type SyncResult =
   | { ok: true; result: HealthSyncResponse }
   | { ok: false; reason: "unauthenticated" | "no-permission" | "error"; error?: unknown };
 
-export async function syncLastMinute(): Promise<SyncResult> {
+const DEFAULT_LOOKBACK_MS = 24 * 60 * 60 * 1000;
+
+export async function syncFromCheckpoint(): Promise<SyncResult> {
   const userId = await tokenStorage.getUserId();
   if (!userId) return { ok: false, reason: "unauthenticated" };
 
@@ -18,7 +20,11 @@ export async function syncLastMinute(): Promise<SyncResult> {
   if (!granted) return { ok: false, reason: "no-permission" };
 
   const periodEnd = new Date();
-  const periodStart = new Date(periodEnd.getTime() - 60_000);
+  const savedTs = await checkpointStorage.getLastSnapshotTimestamp();
+  const periodStart = savedTs
+    ? new Date(savedTs)
+    : new Date(periodEnd.getTime() - DEFAULT_LOOKBACK_MS);
+
   const snapshot = await buildSnapshotForWindow(periodStart, periodEnd);
 
   try {
@@ -29,6 +35,7 @@ export async function syncLastMinute(): Promise<SyncResult> {
       periodEnd: periodEnd.toISOString(),
       snapshot,
     });
+    await checkpointStorage.setLastSnapshotTimestamp(periodEnd.toISOString());
     return { ok: true, result };
   } catch (error) {
     return { ok: false, reason: "error", error };

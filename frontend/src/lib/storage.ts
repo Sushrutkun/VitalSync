@@ -5,6 +5,7 @@ const KEYS = {
   accessToken: "vs.accessToken",
   refreshToken: "vs.refreshToken",
   userId: "vs.userId",
+  lastSnapshotTimestamp: "vs.lastSnapshotTimestamp",
 } as const;
 
 const isWeb = Platform.OS === "web";
@@ -48,6 +49,19 @@ export const tokenStorage = {
       store.delete(KEYS.accessToken),
       store.delete(KEYS.refreshToken),
       store.delete(KEYS.userId),
+      store.delete(KEYS.lastSnapshotTimestamp),
     ]);
+  },
+};
+
+export const checkpointStorage = {
+  async getLastSnapshotTimestamp(): Promise<string | null> {
+    return store.get(KEYS.lastSnapshotTimestamp);
+  },
+  async setLastSnapshotTimestamp(isoString: string): Promise<void> {
+    await store.set(KEYS.lastSnapshotTimestamp, isoString);
+  },
+  async clear(): Promise<void> {
+    await store.delete(KEYS.lastSnapshotTimestamp);
   },
 };

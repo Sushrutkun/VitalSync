@@ -95,6 +95,18 @@ async function parseError(res: Response): Promise<ApiError> {
   return new ApiError(res.status, code, message, details);
 }
 
+function maskHeaders(headers: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(headers)) {
+    if (k.toLowerCase() === "authorization" && v.startsWith("Bearer ")) {
+      out[k] = `Bearer ${v.slice(7, 19)}…`;
+    } else {
+      out[k] = v;
+    }
+  }
+  return out;
+}
+
 async function doFetch(path: string, opts: RequestOptions, accessToken: string | null): Promise<Response> {
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -120,6 +132,7 @@ async function doFetch(path: string, opts: RequestOptions, accessToken: string |
       path,
       requestBody: opts.body,
       queryParams: opts.query,
+      requestHeaders: maskHeaders(headers),
     });
     return res;
   } catch (err) {
@@ -131,6 +144,7 @@ async function doFetch(path: string, opts: RequestOptions, accessToken: string |
       path,
       requestBody: opts.body,
       queryParams: opts.query,
+      requestHeaders: maskHeaders(headers),
     });
     throw err;
   }

@@ -17,7 +17,7 @@ import {
   getHealthConnectStatus,
   openHealthConnectAppSettings,
 } from "@/src/health/permissions";
-import { syncLastMinute } from "@/src/health/sync";
+import { syncFromCheckpoint } from "@/src/health/sync";
 import { ApiError } from "@/src/lib/api";
 import { brand } from "@/src/theme/tokens";
 
@@ -81,7 +81,7 @@ export default function TodayScreen() {
       if (status !== "available") return;
       const perm = await ensureHealthPermissions();
       if (!perm.granted) return;
-      await syncLastMinute();
+      await syncFromCheckpoint();
       void summary.refetch();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +109,7 @@ export default function TodayScreen() {
       setSyncing(false);
       return;
     }
-    const result = await syncLastMinute();
+    const result = await syncFromCheckpoint();
     setSyncMessage(result.ok ? "Synced." : `Sync failed: ${result.reason}`);
     void summary.refetch();
     setSyncing(false);
@@ -120,7 +120,7 @@ export default function TodayScreen() {
     const status = await getHealthConnectStatus();
     if (status === "available") {
       const perm = await ensureHealthPermissions();
-      if (perm.granted) await syncLastMinute();
+      if (perm.granted) await syncFromCheckpoint();
     }
     void summary.refetch();
     setSyncing(false);
